@@ -237,81 +237,11 @@
                 </div>
               </div>
 
-              <div class="info-line mb-6">
-                  <div class="title font-weight-bold mb-1">Skills</div>
-                  <div class="info">C#, PHP, Javascript, Angular, JS, HTML, CSS</div>
-              </div>
 
-              <div class="info-line mb-6">
-                  <div class="title font-weight-bold mb-1">Jobs</div>
-                  <table class="info jobs">
-
-                      <tr class="job">
-                          <td class="company font-weight-bold pr-4">Self-Employed</td>
-                          <td class="date">2010 - Now</td>
-                      </tr>
-
-                      <tr class="job">
-                          <td class="company font-weight-bold pr-4">Google</td>
-                          <td class="date">2008 - 2010</td>
-                      </tr>
-
-                  </table>
-              </div>
 
           </div>
       </div>
 
-      <div class="profile-box info-box contact card mb-4">
-
-          <header class="h6 bg-secondary text-auto p-4">
-              <div class="title">Contact</div>
-          </header>
-
-          <div class="content p-4">
-
-              <div class="info-line mb-6">
-                  <div class="title font-weight-bold mb-1">Address</div>
-                  <div class="info">Ut pharetra luctus est quis sodales. Duis nisi tortor, bibendum eget tincidunt, aliquam ac elit. Mauris nec euismod odio.</div>
-              </div>
-
-              <div class="info-line mb-6">
-                  <div class="title font-weight-bold mb-1">Tel.</div>
-
-                  <div class="info">
-                      <span>&#43;6 555 6600</span>
-                  </div>
-
-                  <div class="info">
-                      <span>&#43;9 555 5255</span>
-                  </div>
-
-              </div>
-
-              <div class="info-line mb-6">
-                  <div class="title font-weight-bold mb-1">Website</div>
-
-                  <div class="info">
-                      <span>withinpixels.com</span>
-                  </div>
-
-              </div>
-
-              <div class="info-line mb-6">
-                  <div class="title font-weight-bold mb-1">Emails</div>
-
-                  <div class="info" ng-repeat="email in vm.about.contact.emails">
-                      <span>mail@withinpixels.com</span>
-                  </div>
-
-                  <div class="info" ng-repeat="email in vm.about.contact.emails">
-                      <span>mail@creapond.com</span>
-                  </div>
-
-              </div>
-
-          </div>
-      </div>
 
   </div>
 
