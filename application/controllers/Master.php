@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Master extends CI_Controller {
 
+
 private $company_id='';
   function __construct() { 
   parent::__construct();
