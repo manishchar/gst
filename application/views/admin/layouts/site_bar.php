@@ -43,53 +43,56 @@
                                 </a>
                                 <ul id="collapse-ecommerce" class='collapse ' role="tabpanel" aria-labelledby="heading-ecommerce" data-children=".nav-item">
 
+
 <li class="nav-item">
-    <a class="nav-link ripple " href="<?php echo base_url().'company/group_master' ?>">
+    <a class="nav-link ripple " href="<?php echo base_url().'master/group_master' ?>">
         <span>Group</span>
     </a>
 </li>
 
 <li class="nav-item">
-    <a class="nav-link ripple " href="<?php echo base_url().'master/lead'; ?>">
+    <a class="nav-link ripple " href="<?php echo base_url().'master/index'; ?>">
         <span>Bank Details</span>
     </a>
 </li>
 
 <li class="nav-item">
-    <a class="nav-link ripple " href="<?php echo base_url().'master/lead'; ?>">
+    <a class="nav-link ripple " href="<?php echo base_url().'master/party_master'; ?>">
         <span>Party</span>
     </a>
 </li>
 
 <li class="nav-item">
-    <a class="nav-link ripple "  href="<?php echo base_url().'company/product_services' ?>">
+    <a class="nav-link ripple "  href="<?php echo base_url().'master/product_services' ?>">
         <span>Products</span>
     </a>
 </li>
 
 <li class="nav-item">
-    <a class="nav-link ripple " href="<?php echo base_url().'master/lead'; ?>">
+    <a class="nav-link ripple " href="<?php echo base_url().'master/route_master'; ?>">
         <span>Route</span>
     </a>
 </li>
 
 <li class="nav-item">
-    <a class="nav-link ripple " href="<?php echo base_url().'master/lead'; ?>">
+    <a class="nav-link ripple " href="<?php echo base_url().'master/tex_master'; ?>">
         <span>Taxes</span>
     </a>
 </li>
 
 <li class="nav-item">
-    <a class="nav-link ripple " href="<?php echo base_url().'master/lead'; ?>">
+    <a class="nav-link ripple " href="<?php echo base_url().'master/unit_master'; ?>">
         <span>Unit</span>
     </a>
 </li>
 
 <li class="nav-item">
-    <a class="nav-link ripple " href="<?php echo base_url().'company/user_master' ?>">
+    <a class="nav-link ripple " href="<?php echo base_url().'master/user_master' ?>">
         <span>User</span>
     </a>
 </li>
+
+
 
 
 

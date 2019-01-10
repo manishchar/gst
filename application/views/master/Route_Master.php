@@ -1,46 +1,100 @@
 
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+<?php $this->load->view('admin/layouts/meta'); ?>
 </head>
-<body>
-<table>
-  <div class="container-fluid">
 
-      <div class="col-md-12 ">
-        <h4>Route Master</h4>
-          <hr>
-            <div class="form-group">
-            	<?php echo form_open('Company/route_master'); ?>
+<body class="layout layout-vertical layout-left-navigation layout-below-toolbar">
+<main>
+<div id="wrapper">
+<aside id="aside" class="aside aside-left" data-fuse-bar="aside" data-fuse-bar-media-step="md" data-fuse-bar-position="left">
+<?php $this->load->view('admin/layouts/site_bar'); 
+?>
+</aside>
+<div class="content-wrapper">
+<nav id="toolbar" class="bg-white">
 
-               <div class="col-md-12">
-                <div class="col-md-4">
+<?php $this->load->view('admin/layouts/header'); ?>
+</nav>
+<div class="content custom-scrollbar">
+
+<div id="project-dashboard" class="page-layout simple right-sidebar">
+
+<div class="page-content-wrapper custom-scrollbar">
+
+<!-- HEADER -->
+<?php $this->load->view('admin/layouts/inside_header'); ?>
+<!-- / HEADER -->
+<!-- CONTENT -->
+<div class="page-content p-6">
+<div class="topTab" style="margin-top: 0px;">
+	<form method="POST" id="routeForm">
+      <div class=" row form-group col-md-12">
+                <!-- <div class="col-md-4">
                 <label class="control-label">Route Name</label><br>
                 
-			 <div class="input-group">
-                 <select type="text" class="form-control" value="" name="routeName" id="">
-							
-							<option value="r1">r1</option>
-							<option value="r2">r2</option>
-							<option value="r3">r3</option>
-							<option value="r4">r4</option>
-							<option value="r5">r5</option>
-							<option value="r6">r6</option>
-							</select>
-	          </div>
-			   </div>
-			   <div class="col-md-12"><hr>
-			        <div class="col-md-6 col-md-offset-3" style="margin-left: 50%" >
-                            
-		                   <button type="submit" value="add" name="add" class="btn btn-primary" style="width:120px;margin:10px 10px;margin left; ">ADD</button>
-                           <button type="" value="" name="" class="btn btn-danger" style="width:120px;margin:10px 10px;margin left">DELETE</button>
-                    </div> 
-			  
-			   <div>
-            </div>
-            <?php echo form_close();?>
-      </div>
-      
-    
-
+			           <input type="text" name="id" id="id" class="form-control" hidden="hidden">
+                         <select type="text" class="form-control" value="route" name="route" id="route" >
+                            <option value="0">Root</option>
+                     <?php
+                           //if($routes){
+                              //  foreach ($routes as $key => $value) { ?>
+                       <option value="<?= $value->id; ?>"><?= $value->routeName; ?></option>
+                     <?php 
+                     
+                     ?>
+              
+              
+                     </select>  
+                      </div> -->
+                       
+          <div class="col-md-4"  ">
+                <label class="control-label" for="routeName"  required="required">Route Name</label>
+                <input type="text" name="id" id="id" class="form-control" hidden="hidden">
+                <input type="text" name="routeName" id="routeName" class="form-control">
+          </div>
+			</div>
+			<div class=" row form-group col-md-12">
+			   	<div class="col-md-6">
+                <label for="group">Groups Name</label>
+                <select type="text" class="form-control" value="route" name="route" id="routeEdit" required="required">
+                   <option value="0">Root</option>
+                      <?php
+                        if($all_routes){
+                        foreach ($all_routes as $key => $value) { 
+                                  ?>
+                      <option  value="<?php echo $value->id ; ?>"><?php echo  $value->routeName ;?>
+                      </option>
+                  <?php
+                     }
+                     }
+                    ?>
+               </select>
+          </div>
+			     <div class="col-md-6 " style="margin:30px 0px;" >
+		                 <button type="submit" value="add" name="submit" id="routeSubmit" class="btn " style="width:120px; background-color: blue; color: white; ">ADD</button>
+                    <button type="button" value="delete" name="delete" id="routeDelete" class="btn btn-danger" style="width:120px;">DELETE</button>
+          </div> 
+			
+    </div>
+  </form>
   </div>
+
+</div>
+
+</div>
+
+
+</div>
+
+
+</div>
+</div>
+
+</div>
+
+
 </body>
-</table>
 </html>
+<?php $this->load->view('admin/layouts/footer'); ?>

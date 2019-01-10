@@ -11,7 +11,7 @@
             "processing": true,
             "serverSide": true,
             "ajax": {
-              'url':"<?php echo base_url().'company/get_bank_details'; ?>",
+              'url':"<?php echo base_url().'master/get_bank_details'; ?>",
               "type": "POST"
             }, "columns": [
                 { "data": "accountId"},
@@ -33,7 +33,7 @@
         if(r){
             $.ajax({
                 type  : "POST",
-                url   : "<?php echo base_url()."company/get_bank"; ?>",
+                url   : "<?php echo base_url()."master/get_bank"; ?>",
                 data  : {cek_id:cek_id},
                 success:function(result){
                    var obj = JSON.parse(result);
@@ -64,7 +64,7 @@
      alert('Ready To delete');
                 $.ajax({
                     type: "POST",
-                    url: "<?php echo base_url('Company/delete_bank_details') ?>", 
+                    url: "<?php echo base_url('master/delete_bank_details') ?>", 
                     data: $("#bankForm").serialize(),
                     success: function(result) 
                     {
@@ -85,7 +85,7 @@
         if(r){
             $.ajax({
                 type: "POST",
-                url: "<?php echo base_url('Company/update_bank_details') ?>", 
+                url: "<?php echo base_url('master/update_bank_details') ?>", 
                 data: $("#bankForm").serialize(),
                 success: function(result) 
                 {
@@ -118,7 +118,7 @@
             "processing": true,
             "serverSide": true,
                "ajax": {
-              'url':"<?php echo base_url().'company/get_party_master'; ?>",
+              'url':"<?php echo base_url().'Master/get_party_master'; ?>",
               "type": "POST"
             }, "columns": [
                 { "data": "customerType"},
@@ -151,7 +151,7 @@ function partyEdit(cek_id){
     if(r){
         $.ajax({
             type  : "POST",
-            url   : "<?php echo base_url()."company/get_party"; ?>",
+            url   : "<?php echo base_url()."master/get_party"; ?>",
             data  : {cek_id:cek_id},
             success:function(result){
                var obj = JSON.parse(result);
@@ -192,7 +192,7 @@ $('#partyDelete').click(function(){
     if(r){
             $.ajax({
                 type: "POST",
-                url: "<?php echo base_url('Company/delete_party_master') ?>", 
+                url: "<?php echo base_url('master/delete_party_master') ?>", 
                 data: $("#partyForm").serialize(),
                 success: function(result) 
                 {
@@ -214,7 +214,7 @@ $('#partyUpdate').click(function(){
     if(r){
         $.ajax({
             type: "POST",
-            url: "<?php echo base_url('Company/update_party_master') ?>", 
+            url: "<?php echo base_url('master/update_party_master') ?>", 
             data: $("#partyForm").serialize(),
             success: function(result) 
             {
@@ -248,7 +248,7 @@ $(document).ready(function() {
         "processing": true,
         "serverSide": true,
         "ajax": {
-          'url':"<?php echo base_url().'company/get_product_services'; ?>",
+          'url':"<?php echo base_url().'master/get_product_services'; ?>",
            "type": "POST"
         }, "columns": [
             { "data": "productCode"},
@@ -282,7 +282,7 @@ function productEdit(cek_id){
      if(r){
          $.ajax({
              type : "POST",
-             url  : "<?php echo base_url()."company/get_product"; ?>",
+             url  : "<?php echo base_url()."master/get_product"; ?>",
              data : {cek_id:cek_id},
              success:function(result){
             var obj = JSON.parse(result);
@@ -328,7 +328,7 @@ function productEdit(cek_id){
     if(r){
         $.ajax({
            type: "POST",
-           url: "<?php echo base_url('Company/update_product_services') ?>", 
+           url: "<?php echo base_url('master/update_product_services') ?>", 
             data: $("#productForm").serialize(),
             success: function(result) 
           {
@@ -359,7 +359,7 @@ function productEdit(cek_id){
     if(r){
             $.ajax({
                 type: "POST",
-                url: "<?php echo base_url('Company/delete_product_master') ?>", 
+                url: "<?php echo base_url('master/delete_product_master') ?>", 
                 data: $("#productForm").serialize(),
                 success: function(result) 
                 {
@@ -385,7 +385,7 @@ $(document).ready(function() {
         "processing": true,
         "serverSide": true,
         "ajax": {
-          'url':"<?php echo base_url().'company/get_tex_details'; ?>",
+          'url':"<?php echo base_url().'master/get_tex_details'; ?>",
           "type": "POST"
         }, "columns": [
             { "data": "texName"},
@@ -407,7 +407,7 @@ function texEdit(cek_id){
     if(r){
         $.ajax({
             type  : "POST",
-            url   : "<?php echo base_url()."company/get_tex"; ?>",
+            url   : "<?php echo base_url()."master/get_tex"; ?>",
             data  : {cek_id:cek_id},
             success:function(result){
                var obj = JSON.parse(result);
@@ -439,7 +439,7 @@ $('#texDelete').click(function(){
     if(r){
             $.ajax({
                 type: "POST",
-                url: "<?php echo base_url('Company/delete_tex_master') ?>", 
+                url: "<?php echo base_url('master/delete_tex_master') ?>", 
                 data: $("#texForm").serialize(),
                 success: function(result) 
                 {
@@ -462,7 +462,7 @@ $('#texUpdate').click(function(){
     if(r){
         $.ajax({
             type: "POST",
-            url: "<?php echo base_url('Company/update_tex_master') ?>", 
+            url: "<?php echo base_url('master/update_tex_master') ?>", 
             data: $("#texForm").serialize(),
             success: function(result) 
             {
@@ -497,7 +497,7 @@ $(document).ready(function() {
         "processing": true,
         "serverSide": true,
         "ajax": {
-          'url':"<?php echo base_url().'company/get_user_master'; ?>",
+          'url':"<?php echo base_url().'master/get_user_master'; ?>",
            "type": "POST"
         }, "columns": [
            // {"data": "company_id"},
@@ -520,7 +520,7 @@ function userEdit(cek_id){
      if(r){
          $.ajax({
              type : "POST",
-             url  : "<?php echo base_url()."company/get_user"; ?>",
+             url  : "<?php echo base_url()."master/get_user"; ?>",
              data : {cek_id:cek_id},
              success:function(result){
             var obj = JSON.parse(result);
@@ -551,7 +551,7 @@ function userEdit(cek_id){
     if(r){
         $.ajax({
            type: "POST",
-           url: "<?php echo base_url('Company/update_user_master') ?>", 
+           url: "<?php echo base_url('master/update_user_master') ?>", 
             data: $("#userForm").serialize(),
             success: function(result) 
           {
@@ -576,7 +576,7 @@ function userEdit(cek_id){
  alert('Ready To delete');
             $.ajax({
                 type: "POST",
-                url: "<?php echo base_url('Company/delete_user_master') ?>", 
+                url: "<?php echo base_url('master/delete_user_master') ?>", 
                 data: $("#userForm").serialize(),
                 success: function(result) 
                 {
