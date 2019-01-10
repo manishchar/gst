@@ -47,7 +47,7 @@
                      $("#accountNumber").val(obj.data.accountNumber); 
                      $("#branch").val(obj.data.branch); 
                      $("#ifscCode").val(obj.data.ifscCode);
-                     $('#submit').prop('disabled',true);
+                     $('#bankSubmit').prop('disabled',true);
                     //$('#submit').prop('disabled',true);
                    }
                    if(obj.status == 'failed'){
@@ -70,12 +70,17 @@
                     {
                     console.log(result);
                     var obj = JSON.parse(result);
-                   if(obj.status == 'success'){
-                     $('#bankResult').DataTable().ajax.reload(); 
-                   }
-                   if(obj.status == 'failed'){
-                        alert(obj.message);
-                   }
+                   if(obj.status=='success'){
+                       $('#errorMessage').html('<div class="alert alert-success">'+obj.message+'</div>');
+                       $('#bankResult').DataTable().ajax.reload();
+                       $('bankForm').trigger('reset');
+                       //window.location.reload(); 
+                    }
+                    if(obj.status=='failed'){
+                        $('#errorMessage').html('<div class="alert alert-danger">'+obj.message+'</div>');
+                       $('bankForm').trigger('reset');
+                       $('#bankResult').DataTable().ajax.reload(); 
+                    }
                     }        
                 });
     });
@@ -94,14 +99,14 @@
                     console.log(obj.status);
                     if(obj.status=='success'){
                        $('#errorMessage').html('<div class="alert alert-success">'+obj.message+'</div>');
-                       
+                       $('bankForm').trigger('reset');
                        $('#bankResult').DataTable().ajax.reload();
-                       window.location.reload(); 
+                       //window.location.reload(); 
                     }
                     if(obj.status=='failed'){
                         $('#errorMessage').html('<div class="alert alert-danger">'+obj.message+'</div>');
-                        //alert(obj.message);
-                       //$('#bankResult').DataTable().ajax.reload(); 
+                       $('bankForm').trigger('reset');
+                       $('#bankResult').DataTable().ajax.reload(); 
                     }
                     
                     //$('#bankResult').DataTable().ajax.reload();
@@ -198,12 +203,18 @@ $('#partyDelete').click(function(){
                 {
                 console.log(result);
                 var obj = JSON.parse(result);
-               if(obj.status == 'success'){
-                 $('#partyResult').DataTable().ajax.reload(); 
-               }
-               if(obj.status == 'failed'){
-                    alert(obj.message);
-               }
+              if(obj.status=='success'){
+                   $('#errorMessage').html('<div class="alert alert-success">'+obj.message+'</div>');
+                   $('#partyForm').trigger('reset');
+                   $('#partyResult').DataTable().ajax.reload();
+                   //window.location.reload(); 
+                }
+                if(obj.status=='failed'){
+                    $('#errorMessage').html('<div class="alert alert-danger">'+obj.message+'</div>');
+                    //alert(obj.message);
+                   //$('#bankResult').DataTable().ajax.reload(); 
+                }
+                
                 }        
             });
         }
@@ -223,14 +234,15 @@ $('#partyUpdate').click(function(){
                 console.log(obj.status);
                 if(obj.status=='success'){
                    $('#errorMessage').html('<div class="alert alert-success">'+obj.message+'</div>');
-                   
+                $('#partyForm').trigger('reset');
+
                    $('#partyResult').DataTable().ajax.reload();
                    //window.location.reload(); 
                 }
                 if(obj.status=='failed'){
                     $('#errorMessage').html('<div class="alert alert-danger">'+obj.message+'</div>');
-                    //alert(obj.message);
-                   //$('#bankResult').DataTable().ajax.reload(); 
+                     $('#partyForm').trigger('reset');
+                    $('#bankResult').DataTable().ajax.reload(); 
                 }
                 
                 //$('#bankResult').DataTable().ajax.reload();
@@ -592,6 +604,204 @@ function userEdit(cek_id){
             });
 });
 // user master end //
+//unit master start//
+    $("#unitEdit").change(function(event) {
+        event.preventDefault();
+        var id = $(this).val();
+          var r = confirm("Are you sure to selected!");
+          if(r){
+        $.ajax({
+            type: "POST",
+            url: "<?php echo base_url('Company/get_unit') ?>" ,
+            
+            data: {id: id},
+            success:function(result){
+
+            var obj = JSON.parse(result);
+            if(obj.status == 'success'){
+              console.log(obj.data);
+              console.log(obj.data.id);
+                 $("#id").val(obj.data.id);
+                 $("#unit").val(obj.data.unit); 
+                 $('#unitSubmit').prop('disabled',true);    
+                 }  
+             if(obj.status == 'failed'){
+                 alert(obj.message)
+             }
+             }
+        });
+       }
+    });
+
+    $('#unitDelete').click(function(){  
+ var r = confirm("Are You Sure To Delete!");
+    if(r){
+          $.ajax({
+                type: "POST",
+                url: "<?php echo base_url('Company/delete_unit_master') ?>", 
+                data: $("#unitForm").serialize(),
+                success: function(result) 
+                {
+                console.log(result);
+                var obj = JSON.parse(result);
+               if(obj.status == 'success'){
+                 $('#errorMessage').html('<div class="alert alert-success">'+obj.message+'</div>');
+                   //$('#userResult').DataTable().ajax.reload();
+                   $('#unitForm').trigger("reset");
+                   $('#unit').trigger("reset");
+
+ }
+               if(obj.status == 'failed'){
+                    //alert(obj.message);
+                    $('#errorMessage').html('<div class="alert alert-danger">'+obj.message+'</div>');
+                   $('#unitForm').trigger("reset");
+                   //$('#userResult').DataTable().ajax.reload();
+
+               }
+                }        
+            });
+      }
+});
+
+//unit master end//
+// groupe master start//
+$("#groupEdit").change(function(event) {
+        event.preventDefault();
+        var id = $(this).val();
+          var r = confirm("Are you sure to selected!");
+          if(r){
+        $.ajax({
+            type: "POST",
+            url: "<?php echo base_url('Company/get_group') ?>" ,
+            
+            data: {id: id},
+            success:function(result){
+
+            var obj = JSON.parse(result);
+            if(obj.status == 'success'){
+              console.log(obj.data);
+              console.log(obj.data.id);
+                 $("#id").val(obj.data.id);
+                 $("#group").val(obj.data.parent_id); 
+                  $("#groupName").val(obj.data.groupName);
+
+ 
+                 $('#groupSubmit').prop('disabled',true);    
+                 }  
+             if(obj.status == 'failed'){
+                 alert(obj.message)
+             }
+             }
+        });
+       }
+    });
+$('#groupDelete').click(function(){  
+ var r = confirm("Are You Sure To Delete!");
+    if(r){
+          $.ajax({
+                type: "POST",
+                url: "<?php echo base_url('Company/delete_group_master') ?>", 
+                data: $("#groupForm").serialize(),
+                success: function(result) 
+                {
+                console.log(result);
+                var obj = JSON.parse(result);
+               if(obj.status == 'success'){
+                 $('#errorMessage').html('<div class="alert alert-success">'+obj.message+'</div>');
+                   //$('#userResult').DataTable().ajax.reload();
+                   $('#groupForm').trigger("reset");
+                   $('#groupName').trigger("reset");
+
+ }
+               if(obj.status == 'failed'){
+                    //alert(obj.message);
+                    $('#errorMessage').html('<div class="alert alert-danger">'+obj.message+'</div>');
+                   $('#groupForm').trigger("reset");
+                   //$('#userResult').DataTable().ajax.reload();
+
+               }
+                }        
+            });
+      }
+});
+// group master end//
+
+//route master start//
+$("#routeEdit").change(function(event) {
+        event.preventDefault();
+        var id = $(this).val();
+          var r = confirm("Are you sure to selected!");
+          if(r){
+        $.ajax({
+            type: "POST",
+            url: "<?php echo base_url('master/get_route') ?>" ,
+            
+            data: {id: id},
+            success:function(result){
+
+            var obj = JSON.parse(result);
+            if(obj.status == 'success'){
+              console.log(obj.data);
+              console.log(obj.data.id);
+                 $("#id").val(obj.data.id);
+                 $("#route").val(obj.data.parent_id); 
+                  $("#routeName").val(obj.data.routeName);
+
+ 
+                 $('#routeSubmit').prop('disabled',true);    
+                 }  
+             if(obj.status == 'failed'){
+                 alert(obj.message)
+             }
+             }
+        });
+       }
+    });
+$('#routeDelete').click(function(){  
+ var r = confirm("Are You Sure To Delete!");
+    if(r){
+          $.ajax({
+                type: "POST",
+                url: "<?php echo base_url('master/delete_route_master') ?>", 
+                data: $("#routeForm").serialize(),
+                success: function(result) 
+                {
+                console.log(result);
+                var obj = JSON.parse(result);
+               if(obj.status == 'success'){
+                 $('#errorMessage').html('<div class="alert alert-success">'+obj.message+'</div>');
+                   //$('#userResult').DataTable().ajax.reload();
+                   $('#routeForm').trigger("reset");
+                   $('#routeName').trigger("reset");
+
+ }
+               if(obj.status == 'failed'){
+                    //alert(obj.message);
+                    $('#errorMessage').html('<div class="alert alert-danger">'+obj.message+'</div>');
+                   $('#routeForm').trigger("reset");
+                   //$('#userResult').DataTable().ajax.reload();
+
+               }
+                }        
+            });
+      }
+});
+
+function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#productImage')
+                    .attr('src', e.target.result)
+                    .width(100)
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+
 </script>
 
   

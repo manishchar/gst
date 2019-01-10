@@ -27,6 +27,17 @@
 <!-- / HEADER -->
 <!-- CONTENT -->
 <div class="page-content p-6">
+  <div id="errorMessage"></div>
+                <?php
+                if($this->session->flashdata('message')){ ?>
+                  <div class="alert alert-success">
+                    <h5><?php echo $this->session->flashdata('message'); ?></h5>
+                  </div>
+                      <?php }elseif($this->session->flashdata('error')){ ?>
+                   <div class="alert alert-danger">
+                    <h5><?php echo $this->session->flashdata('error'); ?></h5>
+                  </div>
+                <?php } ?>
 <div class="topTab" style="margin-top: 0px;">
        <form method="POST" id="bankForm" >
             <div class="row  col-md-12 text text-danger">
@@ -88,7 +99,7 @@
                     </select>  
                 </div>
                 <div class="col-md-6 " style="display: inline-flex;padding: 0;margin: 0;">
-                  <button type="submit" name="add" class="btn  " style="width: 120px;margin: 10px 10px; margin-left: 10px; background-color: blue; color: white;">Add</button> 
+                  <button type="submit" name="add" id="bankSubmit" class="btn  " style="width: 120px;margin: 10px 10px; margin-left: 10px; background-color: blue; color: white;">Add</button> 
                   <button type="button" name="modify" id="bankUpdate"  class="btn  btn-primary   " style="width: 120px;margin: 10px 10px; color: white;">Modify</button>
                   <button type="button" name="delete" id="bankDelete"  class="btn  btn-secondery " style="width: 120px;margin: 10px 10px; background-color: red; color: white;">Delete</button> 
                 </div>
