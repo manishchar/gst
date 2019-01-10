@@ -727,6 +727,7 @@ $('#groupDelete').click(function(){
 // group master end//
 
 //route master start//
+
 $("#routeEdit").change(function(event) {
         event.preventDefault();
         var id = $(this).val();
