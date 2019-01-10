@@ -197,8 +197,12 @@ public function profile(){
   $this->load->view('master/profile',$data); 
 }
 public function change_password(){
-  $data['page_title'] = "Change Password";
-  $this->load->view('master/change_password',$data); 
+  if($this->input->post()){
+    
+  }else{
+    $data['page_title'] = "Change Password";
+    $this->load->view('master/change_password',$data); 
+  }
 }
 public function Logout()
 {
