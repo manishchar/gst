@@ -64,57 +64,57 @@
               <div class="row form-group">
                 <div class="col-md-3 col-lg-3">
                   <div class="title font-weight-bold mb-1">GSTIN no</div>
-                  <div class="info"><?= $company->companyName; ?></div>
+                  <div class="info"><?= $company->gistinNo; ?></div>
                 </div>
                 <div class="col-md-3 col-lg-3">
                   <div class="title font-weight-bold mb-1">Pan no</div>
-                  <div class="info"><?= $company->companyName; ?></div>
+                  <div class="info"><?= $company->panNo; ?></div>
                 </div>
                 <div class="col-md-3 col-lg-3">
                   <div class="title font-weight-bold mb-1">Cin no</div>
-                  <div class="info"><?= $company->companyName; ?></div>
+                  <div class="info"><?= $company->cinNo; ?></div>
                 </div>
                 <div class="col-md-3 col-lg-3">
                   <div class="title font-weight-bold mb-1">Aadhaar no</div>
-                  <div class="info"><?= $company->companyName; ?></div>
+                  <div class="info"><?= $company->aadhaarNo; ?></div>
                 </div>
               </div>
 
                <div class="row form-group">
                 <div class="col-md-3 col-lg-3">
                   <div class="title font-weight-bold mb-1">Bank Account no</div>
-                  <div class="info"><?= $company->companyName; ?></div>
+                  <div class="info"><?= $company->bankAccountNo; ?></div>
                 </div>
                 <div class="col-md-3 col-lg-3">
                   <div class="title font-weight-bold mb-1">Bank Account Name</div>
-                  <div class="info"><?= $company->companyName; ?></div>
+                  <div class="info"><?= $company->bankAccountName; ?></div>
                 </div>
                 <div class="col-md-3 col-lg-3">
                   <div class="title font-weight-bold mb-1">Bank IFSC Code</div>
-                  <div class="info"><?= $company->companyName; ?></div>
+                  <div class="info"><?= $company->bankIfscCode; ?></div>
                 </div>
                 <div class="col-md-3 col-lg-3">
                   <div class="title font-weight-bold mb-1">Bank Name</div>
-                  <div class="info"><?= $company->companyName; ?></div>
+                  <div class="info"><?= $company->bankName; ?></div>
                 </div>
               </div>
 
                <div class="row form-group">
                 <div class="col-md-3 col-lg-3">
                   <div class="title font-weight-bold mb-1">Bank Branch</div>
-                  <div class="info"><?= $company->companyName; ?></div>
+                  <div class="info"><?= $company->branchName; ?></div>
                 </div>
                 <div class="col-md-3 col-lg-3">
                   <div class="title font-weight-bold mb-1">Estimate Series</div>
-                  <div class="info"><?= $company->companyName; ?></div>
+                  <div class="info"><?= $company->estimateSeries; ?></div>
                 </div>
                 <div class="col-md-3 col-lg-3">
                   <div class="title font-weight-bold mb-1">Required Barcode</div>
-                  <div class="info"><?= $company->companyName; ?></div>
+                  <div class="info"><?= $company->requiredBarcode; ?></div>
                 </div>
                 <div class="col-md-3 col-lg-3">
                   <div class="title font-weight-bold mb-1">Seperate tex for Product</div>
-                  <div class="info"><?= $company->companyName; ?></div>
+                  <div class="info"><?= $company->TaxForProduct; ?></div>
                 </div>
               </div>
 
@@ -132,38 +132,38 @@
               <div class="row form-group">
                 <div class="col-md-3 col-lg-3">
                   <div class="title font-weight-bold mb-1">Barcode Title</div>
-                  <div class="info"><?= $company->companyName; ?></div>
+                  <div class="info"><?= $company->barCodeTitle; ?></div>
                 </div>
                 <div class="col-md-3 col-lg-3">
                   <div class="title font-weight-bold mb-1">Barcode MRP Prefix</div>
-                  <div class="info"><?= $company->companyName; ?></div>
+                  <div class="info"><?= $company->barCodeMrpPrefix; ?></div>
                 </div>
                 <div class="col-md-3 col-lg-3">
                   <div class="title font-weight-bold mb-1">Barcode Sending Price Prefix</div>
-                  <div class="info"><?= $company->companyName; ?></div>
+                  <div class="info"><?= $company->barCodeSendingPricePrefix; ?></div>
                 </div>
                 <div class="col-md-3 col-lg-3">
                   <div class="title font-weight-bold mb-1">Barcode Field</div>
-                  <div class="info"><?= $company->companyName; ?></div>
+                  <div class="info"><?= $company->barCodeField; ?></div>
                 </div>
               </div>
 
               <div class="row form-group">
                 <div class="col-md-3 col-lg-3">
                   <div class="title font-weight-bold mb-1">Barcode Price Code</div>
-                  <div class="info">Female</div>
+                  <div class="info"><?= $company->barCodePriceCode; ?></div>
                 </div>
                 <div class="col-md-3 col-lg-3">
                   <div class="title font-weight-bold mb-1">Barcode Code Field 1</div>
-                  <div class="info">12.01.1987</div>
+                  <div class="info"><?= $company->barCodeField1; ?></div>
                 </div>
                 <div class="col-md-3 col-lg-3">
                   <div class="title font-weight-bold mb-1">Barcode Code Field 2</div>
-                  <div class="info">12.01.1987</div>
+                  <div class="info"><?= $company->barCodeField2; ?></div>
                 </div>
                 <div class="col-md-3 col-lg-3">
                   <div class="title font-weight-bold mb-1">Barcode Code Field 3</div>
-                  <div class="info">12.01.1987</div>
+                  <div class="info"><?= $company->barCodeField3; ?></div>
                 </div>
               </div>
 
@@ -183,57 +183,57 @@
               <div class="row form-group">
                 <div class="col-md-3 col-lg-3">
                   <div class="title font-weight-bold mb-1">Logo</div>
-                  <div class="info">Female</div>
+                  <div class="info"><?= $company->logo; ?></div>
                 </div>
                 <div class="col-md-3 col-lg-3">
                   <div class="title font-weight-bold mb-1">Image</div>
-                  <div class="info">12.01.1987</div>
+                  <div class="info"><?= $company->logoImage; ?></div>
                 </div>
                 <div class="col-md-3 col-lg-3">
                   <div class="title font-weight-bold mb-1">Invoice Format</div>
-                  <div class="info">12.01.1987</div>
+                  <div class="info"><?= $company->invoiceFormat; ?></div>
                 </div>
                 <div class="col-md-3 col-lg-3">
                   <div class="title font-weight-bold mb-1">Barcode Format</div>
-                  <div class="info">12.01.1987</div>
+                  <div class="info"><?= $company->barcodeFormat; ?></div>
                 </div>
               </div>
 
               <div class="row form-group">
                 <div class="col-md-3 col-lg-3">
                   <div class="title font-weight-bold mb-1">Nature of Business</div>
-                  <div class="info">Female</div>
+                  <div class="info"><?= $company->natureOfBusiness; ?></div>
                 </div>
                 <div class="col-md-3 col-lg-3">
                   <div class="title font-weight-bold mb-1">Cash Sales Conditions</div>
-                  <div class="info">12.01.1987</div>
+                  <div class="info"><?= $company->cashSalesConditions; ?></div>
                 </div>
                 <div class="col-md-3 col-lg-3">
                   <div class="title font-weight-bold mb-1">Credit Sales Conditions</div>
-                  <div class="info">12.01.1987</div>
+                  <div class="info"><?= $company->creditSalesConditions; ?></div>
                 </div>
                 <div class="col-md-3 col-lg-3">
                   <div class="title font-weight-bold mb-1">Account Mode</div>
-                  <div class="info">12.01.1987</div>
+                  <div class="info"><?= $company->accountMode; ?></div>
                 </div>
               </div>
 
               <div class="row form-group">
                 <div class="col-md-3 col-lg-3">
                   <div class="title font-weight-bold mb-1">Sub Title</div>
-                  <div class="info">Female</div>
+                  <div class="info"><?= $company->subTitle; ?></div>
                 </div>
                 <div class="col-md-3 col-lg-3">
                   <div class="title font-weight-bold mb-1">Required Rate Calculator</div>
-                  <div class="info">12.01.1987</div>
+                  <div class="info"><?= $company->requiredRateCalculator; ?></div>
                 </div>
                 <div class="col-md-3 col-lg-3">
                   <div class="title font-weight-bold mb-1">Required Product Image</div>
-                  <div class="info">12.01.1987</div>
+                  <div class="info"><?= $company->requiredProductImage; ?></div>
                 </div>
                 <div class="col-md-3 col-lg-3">
                   <div class="title font-weight-bold mb-1">Size/Packing Calculator</div>
-                  <div class="info">12.01.1987</div>
+                  <div class="info"><?= $company->packingCalculator; ?></div>
                 </div>
               </div>
 
