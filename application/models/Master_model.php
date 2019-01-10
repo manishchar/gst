@@ -236,6 +236,16 @@ public function get_user(){
   $id = $this->input->post("cek_id");
   return $this->db->select('*')->where("id",$id)->get('msd_user_master')->row();
 }
+public function get_route(){ 
+  $id = $this->input->post("cek_id");
+  return $this->db->select('*')->where("id",$id)->get('msd_route_master')->row();
+}public function get_group(){ 
+  $id = $this->input->post("cek_id");
+  return $this->db->select('*')->where("id",$id)->get('msd_group_master')->row();
+}public function get_unit(){ 
+  $id = $this->input->post("cek_id");
+  return $this->db->select('*')->where("id",$id)->get('msd_unit_master')->row();
+}
 
 
 // ----------------CompanyList--------------

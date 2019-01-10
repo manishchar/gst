@@ -31,25 +31,7 @@
 <div class="topTab" style="margin-top: 0px;">
 	<form method="POST" id="routeForm">
       <div class=" row form-group col-md-12">
-                <!-- <div class="col-md-4">
-                <label class="control-label">Route Name</label><br>
-                
-			           <input type="text" name="id" id="id" class="form-control" hidden="hidden">
-                         <select type="text" class="form-control" value="route" name="route" id="route" >
-                            <option value="0">Root</option>
-                     <?php
-                           //if($routes){
-                              //  foreach ($routes as $key => $value) { ?>
-                       <option value="<?= $value->id; ?>"><?= $value->routeName; ?></option>
-                     <?php 
-                     
-                     ?>
-              
-              
-                     </select>  
-                      </div> -->
-                       
-          <div class="col-md-4"  ">
+               <div class="col-md-4"  ">
                 <label class="control-label" for="routeName"  required="required">Route Name</label>
                 <input type="text" name="id" id="id" class="form-control" hidden="hidden">
                 <input type="text" name="routeName" id="routeName" class="form-control">
@@ -57,7 +39,7 @@
 			</div>
 			<div class=" row form-group col-md-12">
 			   	<div class="col-md-6">
-                <label for="group">Groups Name</label>
+                <label for="group">All Routs </label>
                 <select type="text" class="form-control" value="route" name="route" id="routeEdit" required="required">
                    <option value="0">Root</option>
                       <?php

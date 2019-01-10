@@ -3,7 +3,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Master extends CI_Controller {
 
-
 private $company_id='';
   function __construct() { 
   parent::__construct();
@@ -45,7 +44,7 @@ public function index(){
           if($this->Master_model->bank_details($data)){
           $this->session->set_flashdata('message', 'Record Save succesfully');
           }else{
-          $this->session->set_flashdata('error', 'Record Failed');
+          $this->session->set_flashdata('error', 'Record Save Failed');
           }
           redirect('master');
 
@@ -60,7 +59,7 @@ public function index(){
     }
    }
    public function get_bank(){
-   $bank = $this->Company_model->get_bank(); 
+   $bank = $this->Master_model->get_bank(); 
    if(!empty($bank)){
     $response = array('status'=>'success','code'=>'200','data'=>$bank);
    }else{
@@ -113,24 +112,36 @@ public function update_bank_details(){
     $branch= $_POST['branch'];
     $ifscCode= $_POST['ifscCode'];
     $qery=$this->db->query("UPDATE `msd_bank_details` SET `accountId`='$accountId',`bankName`='$bankName',`accountHolder`='$accountHolder',`accountNumber`='$accountNumber',`branch`='$branch',`ifscCode`='$ifscCode' WHERE `id`='$id' ");
+    if($id){
     if($qery){
-      $this->session->set_flashdata('message','data update successfully');
+      //$this->session->set_flashdata('message','data update successfully');
       $response = array('status'=>'success','message'=>'data update successfully');
     }else{
-      $this->session->set_flashdata('error','data update Failed');
+      //$this->session->set_flashdata('error','data update Failed');
       $response = array('status'=>'failed','message'=>'data update failed');
     }
+  }else{
+          $response = array('status'=>'failed','message'=>'data Invailid Records');
+
+  }
     echo json_encode($response);
+  
 }
 public function delete_bank_details(){
   $id = $_POST['id'];
   $qery= $this->db->query("UPDATE `msd_bank_details` SET `active`='0' WHERE `id`='$id' ");
-  if($qery){
-    $response = array('status'=>'success','message'=>'data Delete successfully');
-  }else{
-    $response = array('status'=>'failed','message'=>'data Delete failed');
-  }
+   if($id){
+        if($qery){
+          $response = array('status'=>'success','message'=>'data Delete successfully');
+          }else{
+          $response = array('status'=>'failed','message'=>'data Delete failed');
+           }
+   }else{
+          $response = array('status'=>'failed','message'=>'data Invailid Records');
+
+    }
   echo json_encode($response);
+
 }
 
   // ----------------group master---------------------
@@ -144,18 +155,19 @@ public function group_master(){
           if ($this->form_validation->run() == TRUE)
                                  {
                         $data = array(
+                                     'company_id' => $this->company_id,
                                      'groupName' => $this->input->post('groupName'),
-                                    );
+                               );
                
-                           $query = $this->Company_model->group_master($data);
+                           $query = $this->Master_model->group_master($data);
     
                 if($query>0){
                             $this->session->set_flashdata('success', 'succesfully');
-                            redirect('Company/group_master');
+                            redirect('Master/group_master');
                      }
                 else{
                            $this->session->set_flashdata('faiid', 'faild');
-                           redirect('Company/group_master');
+                           redirect('Master/group_master');
                     }
             }
          else
@@ -213,17 +225,16 @@ public function party_master(){
                          'requiredSms' => $this->input->post('requiredSms')
                  );
            
-              $query = $this->Master_model->party_master($data);
+             
 
-           if($query>0){
-               $this->session->set_flashdata('success', 'succesfully');
-                   redirect('master/party_master');
-                 }
-            else{
-                  $this->session->set_flashdata('faiid', 'faild');
+           if($this->Master_model->party_master($data)){
+                $this->session->set_flashdata('message', 'Record Save succesfully');
+                    }else{
+                 $this->session->set_flashdata('error', 'Record Failed');
+                     }
 
                    redirect('master/party_master');
-            }
+            
           }else{
                $this->load->view('master/party_master',$data);
           }
@@ -294,32 +305,44 @@ public function update_party_master(){
   $openingBalance= $_POST['openingBalance'];
   $requiredSms= $_POST['requiredSms'];
 
-  
+  if($id){
   $qery=$this->db->query("UPDATE `msd_party_master` SET `customerType`='$customerType',`customer`='$customer',`primaryContactPerson`='$primaryContactPerson',`email`='$email',`mobile`='$mobile',`billingAddress`='$billingAddress',`addressLine2`='$addressLine2',`city`='$city',`state`='$state',`pin`='$pin',`gstinNo`='$gstinNo',`panNo`='$panNo',`collectionRoute`='$collectionRoute',`openingBalance`='$openingBalance',`requiredSms`='$requiredSms' WHERE `id`='$id' ");
   if(!empty($qery)){
     $response = array('status'=>'success','code'=>'200','message'=>'Record Update succesfully');
   }else{
     $response = array('status'=>'failed','code'=>'201','message'=>'Record Update Failed');
   }
+  }else{
+    $response = array('status'=>'failed','code'=>'201','message'=>'Invailid Records');
+  }
   echo json_encode($response);
   //redirect('company/party_master');
 }
 public function delete_party_master(){
   $id = $_POST['id'];
-  $qery=$this->db->query("UPDATE `msd_party_master` SET `active`='0' WHERE `id`='$id' ");
-  if(!empty($qery)){
-    $response = array('status'=>'success','code'=>'200','message'=>'Record Delete succesfully');
-  }else{
-    $response = array('status'=>'failed','code'=>'201','message'=>'Record Delete Failed');
-  }
+  if($id){
+
+       $qery=$this->db->query("UPDATE `msd_party_master` SET `active`='0' WHERE `id`='$id' ");
+      if(!empty($qery)){
+            $response = array('status'=>'success','code'=>'200','message'=>'Record Delete succesfully');
+       }else{
+            $response = array('status'=>'failed','code'=>'201','message'=>'Record Delete Failed');
+        }
+}else{
+    $response = array('status'=>'failed','code'=>'201','message'=>'Invailid Records');
+
+}
   echo json_encode($response);
+
 }
 
 //party master 
 public function route_master(){
    $data['title']="Route Master";
     $data['page_title']="Route Master";
-  
+    $data['all_routes'] = $this->db->select('*')->get('msd_route_master')->result();
+  // print_r($da);
+  // die();
      if($this->input->post()){  
                   $this->form_validation->set_rules('routeName','route name','required');     
               if ($this->form_validation->run() == TRUE)
@@ -341,26 +364,38 @@ public function route_master(){
                }
           else
              {
-                   //$this->load->view('template/header');
-                   //$this->load->view('template/sidemenu');
-                   //$this->load->view('template/topbar');
-                   //$this->load->view('template/breadcrumbs');
-                   $this->load->view('master/Route_master',$data);
-                   //$this->load->view('template/footer');  
-  
+                     $this->load->view('master/Route_master',$data);
             }
-  }
+     }
   else{
-                  // $this->load->view('template/header');
-                  //  $this->load->view('template/sidemenu');
-                  //  $this->load->view('template/topbar');
-                  //  $this->load->view('template/breadcrumbs');
-                   $this->load->view('master/Route_master',$data);
-                   //$this->load->view('template/footer');  
-  
-    
+                        $this->load->view('master/Route_master',$data);    
     }
                    
+}
+public function get_route(){
+   $user = $this->Master_model->get_route(); 
+   if(!empty($user)){
+    $response = array('status'=>'success','code'=>'200','data'=>$user);
+   }else{
+    $response = array('status'=>'failed','code'=>'201','message'=>'data not found');
+   }
+   echo json_encode($response);
+}
+public function delete_route_master(){
+  $id = $_POST['id'];
+  if($id){
+     $qery=$this->db->query("UPDATE `msd_route_master` SET `active`='0' WHERE `id`='$id' ");
+  if(!empty($qery)){
+    $response = array('status'=>'success','code'=>'200','message'=>'Record Delete succesfully');
+  }else{
+    $response = array('status'=>'failed','code'=>'201','message'=>'Record Delete Failed');
+  }
+}else{
+      $response = array('status'=>'failed','code'=>'201','message'=>'Invailid Records');
+ 
+}
+  echo json_encode($response);
+
 }
 
 
@@ -379,10 +414,10 @@ public function tex_master(){
                 
           if ($this->form_validation->run() == TRUE)
         {
-          $company_id=$this->session->userdata('gst_login');
+          //$company_id=$this->session->userdata('gst_login');
 
           $data = array(
-            'company_id' => $company_id['loginId'], 
+            'company_id' => $this->company_id, 
             'texName' => $this->input->post('texName'),
             'texPercentage' => $this->input->post('texPercentage'),
             'texType' => $this->input->post('texType'),
@@ -403,21 +438,11 @@ public function tex_master(){
         }
         else
         {
-          $this->load->view('template/header');
-          $this->load->view('template/sidemenu');
-          $this->load->view('template/topbar');
-          $this->load->view('template/breadcrumbs');
-          $this->load->view('Tex_master',$data);
-          $this->load->view('template/footer'); 
+           $this->load->view('master/Tex_master',$data);
         }
     }else{
-        $this->load->view('template/header');
-        $this->load->view('template/sidemenu');
-        $this->load->view('template/topbar');
-        $this->load->view('template/breadcrumbs');
-        $this->load->view('Tex_master',$data);
-        $this->load->view('template/footer'); 
-    }
+          $this->load->view('master/Tex_master',$data);
+      }
    }  
 
 
@@ -430,7 +455,7 @@ public function get_tex_details(){
   $search = $searchArray['value'];
 
   if($search !=''){
-  $query = "SELECT * FROM `msd_tex_master` WHERE `active` = 1 AND `company_id` = '".$this->company_id['loginId']."' AND  (`texName` LIKE '%".$search."%' ESCAPE '!'
+  $query = "SELECT * FROM `msd_tex_master` WHERE `active` = 1 AND `company_id` = '".$this->company_id."' AND  (`texName` LIKE '%".$search."%' ESCAPE '!'
 OR  `texPercentage` LIKE '%".$search."%' OR  `texType` LIKE '%".$search."%' OR  `sgst` LIKE '%".$search."%' OR  `cgst` LIKE '%".$search."%' OR  `igst` LIKE '%".$search."%')";
     $totalCount = $this->db->query($query)->num_rows();
   $query .= "ORDER BY `created_date` DESC, `deleted_date` DESC LIMIT 10";
@@ -440,10 +465,10 @@ OR  `texPercentage` LIKE '%".$search."%' OR  `texType` LIKE '%".$search."%' OR  
     //echo $this->db->last_query();
 
   }else{
-    $totalCount = $this->db->where(['active'=>1,'company_id'=>$this->company_id['loginId']])->get('msd_tex_master')->num_rows();
+    $totalCount = $this->db->where(['active'=>1,'company_id'=>$this->company_id])->get('msd_tex_master')->num_rows();
  // print_r($totalCount);
  // die();
-    $product = $this->db->where(['active'=>1,'company_id'=>$this->company_id['loginId']])->limit($length, $start)->order_by("created_date DESC,deleted_date DESC")->get('msd_tex_master')->result_array();
+    $product = $this->db->where(['active'=>1,'company_id'=>$this->company_id])->limit($length, $start)->order_by("created_date DESC,deleted_date DESC")->get('msd_tex_master')->result_array();
   }
 
   $productResult = array();
@@ -488,7 +513,7 @@ if($id ){
 
 
 public function get_tex(){
-   $tex = $this->Company_model->get_tex(); 
+   $tex = $this->Master_model->get_tex(); 
    if(!empty($tex)){
     $response = array('status'=>'success','code'=>'200','data'=>$tex);
    }else{
@@ -739,11 +764,11 @@ public function delete_user_master(){
            
               
 
-           if($this->Company_model->product_services($data)){
-          $this->session->set_flashdata('message', 'Record Save succesfully');
-          }else{
-          $this->session->set_flashdata('error', 'Record Failed');
-          }
+               if($this->Company_model->product_services($data)){
+                $this->session->set_flashdata('message', 'Record Save succesfully');
+                    }else{
+                 $this->session->set_flashdata('error', 'Record Failed');
+                     }
 
                    redirect('Company/product_services');
            

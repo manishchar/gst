@@ -35,12 +35,47 @@
 <!-- CONTENT -->
 <div class="page-content p-6">
 <div class="topTab" style="margin-top: 0px;">
-<ul class="topUL">
 
 
-</a>
-</li>
-</ul>
+<div class="row">
+	<div class="col-12 col-sm-6 col-xl-3 p-3">
+		<div class="widget widget1 card">
+		    <div class="widget-content pt-2 pb-8 d-flex flex-column align-items-center justify-content-center">
+		        <div class="title text-secondary"><strong>25</strong></div>
+		        <div class="sub-title h6 text-muted"><strong>Sales</strong></div>
+		    </div>
+		</div>
+	</div>
+
+	<div class="col-12 col-sm-6 col-xl-3 p-3">
+		<div class="widget widget1 card">
+		    <div class="widget-content pt-2 pb-8 d-flex flex-column align-items-center justify-content-center">
+		        <div class="title text-secondary"><strong>25</strong></div>
+		        <div class="sub-title h6 text-muted"><strong>Purchase</strong></div>
+		    </div>
+		</div>
+	</div>
+
+	<div class="col-12 col-sm-6 col-xl-3 p-3">
+		<div class="widget widget1 card">
+		    <div class="widget-content pt-2 pb-8 d-flex flex-column align-items-center justify-content-center">
+		        <div class="title text-secondary"><strong>25</strong></div>
+		        <div class="sub-title h6 text-muted"><strong>User</strong></div>
+		    </div>
+		</div>
+	</div>
+	
+
+	<div class="col-12 col-sm-6 col-xl-3 p-3">
+		<div class="widget widget1 card">
+		    <div class="widget-content pt-2 pb-8 d-flex flex-column align-items-center justify-content-center">
+		        <div class="title text-secondary"><strong>25</strong></div>
+		        <div class="sub-title h6 text-muted"><strong>Sales</strong></div>
+		    </div>
+		</div>
+	</div>
+
+</div>
 </div>
 
 </div>
