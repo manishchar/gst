@@ -70,7 +70,7 @@
 		<div class="widget widget1 card">
 		    <div class="widget-content pt-2 pb-8 d-flex flex-column align-items-center justify-content-center">
 		        <div class="title text-secondary"><strong>25</strong></div>
-		        <div class="sub-title h6 text-muted"><strong>Sales</strong></div>
+		        <div class="sub-title h6 text-muted"><strong>Total</strong></div>
 		    </div>
 		</div>
 	</div>
