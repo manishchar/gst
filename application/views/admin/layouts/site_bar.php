@@ -128,7 +128,7 @@
 
                            <li class="nav-item" role="tab" id="heading-dashboards">
 
-                                <a class="nav-link ripple "  href="<?php echo base_url().'complete'; ?>" data-url="index.html">
+                                <a class="nav-link ripple "  href="<?php echo base_url().'Sales'; ?>" data-url="index.html">
 
                                     <i class="icon-document"></i>
 
