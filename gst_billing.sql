@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 10, 2019 at 01:47 PM
+-- Generation Time: Jan 15, 2019 at 11:28 AM
 -- Server version: 10.1.32-MariaDB
 -- PHP Version: 7.0.30
 
@@ -71,7 +71,7 @@ INSERT INTO `companymaster` (`cmId`, `companyName`, `address`, `contactNo`, `ema
 (37, 'manish', 'manish@gmail.com', 2147483647, 'manish@gmail.com', '', '', '', '', '', '0', 'Yes', '', '65.png', '0', '0', '1', '', '', '1', '', 0, '0', '0', 0),
 (38, 'new com', 'bhopal', 9856985, 'new@gmail.com', '', '', '', '', '', '0', 'Yes', '', NULL, '0', '0', '1', '', '', '1', '', 0, '0', '0', 0),
 (39, 'rahul', 'bhopal', 2147483647, 'rahul@gmail.com', '', '', '', '', '', '0', 'Yes', '', NULL, '0', '0', '1', '', '', '1', '', 0, '0', '0', 0),
-(40, 'demo', 'demo', 985698555, 'demo@gmail.com', '123456', '123456', '252535', '123654788', '', '0', 'Yes', '', NULL, '0', '0', '1', 'set_value(\'cashSalesConditions\');', 'set_value(\'creditSalesConditions\');', '1', '', 0, '0', '0', 1);
+(40, 'demo', 'demo', 985698555, 'demo@gmail.com', '123456', '123456', '252535', '123654788', '', '0', 'Yes', 'logo mmmmmmm', '13.png', '0', '0', '1', 'dsa', '4444', '2', 'gsdfg', 1, '1', '1', 1);
 
 -- --------------------------------------------------------
 
@@ -126,7 +126,7 @@ INSERT INTO `company_barcode` (`barcode_id`, `company_id`, `barCodeTitle`, `barC
 (1, 37, '', '', '', '0', '0', '0', '0', '0', 1),
 (2, 38, '', '', '', '0', '0', '0', '0', '0', 1),
 (3, 39, '', '', '', '0', '0', '0', '0', '0', 1),
-(4, 40, '', '', '', NULL, NULL, NULL, NULL, '0', 1);
+(4, 40, '', '', '123456', NULL, NULL, NULL, NULL, '0', 1);
 
 -- --------------------------------------------------------
 
@@ -162,8 +162,9 @@ INSERT INTO `msd_bank_details` (`id`, `company_id`, `accountId`, `bankName`, `ac
 (3, 2, '123456', '1', 'manish', '123456', '225645', 'BOI123456', 1, NULL, 0, '2019-01-03 08:44:32', '0000-00-00 00:00:00', '2019-01-03 08:45:05', NULL),
 (4, 2, '123456', '1', 'manish', '123456', '22', '2222', 1, NULL, 0, '2019-01-03 08:44:45', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
 (5, 40, '123456', '2', 'manish chakravarti', 'fghd', 'sdaf', 'sdfg', 1, NULL, 0, '2019-01-10 10:10:38', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
-(6, 40, '123456', '2', 'manish chakravarti', 'fghd', 'sdaf', 'sdfg', 1, NULL, 0, '2019-01-10 10:10:54', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
-(7, 40, '123456', '1', 'manish chakravarti', 'fghd', 'sdaf', 'sdfg', 1, NULL, 0, '2019-01-10 10:14:29', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL);
+(6, 40, '123456', '2', 'manish chakravarti', 'fghd', 'sdaf', 'new', 1, NULL, 0, '2019-01-10 10:10:54', '0000-00-00 00:00:00', '2019-01-10 13:16:53', NULL),
+(7, 40, '123456', '1', 'manish chakravarti', 'fghd', 'sdaf', 'sdfg4444', 1, NULL, 0, '2019-01-10 10:14:29', '0000-00-00 00:00:00', '2019-01-10 13:16:42', NULL),
+(8, 36, '123456', '1', 'manish chakravarti', 'fghd', 'sdaf', 'sdfg', 1, NULL, 0, '2019-01-15 09:01:49', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -192,7 +193,8 @@ INSERT INTO `msd_group_master` (`id`, `company_id`, `groupName`, `active`, `stat
 (1, 0, '2', 1, NULL, 0, '2018-12-23 15:59:07', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
 (2, 0, '1', 1, NULL, 0, '2018-12-23 16:03:58', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
 (3, 0, '1', 1, NULL, 0, '2018-12-24 06:40:35', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
-(4, 0, '1', 1, NULL, 0, '2018-12-24 06:55:09', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL);
+(4, 0, '1', 1, NULL, 0, '2018-12-24 06:55:09', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
+(5, 36, 'ghjfg', 1, NULL, 0, '2019-01-15 09:01:20', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -203,6 +205,7 @@ INSERT INTO `msd_group_master` (`id`, `company_id`, `groupName`, `active`, `stat
 CREATE TABLE `msd_party_master` (
   `id` int(11) NOT NULL,
   `company_id` int(11) NOT NULL,
+  `partyImage` varchar(255) DEFAULT NULL,
   `customerType` varchar(255) NOT NULL,
   `customer` varchar(255) NOT NULL,
   `primaryContactPerson` varchar(255) NOT NULL,
@@ -231,13 +234,19 @@ CREATE TABLE `msd_party_master` (
 -- Dumping data for table `msd_party_master`
 --
 
-INSERT INTO `msd_party_master` (`id`, `company_id`, `customerType`, `customer`, `primaryContactPerson`, `email`, `mobile`, `billingAddress`, `addressLine2`, `city`, `state`, `pin`, `gstinNo`, `panNo`, `collectionRoute`, `openingBalance`, `requiredSms`, `active`, `status`, `created_by`, `created_date`, `deleted_date`, `updated_date`, `updated_by`) VALUES
-(1, 0, '1', 'dsds', 'sdsadsd', 'sunil123@gmail.com', '9993967305', '55345', 'address one', 'sdsas', 'sdaf', 0, 0, 'sadsa', '2', '5665', '2', 0, NULL, 0, '2018-12-23 19:00:23', '0000-00-00 00:00:00', '2018-12-29 11:19:14', NULL),
-(2, 0, '1', 'dsds', 'sdsadsd', 'sunil123@gmail.com', '9993967305', '55345', 'address one', 'sdsas', 'sdaf', 0, 0, '645123', '2', '5665', '2', 1, NULL, 0, '2018-12-23 19:00:23', '0000-00-00 00:00:00', '2018-12-29 11:58:25', NULL),
-(3, 0, '1', 'dsds', 'sdsadsd', 'sunil123@gmail.com', '9993967305', '55345', 'address one', 'sdsas', 'sdaf', 0, 0, 'sadsa', '2', '5665', '2', 0, NULL, 0, '2018-12-23 19:00:23', '0000-00-00 00:00:00', '2018-12-29 11:22:02', NULL),
-(4, 40, '1', 'dsds', 'sdsadsd', 'sunil123@gmail.com', '9993967305', '55345', 'address one', 'sdsas', 'sdaf', 0, 0, 'sadsa', '2', '5665', '2', 0, NULL, 0, '2018-12-23 19:00:23', '0000-00-00 00:00:00', '2019-01-10 10:21:48', NULL),
-(5, 0, '1', 'manish chakravarti', 'sdsadsd', 'manish09.chakravarti@gmail.com', '9926331375', 'bhopal', 'bhopal', 'bhopal', 'Madhya Pradesh', 462038, 0, '65748564', '1', '5665', '1', 1, NULL, 0, '2019-01-10 10:17:58', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
-(6, 40, '1', 'manish chakravarti', 'sdsadsd', 'sunil.neel88@gmail.com', '9926331375', 'bhopal', 'bhopal', 'bhopal', 'Madhya Pradesh', 462038, 0, '65748564', '1', '5665', '1', 0, NULL, 0, '2019-01-10 10:21:03', '0000-00-00 00:00:00', '2019-01-10 10:21:54', NULL);
+INSERT INTO `msd_party_master` (`id`, `company_id`, `partyImage`, `customerType`, `customer`, `primaryContactPerson`, `email`, `mobile`, `billingAddress`, `addressLine2`, `city`, `state`, `pin`, `gstinNo`, `panNo`, `collectionRoute`, `openingBalance`, `requiredSms`, `active`, `status`, `created_by`, `created_date`, `deleted_date`, `updated_date`, `updated_by`) VALUES
+(1, 0, NULL, '1', 'dsds', 'sdsadsd', 'sunil123@gmail.com', '9993967305', '55345', 'address one', 'sdsas', 'sdaf', 0, 0, 'sadsa', '2', '5665', '2', 0, NULL, 0, '2018-12-23 19:00:23', '0000-00-00 00:00:00', '2018-12-29 11:19:14', NULL),
+(2, 0, NULL, '1', 'dsds', 'sdsadsd', 'sunil123@gmail.com', '9993967305', '55345', 'address one', 'sdsas', 'sdaf', 0, 0, '645123', '2', '5665', '2', 1, NULL, 0, '2018-12-23 19:00:23', '0000-00-00 00:00:00', '2018-12-29 11:58:25', NULL),
+(3, 0, NULL, '1', 'dsds', 'sdsadsd', 'sunil123@gmail.com', '9993967305', '55345', 'address one', 'sdsas', 'sdaf', 0, 0, 'sadsa', '2', '5665', '2', 0, NULL, 0, '2018-12-23 19:00:23', '0000-00-00 00:00:00', '2018-12-29 11:22:02', NULL),
+(4, 40, NULL, '1', 'dsds', 'sdsadsd', 'sunil123@gmail.com', '9993967305', '55345', 'address one', 'sdsas', 'sdaf', 0, 0, 'sadsa', '2', '5665', '2', 0, NULL, 0, '2018-12-23 19:00:23', '0000-00-00 00:00:00', '2019-01-10 10:21:48', NULL),
+(5, 0, NULL, '1', 'manish chakravarti', 'sdsadsd', 'manish09.chakravarti@gmail.com', '9926331375', 'bhopal', 'bhopal', 'bhopal', 'Madhya Pradesh', 462038, 0, '65748564', '1', '5665', '1', 1, NULL, 0, '2019-01-10 10:17:58', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
+(6, 40, NULL, '1', 'manish chakravarti', 'sdsadsd', 'sunil.neel88@gmail.com', '9926331375', 'bhopal', 'bhopal', 'bhopal', 'Madhya Pradesh', 462038, 0, '65748564', '1', '5665', '1', 0, NULL, 0, '2019-01-10 10:21:03', '0000-00-00 00:00:00', '2019-01-10 10:21:54', NULL),
+(7, 36, NULL, '1', 'manish chakravarti', 'sdsadsd', 'manish09.chakravarti@gmail.com', '9926331375', 'bhopal', 'bhopal', 'bhopal', 'Madhya Pradesh', 462038, 0, '65748564', '1', '5665', '1', 1, NULL, 0, '2019-01-15 09:04:17', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
+(8, 36, NULL, '1', 'manish chakravarti', 'sdsadsd', 'manish09.chakravarti@gmail.com', '9926331375', 'bhopal', 'bhopal', 'bhopal', 'Madhya Pradesh', 462038, 0, '65748564', '1', '5665', '1', 1, NULL, 0, '2019-01-15 09:04:39', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
+(9, 36, '1.png', '2', 'manish chakravarti', 'sdsadsd', 'manish09.chakravarti@gmail.com', '9926331375', 'bhopal', 'bhopal', 'bhopal', 'Madhya Pradesh', 462038, 0, 'sadsa', '1', '5665', '1', 1, NULL, 0, '2019-01-15 09:13:11', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
+(10, 36, 'a518695f30f8d1b2079eaa8a26005bb6.png', '1', 'manish chakravarti', 'sdsadsd', 'manish09.chakravarti@gmail.com', '9926331375', 'bhopal', 'bhopal', 'bhopal', 'Madhya Pradesh', 462038, 0, '65748564', '1', '5665', '1', 1, NULL, 0, '2019-01-15 09:14:56', '0000-00-00 00:00:00', '2019-01-15 09:33:38', NULL),
+(11, 36, 'ed667e80164fba6ebf5c6c32c51065df.png', '2', 'manish chakravarti', 'sdsadsd', 'manish09.chakravarti@gmail.com', '9926331375', 'bhopal', 'bhopal', 'bhopal', 'Madhya Pradesh', 462038, 0, '65748564', '1', '5665', '1', 1, NULL, 0, '2019-01-15 09:15:31', '0000-00-00 00:00:00', '2019-01-15 09:33:22', NULL),
+(12, 36, 'e335b1b3f172f4e83b2c0041bd296fde.png', '1', 'manish chakravarti', 'sdsadsd', 'manish09.chakravarti@gmail.com', '9926331375', 'bhopal', 'bhopal', 'bhopal', 'Madhya Pradesh', 462038, 0, '65748564', '1', '5665', '1', 1, NULL, 0, '2019-01-15 09:18:58', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -248,6 +257,7 @@ INSERT INTO `msd_party_master` (`id`, `company_id`, `customerType`, `customer`, 
 CREATE TABLE `msd_product_services` (
   `id` int(11) NOT NULL,
   `company_id` int(11) NOT NULL,
+  `productImage` varchar(255) DEFAULT NULL,
   `productCode` varchar(255) NOT NULL,
   `productGroup` varchar(255) NOT NULL,
   `productName` varchar(255) NOT NULL,
@@ -278,9 +288,10 @@ CREATE TABLE `msd_product_services` (
 -- Dumping data for table `msd_product_services`
 --
 
-INSERT INTO `msd_product_services` (`id`, `company_id`, `productCode`, `productGroup`, `productName`, `productType`, `productDescription`, `sellingPrice`, `productPrice`, `mrpPrice`, `openingStock`, `unitType`, `salesType`, `purchaseType`, `calculation`, `negativeStock`, `hsnCode`, `minQty`, `subUnit`, `active`, `status`, `created_by`, `created_date`, `deleted_date`, `updated_date`, `updated_by`) VALUES
-(1, 0, 'sdsad', 'dfds', 'dsfs', '1', 'dfds', '2123', '1231', '2332', '31321', '1', '1', '1', '1', '1', '213', '2323233', '1', 1, NULL, 0, '2018-12-24 13:14:32', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
-(2, 0, 'sdsad', 'dfds', 'zfdf', '3', 'dsfsd', 'dsfsd', 'dsfsd', 'dfsd', 'dfsdsd', '4', '2', '2', '3', '2', 'dfsdf', '1212', '3', 1, NULL, 0, '2018-12-25 10:11:43', '0000-00-00 00:00:00', '2019-01-09 13:32:11', NULL);
+INSERT INTO `msd_product_services` (`id`, `company_id`, `productImage`, `productCode`, `productGroup`, `productName`, `productType`, `productDescription`, `sellingPrice`, `productPrice`, `mrpPrice`, `openingStock`, `unitType`, `salesType`, `purchaseType`, `calculation`, `negativeStock`, `hsnCode`, `minQty`, `subUnit`, `active`, `status`, `created_by`, `created_date`, `deleted_date`, `updated_date`, `updated_by`) VALUES
+(1, 0, 'f8f45120d2d5e925fc2ba858db5d9d97.png', 'sdsad', 'dfds', 'dsfs', '1', 'dfds', '2123', '1231', '2332', '31321', 'one', 'GST', 'GST', 'Excluding', 'yes', '213', '2323233', 'No', 1, NULL, 0, '2018-12-24 13:14:32', '0000-00-00 00:00:00', '2019-01-15 08:35:59', NULL),
+(2, 0, '5b739b9c2c650ae70c4c35dd8469b8e1.png', 'sdsad', 'dfds', 'zfdf', '3', 'dsfsd', 'dsfsd', 'dsfsd', 'dfsd', 'dfsdsd', 'one', 'GST', 'GST', 'Including', 'yes', 'dfsdf', '1212', 'yes', 1, NULL, 0, '2018-12-25 10:11:43', '0000-00-00 00:00:00', '2019-01-15 08:41:17', NULL),
+(3, 36, 'ac559102bf7f1bb25164fcb4d78e1d71.png', 'new code', 'sdaf', 'hjj', '2', 'fdsgd', '12', '12', '21', '55', 'one', 'GST', 'GST', 'Including', 'yes', '1234566', '5', 'yes', 1, NULL, 0, '2019-01-15 07:46:34', '0000-00-00 00:00:00', '2019-01-15 08:26:44', NULL);
 
 -- --------------------------------------------------------
 
@@ -341,7 +352,9 @@ CREATE TABLE `msd_tex_master` (
 
 INSERT INTO `msd_tex_master` (`id`, `company_id`, `texName`, `texPercentage`, `texType`, `sgst`, `cgst`, `igst`, `active`, `status`, `created_by`, `created_date`, `deleted_date`, `updated_date`, `updated_by`) VALUES
 (1, 2, 'GST', '18', 'sales', '9', '9', '3', 1, NULL, 0, '2019-01-03 09:46:31', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
-(2, 2, 'GST one dfsd', '18', 'purchase', '9', '9', '3', 1, NULL, 0, '2019-01-03 09:46:46', '0000-00-00 00:00:00', '2019-01-03 09:47:12', NULL);
+(2, 2, 'GST one dfsd', '18', 'purchase', '9', '9', '3', 1, NULL, 0, '2019-01-03 09:46:46', '0000-00-00 00:00:00', '2019-01-03 09:47:12', NULL),
+(3, 36, 'GST', '18', 'sales', '9', '9', '0', 1, NULL, 0, '2019-01-15 07:45:03', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
+(4, 36, 'GST', '18', 'purchase', '5', '3', '9', 1, NULL, 0, '2019-01-15 07:45:18', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -367,7 +380,9 @@ CREATE TABLE `msd_unit_master` (
 --
 
 INSERT INTO `msd_unit_master` (`id`, `company_id`, `unit`, `active`, `status`, `created_by`, `created_date`, `deleted_date`, `updated_date`, `updated_by`) VALUES
-(1, 0, 'unit', 1, NULL, 0, '2018-12-24 07:56:04', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL);
+(1, 0, 'unit', 1, NULL, 0, '2018-12-24 07:56:04', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
+(2, 36, 'one', 1, NULL, 0, '2019-01-15 07:44:29', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
+(3, 36, 'two', 1, NULL, 0, '2019-01-15 07:44:34', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -562,25 +577,25 @@ ALTER TABLE `company_barcode`
 -- AUTO_INCREMENT for table `msd_bank_details`
 --
 ALTER TABLE `msd_bank_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `msd_group_master`
 --
 ALTER TABLE `msd_group_master`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `msd_party_master`
 --
 ALTER TABLE `msd_party_master`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `msd_product_services`
 --
 ALTER TABLE `msd_product_services`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `msd_route_master`
@@ -592,13 +607,13 @@ ALTER TABLE `msd_route_master`
 -- AUTO_INCREMENT for table `msd_tex_master`
 --
 ALTER TABLE `msd_tex_master`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `msd_unit_master`
 --
 ALTER TABLE `msd_unit_master`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `msd_user_datails`

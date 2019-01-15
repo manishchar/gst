@@ -180,7 +180,7 @@ function partyEdit(cek_id){
                  $("#collectionRoute").val(obj.data.collectionRoute);
                  $("#openingBalance").val(obj.data.openingBalance);
                  $("#requiredSms").val(obj.data.requiredSms);
-                 $("#showimage").html('<img width="50px" id="partyImage" src="<?php echo base_url(); ?>assets/master/uploads/party_image/'+obj.data.partyImage+'">');
+                 $("#showimage").html('<img width="80px" id="partyImage" src="<?php echo base_url(); ?>assets/images/party_image/'+obj.data.partyImage+'">');
                  $('#partysubmit').prop('disabled',true);
                }
                if(obj.status == 'failed'){
@@ -194,7 +194,7 @@ function partyEdit(cek_id){
 }
 
 $('#partyDelete').click(function(){  
-     var r = confirm("Are You Sure To Delete?");
+    var r = confirm("Are You Sure To Delete?");
 
     if(r){
             $.ajax({
@@ -225,10 +225,15 @@ $('#partyDelete').click(function(){
 $('#partyUpdate').click(function(){          
     var r = confirm("Are You Sure To Update?");
     if(r){
+        var formData = new FormData(partyForm);
         $.ajax({
             type: "POST",
             url: "<?php echo base_url('master/update_party_master') ?>", 
-            data: $("#partyForm").serialize(),
+            cache:false,
+            contentType: false,
+            processData: false,
+            data:formData,
+            //data: $("#partyForm").serialize(),
             success: function(result) 
             {
                 console.log(result);
@@ -303,7 +308,7 @@ function productView(id){
          });
     }
  }
- 
+
 function productEdit(cek_id){
     var r = confirm("Are You Sure To select!");
        
@@ -356,7 +361,7 @@ $('#productUpdate').click(function(){
     var r = confirm("Are You Sure To Update?");
     if(r){
        // productForm
-         var formData = new FormData(productForm);
+        var formData = new FormData(productForm);
         $.ajax({
            type: "POST",
            url: "<?php echo base_url('master/update_product_services') ?>", 
@@ -481,7 +486,7 @@ function texEdit(cek_id){
 }
 
 $('#texDelete').click(function(){  
-        var r = confirm("Are You Sure To Delete?");
+    var r = confirm("Are You Sure To Delete?");
     if(r){
             $.ajax({
                 type: "POST",
@@ -601,8 +606,8 @@ function userEdit(cek_id){
 }
 
 
- $('#userUpdate').click(function(){          
-   var r = confirm("Are You Sure To Update?");
+$('#userUpdate').click(function(){          
+    var r = confirm("Are You Sure To Update?");
     if(r){
         $.ajax({
            type: "POST",
@@ -631,7 +636,7 @@ function userEdit(cek_id){
     }
 }); 
  $('#userDelete').click(function(){  
- alert('Ready To delete');
+            alert('Ready To delete');
             $.ajax({
                 type: "POST",
                 url: "<?php echo base_url('master/delete_user_master') ?>", 
@@ -684,34 +689,34 @@ function userEdit(cek_id){
        }
     });
 
-    $('#unitDelete').click(function(){  
- var r = confirm("Are You Sure To Delete!");
+$('#unitDelete').click(function(){  
+    var r = confirm("Are You Sure To Delete!");
     if(r){
-          $.ajax({
-                type: "POST",
-                url: "<?php echo base_url('master/delete_unit_master') ?>", 
-                data: $("#unitForm").serialize(),
-                success: function(result) 
-                {
-                console.log(result);
-                var obj = JSON.parse(result);
-               if(obj.status == 'success'){
-                 $('#errorMessage').html('<div class="alert alert-success">'+obj.message+'</div>');
-                   //$('#userResult').DataTable().ajax.reload();
-                   $('#unitForm').trigger("reset");
-                   $('#unit').trigger("reset");
+        $.ajax({
+            type: "POST",
+            url: "<?php echo base_url('master/delete_unit_master') ?>", 
+            data: $("#unitForm").serialize(),
+            success: function(result) 
+            {
+            console.log(result);
+            var obj = JSON.parse(result);
+            if(obj.status == 'success'){
+            $('#errorMessage').html('<div class="alert alert-success">'+obj.message+'</div>');
+            //$('#userResult').DataTable().ajax.reload();
+            $('#unitForm').trigger("reset");
+            $('#unit').trigger("reset");
 
- }
-               if(obj.status == 'failed'){
-                    //alert(obj.message);
-                    $('#errorMessage').html('<div class="alert alert-danger">'+obj.message+'</div>');
-                   $('#unitForm').trigger("reset");
-                   //$('#userResult').DataTable().ajax.reload();
+            }
+            if(obj.status == 'failed'){
+            //alert(obj.message);
+            $('#errorMessage').html('<div class="alert alert-danger">'+obj.message+'</div>');
+            $('#unitForm').trigger("reset");
+            //$('#userResult').DataTable().ajax.reload();
 
-               }
-                }        
-            });
-      }
+            }
+            }        
+        });
+    }
 });
 
 //unit master end//

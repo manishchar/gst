@@ -33,72 +33,119 @@
                             </li>
 
 
-                            <li class="nav-item" role="tab" id="heading-ecommerce">
+    <li class="nav-item" role="tab" id="heading-ecommerce">
+        <a class="nav-link ripple with-arrow collapsed" data-toggle="collapse" data-target="#collapse-ecommerce" href="#" aria-expanded="false" aria-controls="collapse-ecommerce">
 
-                                <a class="nav-link ripple with-arrow collapsed" data-toggle="collapse" data-target="#collapse-ecommerce" href="#" aria-expanded="false" aria-controls="collapse-ecommerce">
+        <i class="icon-document"></i>
 
-                                   <i class="icon-document"></i>
-
-                                    <span>Master</span>
-                                </a>
-                                <ul id="collapse-ecommerce" class='collapse ' role="tabpanel" aria-labelledby="heading-ecommerce" data-children=".nav-item">
-
-
+        <span>Master</span>
+        </a>
+        <?php if($this->uri->segment(1) == 'master' ){ ?>
+            <ul id="collapse-ecommerce" class='collapse show' role="tabpanel" aria-labelledby="heading-ecommerce" data-children=".nav-item">
+        <?php }else{ ?>
+            <ul id="collapse-ecommerce" class='collapse' role="tabpanel" aria-labelledby="heading-ecommerce" data-children=".nav-item">
+        <?php } ?>
+        <ul id="collapse-ecommerce" class='collapse show' role="tabpanel" aria-labelledby="heading-ecommerce" data-children=".nav-item">
 <li class="nav-item">
-    <a class="nav-link ripple " href="<?php echo base_url().'master/group_master' ?>">
-        <span>Group</span>
+    <?php if($this->uri->segment(2) == 'group_master' ){ ?>
+    <a class="nav-link ripple active" href="<?= base_url().'master/group_master' ?>">
+    <span>Group</span>
     </a>
+    <?php }else{ ?>
+    <a class="nav-link ripple" href="<?= base_url().'master/group_master' ?>">
+    <span>Group</span>
+    </a>
+    <?php } ?>
 </li>
 
 <li class="nav-item">
-    <a class="nav-link ripple " href="<?php echo base_url().'master/index'; ?>">
-        <span>Bank Details</span>
+    <?php if($this->uri->segment(2) == 'index' ){ ?>
+    <a class="nav-link ripple active " href="<?= base_url().'master/index'; ?>">
+    <span>Bank Details</span>
     </a>
+    <?php }else{ ?>
+    <a class="nav-link ripple " href="<?= base_url().'master/index'; ?>">
+    <span>Bank Details</span>
+    </a>
+    <?php } ?>                
 </li>
 
 <li class="nav-item">
-    <a class="nav-link ripple " href="<?php echo base_url().'master/party_master'; ?>">
-        <span>Party</span>
+    <?php if($this->uri->segment(2) == 'party_master' ){ ?>
+    <a class="nav-link ripple active" href="<?= base_url().'master/party_master'; ?>">
+    <span>Party</span>
     </a>
+    <?php }else{ ?>
+    <a class="nav-link ripple " href="<?= base_url().'master/party_master'; ?>">
+    <span>Party</span>
+    </a>
+    <?php } ?>                   
 </li>
 
 <li class="nav-item">
-    <a class="nav-link ripple "  href="<?php echo base_url().'master/product_services' ?>">
-        <span>Products</span>
+    <?php if($this->uri->segment(2) == 'product_services' ){ ?>
+    <a class="nav-link ripple active"  href="<?= base_url().'master/product_services' ?>">
+    <span>Products</span>
     </a>
+    <?php }else{ ?>
+    <a class="nav-link ripple "  href="<?= base_url().'master/product_services' ?>">
+    <span>Products</span>
+    </a>
+    <?php } ?>                   
 </li>
 
 <li class="nav-item">
-    <a class="nav-link ripple " href="<?php echo base_url().'master/route_master'; ?>">
-        <span>Route</span>
+    <?php if($this->uri->segment(2) == 'route_master' ){ ?>
+    <a class="nav-link ripple active" href="<?= base_url().'master/route_master'; ?>">
+    <span>Route</span>
     </a>
+    <?php }else{ ?>
+    <a class="nav-link ripple " href="<?= base_url().'master/route_master'; ?>">
+    <span>Route</span>
+    </a>
+    <?php } ?>                   
 </li>
 
 <li class="nav-item">
-    <a class="nav-link ripple " href="<?php echo base_url().'master/tex_master'; ?>">
-        <span>Taxes</span>
+    <?php if($this->uri->segment(2) == 'tex_master' ){ ?>
+    <a class="nav-link ripple active" href="<?= base_url().'master/tex_master'; ?>">
+    <span>Taxes</span>
     </a>
+    <?php }else{ ?>
+    <a class="nav-link ripple " href="<?= base_url().'master/tex_master'; ?>">
+    <span>Taxes</span>
+    </a>
+    <?php } ?>                   
+
 </li>
 
-<li class="nav-item">
-    <a class="nav-link ripple " href="<?php echo base_url().'master/unit_master'; ?>">
-        <span>Unit</span>
-    </a>
-</li>
+            <li class="nav-item">
+<?php if($this->uri->segment(2) == 'unit_master' ){ ?>
+<a class="nav-link ripple active" href="<?= base_url().'master/unit_master'; ?>">
+<span>Unit</span>
+</a>
+<?php }else{ ?>
+<a class="nav-link ripple " href="<?= base_url().'master/unit_master'; ?>">
+<span>Unit</span>
+</a>
+ <?php } ?>                   
+                
+            </li>
 
-<li class="nav-item">
-    <a class="nav-link ripple " href="<?php echo base_url().'master/user_master' ?>">
-        <span>User</span>
-    </a>
-</li>
+            <li class="nav-item">
+<?php if($this->uri->segment(2) == 'user_master' ){ ?>
+<a class="nav-link ripple active" href="<?= base_url().'master/user_master' ?>">
+<span>User</span>
+</a>
+<?php }else{ ?>
+<a class="nav-link ripple " href="<?= base_url().'master/user_master' ?>">
+<span>User</span>
+</a>
+ <?php } ?>                   
+            </li>
 
-
-
-
-
-
-                                </ul>
-                            </li>
+        </ul>
+    </li>
 
                             <?php 
 if($this->session->userdata('userRole') == '0'){ ?>
