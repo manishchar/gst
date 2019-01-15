@@ -40,10 +40,10 @@
         <div class="topTab" style="margin-top: 0px;">
        <form method="POST" id="groupForm">
       <div class=" row form-group col-md-12">
-               <div class="col-md-4"  ">
-                <label class="control-label" for="groupName"  required="required">Group Name</label>
+               <div class="col-md-12">
+                <label class="control-label" for="groupName"  required="required">Group Name (&nbsp;<span class="text text-danger">*</span>&nbsp;)</label>
                 <input type="text" name="id" id="id" class="form-control" hidden="hidden" >
-                <input type="text" name="groupName" id="groupName" class="form-control" required="required">
+                <input type="text" autocomplete="off" name="groupName" id="groupName" class="form-control" required="required">
           </div>
       </div>
       <div class=" row form-group col-md-12">

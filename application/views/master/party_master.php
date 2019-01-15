@@ -130,11 +130,8 @@
                 <div class="col-md-2">
                    <label class="control-label">Required SMS</label>
                       <select class="form-control" name="requiredSms" id="requiredSms"  required="required">
-                        <option value=""></option>
-                        <option id="1" value="1">SMS1</option>
-                        <option id="2" value="2">SMS2</option>
-                        <option id="3" value="3">SMS3</option>
-             
+                        <option id="1" value="1">YES</option>
+                        <option id="2" value="2" selected="">No</option>
                       </select>
                 </div>
               </div>

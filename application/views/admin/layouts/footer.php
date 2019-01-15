@@ -766,9 +766,9 @@ $('#groupDelete').click(function(){
                if(obj.status == 'success'){
                  $('#errorMessage').html('<div class="alert alert-success">'+obj.message+'</div>');
                    //$('#userResult').DataTable().ajax.reload();
-                   $('#groupForm').trigger("reset");
-                   $('#groupName').trigger("reset");
-
+                   // $('#groupForm').trigger("reset");
+                   // $('#groupName').trigger("reset");
+                   window.location.reload();
  }
                if(obj.status == 'failed'){
                     //alert(obj.message);
