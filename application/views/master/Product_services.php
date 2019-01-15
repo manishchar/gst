@@ -204,10 +204,10 @@
     <th>Product_Group</th>
     <th>Product_Name</th>
     <th>Product_Type</th>
-    <th>Product_Description</th>
+    <!-- <th>Product_Description</th> -->
     <th>Selling_Price</th>
     <th>Product_Price</th>
-    <th>MRP_Price</th>
+   <!-- <th>MRP_Price</th>
     <th>Opening_Stock</th>
     <th>Unit_Type</th>
     <th>Sales_Type</th>
@@ -216,7 +216,7 @@
     <th>Nagative_Stock</th>
     <th>HSN_Code</th>
     <th>minQty</th>
-    <th>Sub_Unit</th>
+    <th>Sub_Unit</th> -->
     <th>Action</th>
         <!-- <th>View</th> -->
 

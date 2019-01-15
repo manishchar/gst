@@ -316,7 +316,7 @@ public function get_party_master(){
   foreach ($product as $key => $value) {
     $productResult[$key] =$value;
     $productResult[$key]['partyImage'] ="<img src='".base_url('assets/images/party_image')."/".$value['partyImage']."' style='width: 50px;'>";
-    $productResult[$key]['action'] ="<a onclick='partyEdit(".$value['id'].")' class='btn btn-warning'>Edit</a>";
+    $productResult[$key]['action'] ="<a onclick='partyEdit(".$value['id'].")' class='btn btn-warning'>Edit</a>&nbsp;<a href=' ".base_url('master/party_view/'.$value['id'].'')." 'class='btn btn-success'>View</a>";
   }
 
   $data=array(
@@ -331,8 +331,24 @@ public function get_party_master(){
 }
 
 public function update_party_master(){
-  // print_r($_FILES);
-  // die;
+  $partyImage =$_POST['old_image'];
+  if($_FILES['partyImage']['name'] != ''){
+    $config['upload_path']   = './assets/master/uploads/party_image/'; 
+    $config['allowed_types'] = 'gif|jpg|png|jpeg'; 
+    $config['max_size']      = 1048576; 
+    $config['encrypt_name']      = true; 
+    $this->load->library('upload', $config);
+
+    if ( ! $this->upload->do_upload('partyImage')) {
+      $error = array('error' => $this->upload->display_errors());
+    }else { 
+      $file = $this->upload->data();
+      $partyImage=$file['file_name'];
+    }
+  }else{
+        $partyImage =$_POST['old_image'];
+  }   
+
   $id = $_POST['id'];
    $data = array(
            'customerType' => $this->input->post('customerType'),
@@ -395,7 +411,14 @@ public function delete_party_master(){
   echo json_encode($response);
 
 }
-
+public function party_view($id){
+  $data['title']="Company";
+  $data['page_title']="Party Master View";
+  //$id=$this->input->post('id');
+  $data['party']=$this->db->select('*')->where('id',$id)->get('msd_party_master')->result();
+  
+  $this->load->view('master/party_view',$data);
+}
 //party master 
 public function route_master(){
    $data['title']="Route Master";

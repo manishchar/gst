@@ -28,130 +28,158 @@
 <!-- CONTENT -->
 
 <div class="page-content p-6">
-
-<div class="topTab" style="margin-top: 0px;">
-  <!-- <div id="errorMessage"></div>
-                <?php
-                //if($this->session->flashdata('message')){ ?>
-                  <div class="alert alert-success">
-                    <h5><?php //echo $this->session->flashdata('message'); ?></h5>
-                  </div>
-                      <?php //elseif($this->session->flashdata('error')) ?>
-                   <div class="alert alert-danger">
-                    <h5><?php //echo $this->session->flashdata('error'); ?></h5>
-                  </div>
-                <?php  ?> -->
-    <form id="productForm" method="POST" enctype="multipart/form-data">
+<div class="col-md-12">
+  <button class="btn btn-sm pull-right previous" ><a href="<?php echo base_url('master/product_services')?>" >back</a></button>
+</div>
   
-            
-               <div class="row form-group col-md-12">
-               <div class="col-md-12 text text-danger">
-                      <?php 
-                      echo validation_errors('<div class="text text-danger">', '</div>'); 
-                      echo validation_errors(); 
-                      ?>
-                      </div>
-                      <?php foreach($product as $value){?>
-                <div class="row">
-                  <div class="col-md-6">
-                    <label class="col-md-6">Product Code</label>
-                    <label class="col-md-6 "><?php echo $value->productCode ?></label>
-                  </div>
-                <div class="col-md-6">
-                  <label class="control-label">Product Group</label>
-                  <input type="text" name="productGroup" value="<?php echo $value->productGroup ?>" class="form-control" id="productGroup">
-                </div>
-              </div>
-              <div class="col-md-3">
-                        <label class="control-label">Product Name</label>
-                        <input type="text" name="productName" value="<?php echo $value->productName ?>" class="form-control" id="productName">
-              </div>
-              <div class="col-md-3">
-                        <label class="control-label">Product Type</label>
+<div class="topTab" style="margin-top: 0px;">
+    <div class="row form-group col-md-12">
                
-                     <input type="text" class="form-control" value="<?php echo $value->productType ?>" name="productType" id="productType">
-                            
-                            
-              </div>
+            <?php foreach($product as $value){?>
+          
+          <div class="col-md-12 row" style="margin-bottom: 10px;padding: 0px">
+                <img src="<?php echo base_url('assets/master/uploads')."/".$value->productImage ?>" style='width: 50%; height: 150px; padding: 0px;'> 
+          </div>
+
+        <div class="col-md-6 row " style="margin-bottom: 10px;" >
+          <div class=" col-md-6">
+             <div class="">Product Code</div>
+          </div>
+          <div class="col-md-6">
+                <div ><?php echo $value->productCode ?></div>
+          </div>
+        </div>
+
+        <div class="col-md-6 row " style="margin-bottom: 10px;">
+          <div class=" col-md-6">
+             <div class="">Product Group</div>
+          </div>
+          <div class="col-md-6">
+                <div ><?php echo $value->productGroup ?></div>
+          </div>
+        </div>
+        <div class="col-md-6 row " style="margin-bottom: 10px;">
+          <div class=" col-md-6">
+             <div class="">Product Name</div>
+          </div>
+          <div class="col-md-6">
+                <div ><?php echo $value->productName ?></div>
+          </div>
+        </div>
+        <div class="col-md-6 row " style="margin-bottom: 10px;">
+          <div class=" col-md-6">
+             <div class="">Product Type</div>
+          </div>
+          <div class="col-md-6">
+                <div ><?php echo $value->productType ?></div>
+          </div>
+        </div>
+        <div class="col-md-6 row " style="margin-bottom: 10px;">
+          <div class=" col-md-6">
+             <div class="">Product Description</div>
+          </div>
+          <div class="col-md-6" style="margin-bottom: 10px;">
+                <div ><?php echo $value->productDescription ?></div>
+          </div>
+        </div>
+        <div class="col-md-6 row " style="margin-bottom: 10px;">
+          <div class=" col-md-6">
+             <div class="">Selling Price</div>
+          </div>
+          <div class="col-md-6">
+                <div ><?php echo $value->sellingPrice ?></div>
+          </div>
+        </div>
+        <div class="col-md-6 row " style="margin-bottom: 10px;">
+          <div class=" col-md-6">
+             <div class="">Product Price</div>
+          </div>
+          <div class="col-md-6">
+                <div ><?php echo $value->productPrice ?></div>
+          </div>
+        </div>
+        <div class="col-md-6 row " style="margin-bottom: 10px;">
+          <div class=" col-md-6">
+             <div class=""> Mrp Price</div>
+          </div>
+          <div class="col-md-6">
+                <div ><?php echo $value->mrpPrice ?></div>
+          </div>
+        </div> 
+        <div class="col-md-6 row " style="margin-bottom: 10px;">
+          <div class=" col-md-6">
+             <div class=""> Opening Stock</div>
+          </div>
+          <div class="col-md-6">
+                <div ><?php echo $value->openingStock ?></div>
+          </div>
+        </div> 
+        <div class="col-md-6 row " style="margin-bottom: 10px;">
+          <div class=" col-md-6">
+             <div class="">Unit</div>
+          </div>
+          <div class="col-md-6">
+                <div ><?php echo $value->unitType ?></div>
+          </div>
+        </div> 
+        <div class="col-md-6 row " style="margin-bottom: 10px;">
+          <div class=" col-md-6">
+             <div class=""> Sales Type</div>
+          </div>
+          <div class="col-md-6">
+                <div ><?php echo $value->salesType ?></div>
+          </div>
+        </div> 
+        <div class="col-md-6 row " style="margin-bottom: 10px;">
+          <div class=" col-md-6">
+             <div class=""> Purchase Type</div>
+          </div>
+          <div class="col-md-6">
+                <div ><?php echo $value->purchaseType ?></div>
+          </div>
+        </div>
+        <div class="col-md-6 row " style="margin-bottom: 10px;">
+          <div class=" col-md-6">
+             <div class=""> Calculation</div>
+          </div>
+          <div class="col-md-6" style="margin-bottom: 10px;">
+                <div ><?php echo $value->calculation ?></div>
+          </div>
+        </div>
+        <div class="col-md-6 row " style="margin-bottom: 10px;">
+          <div class=" col-md-6">
+             <div class="">Negative Stock</div>
+          </div>
+          <div class="col-md-6">
+                <div ><?php echo $value->negativeStock ?></div>
+          </div>
+        </div><div class="col-md-6 row " style="margin-bottom: 10px;">
+          <div class=" col-md-6">
+             <div class="">Hsn Code</div>
+          </div>
+          <div class="col-md-6">
+                <div ><?php echo $value->hsnCode ?></div>
+          </div>
+        </div><div class="col-md-6 row " style="margin-bottom: 10px;">
+          <div class=" col-md-6">
+             <div class="">Min Qty</div>
+          </div>
+          <div class="col-md-6">
+                <div ><?php echo $value->minQty ?></div>
+          </div>
+        </div><div class="col-md-6 row " style="margin-bottom: 10px;">
+          <div class=" col-md-6">
+             <div class=""> Sub Unit</div>
+          </div>
+          <div class="col-md-6">
+                <div ><?php echo $value->subUnit ?></div>
+          </div>
+        </div>  
     </div>
 
-<div class="row form-group col-md-12">              
-    <div class="col-md-3">
-    <label class="control-label">Product Description</label>
-    <input type="text" name="productDescription" value="<?php echo $value->productDescription ?>" class="form-control" id="productDescription">
-    </div>
-    <div class="col-md-3">
-    <label class="control-label">Selling Price</label>
-    <input type="text" name="sellingPrice" value="<?php echo $value->sellingPrice ?>" class="form-control" id="sellingPrice">
-    </div>
-    <div class="col-md-3">
-    <label class="control-label">Product Price</label>
-    <input type="tex" name="productPrice" value="<?php echo $value->productPrice ?>" class="form-control" id="productPrice">
-    </div>
-    <div class="col-md-3">
-    <label class="control-label">MRP Price</label>
-    <input type="tex" name="mrpPrice" value="<?php echo $value->mrpPrice ?>" class="form-control" id="mrpPrice">
-    </div>
-</div>
-<div class="row form-group col-md-12">
-    <div class="col-md-3">
-        <label class="control-label">Opening Stock    </label>
-        <input type="text" name="openingStock" value="<?php echo $value->openingStock ?>" class="form-control" id="openingStock">
-    </div> 
-    <div class="col-md-3">
-        <label class="control-label">Unit Type</label>
-        <input type="text" class="form-control" value="<?php echo $value->unit ?>" name="unitType" id="unit">
-              
-              
-    </div>
-                    
-    <div class="col-md-3">
-        <label class="control-label">Sales Tex Type</label>
-        <input type="text" class="form-control" value="<?php echo $value->salesType ?>" name="salesType" id="salesType">
-                          
-    </div>
-                     
-    <div class="col-md-3">
-        <label class="control-label">Purchase Tex Type</label>
-        <input type="text" class="form-control" value="<?php echo $value->purchaseType ?>" name="purchaseType" id="purchaseType">
-              
-    </div>
-</div>
-<div class="row form-group col-md-12">
-    <div class="col-md-3">
-        <label class="control-label">Tex Calculation Type</label>
-        <select type="text" class="form-control" value="<?php echo $value->subUnit ?>" name="calculation" id="calculation">
-                
-                <option  value="Including">Including</option>
-              <option  value="Excluding">Excluding</option>
-                
-     </select>
-    </div>
-    <div class="col-md-3">
-      <label class="control-label">Allow Negative Stock</label>
-      <input type="text" class="form-control" value="<?php echo $value->negativeStock ?>" name="negativeStock" id="negativeStock">
-      
-    </div>
 
-    <div class="col-md-3">
-        <label class="control-label">HSN Code</label>
-        <input type="text" name="hsnCode" id="hsnCode" value="<?php echo $value->hsnCode ?>" class="form-control">
-    </div>
-    <div class="col-md-3">
-       <label class="control-label">Min. Qty</label>
-       <input type="text" name="minQty" id="minQty" value="<?php echo $value->minQty ?>" class="form-control">
-    </div>
-</div>
 
-               
-<div class="row form-group col-md-12 ">            
-    <div class="col-md-3">
-         <label class="control-label">Sub Unit</label>             
-        <input type="text" class="form-control" value="<?php echo $value->subUnit ?>" name="subUnit" id="subUnit">
-            
-    </div>
     
-</div>
     
                
               </form>

@@ -44,7 +44,7 @@
               <div class="row form-group col-md-12" style="padding: 0; margin: 0;">
                 <div class="col-md-3" >
                   <h5 style="margin-left: 90%">Demo</h5>
-                    <label class="control-label">Customer Type</label>
+                    <label class="control-label">Customer Type(&nbsp;<span class="text text-danger">*</span>)</label>
                     <?php echo set_value('customerType'); ?>
                     
                       <select class="form-control" name="customerType" id="customerType"  required="required">
@@ -57,26 +57,26 @@
               </div>
               <div class="row form-group  col-md-12">
                   <div class="col-md-3">
-                    <label class="control-label">Customer/Company Name</label>
+                    <label class="control-label">Customer/Company Name(&nbsp;<span class="text text-danger">*</span>)</label>
                     <?php echo set_value('customer'); ?>
                     
                       <input type="text" name="customer" id="customer" class="form-control" required="required">
                       <input type="text" name="id" id="id" class="form-control" hidden="hidden" >
                   </div>
                   <div class="col-md-3">
-                     <label class="control-label">Primary Contact Person</label>
+                     <label class="control-label">Primary Contact Person(&nbsp;<span class="text text-danger">*</span>)</label>
                     
                      <input type="text" name="primaryContactPerson" id="primaryContactPerson" class="form-control"  required="required">
                   </div>
                   <div class="col-md-3">
 
-                    <label class="control-label">Email</label>
+                    <label class="control-label">Email(&nbsp;<span class="text text-danger">*</span>)</label>
                     <div style="color: red;"><?php echo form_error('accountHolder'); ?></div>
 
                      <input type="text" name="email" id="email" class="form-control"  required="required">
                   </div>
                   <div class="col-md-3">
-                    <label class="control-label">Mobile</label>
+                    <label class="control-label">Mobile(&nbsp;<span class="text text-danger">*</span>)</label>
                     <input type="text" name="mobile" id="mobile" class="form-control"  required="required">
                   </div>
               </div>
@@ -90,15 +90,15 @@
                     <input type="text" name="addressLine2" id="addressLine2" class="form-control"  required="required">
                   </div>
                   <div class="col-lg-3" style="width: 200px;" >
-                    <label class="control-label">City</label>
+                    <label class="control-label">City(&nbsp;<span class="text text-danger">*</span>)</label>
                     <input type="text" name="city" id="city" class="form-control"  required="required">
                   </div>
                   <div class="col-lg-3" style="width: 200px;">
-                    <label class="control-label">State</label>
+                    <label class="control-label">State(&nbsp;<span class="text text-danger">*</span>)</label>
                     <input type="text" name="state" id="state" class="form-control"  required="required">
                   </div>
                   <div class="col-lg-3" style="width: 200px;">
-                    <label class="control-label">Pin</label>
+                    <label class="control-label">Pin(&nbsp;<span class="text text-danger">*</span>)</label>
                     <input type="text" name="pin" id="pin" class="form-control"  required="required">
                   </div>
               </div>
@@ -140,10 +140,11 @@
     <div class="row form-group col-md-12">
          <div class="col-md-4" style="">
           <label>Party Picture</label>
-          <span id="showimage">  <img width="50px" id="partyImage"></span>
-
-                <input type="file"  onchange="partyURL(this);" name="partyImage" id="partyImage" class="form-control" />
-              
+          <input type="text" name="old_image" id="old_image">              
+                <img width="50px" id="partyImage" src="<?php echo  base_url().'assets/master/uploads/' ?>">
+         <input type="file"  onchange="partyURL(this);" name="partyImage" id="partyImage" class="form-control" />
+             
+                
 
          </div> 
          
@@ -166,10 +167,10 @@
                        <th width="5%">partyImage</th>
                        <th width="5%">customerType</th>
                        <th width="5%">customer</th>
-                       <th width="5%">primaryContactPerson</th>
+                      <!--  <th width="5%">primaryContactPerson</th> -->
                        <th width="5%">email</th>
                        <th width="5%">mobile</th>
-                       <th width="5%">billingAddress</th>
+                      <!--  <th width="5%">billingAddress</th>
                        <th width="5%">addressLine2</th>
                        <th width="5%">city</th>
                        <th width="5%">state</th>
@@ -178,7 +179,7 @@
                        <th width="5%">panNo</th>
                        <th width="5%">collectionRoute</th>
                        <th width="5%">openingBalance</th>
-                       <th width="5%">requiredSms</th>
+                       <th width="5%">requiredSms</th> -->
                        <th width="5%">action</th>
                       </tr>
                     </thead>               

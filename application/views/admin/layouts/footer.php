@@ -129,19 +129,19 @@
                 { "data": "partyImage"},
                 { "data": "customerType"},
                 { "data": "customer"},
-                { "data": "primaryContactPerson"},
+                //{ "data": "primaryContactPerson"},
                 { "data": "email"},
                 { "data": "mobile"},
-                { "data": "billingAddress"},
-                { "data": "addressLine2"},
-                { "data": "city"},
-                { "data": "state"},
-                { "data": "pin"},
-                { "data": "gstinNo"},
-                { "data": "panNo"},
-                { "data": "collectionRoute"},
-                { "data": "openingBalance"},
-                { "data": "requiredSms"},
+                // { "data": "billingAddress"},
+                // { "data": "addressLine2"},
+                // { "data": "city"},
+                // { "data": "state"},
+                // { "data": "pin"},
+                // { "data": "gstinNo"},
+                // { "data": "panNo"},
+                // { "data": "collectionRoute"},
+                // { "data": "openingBalance"},
+                // { "data": "requiredSms"},
                 { "data": "action"}
                 
             ]
@@ -275,19 +275,19 @@ $(document).ready(function() {
             { "data": "productGroup"},
             { "data": "productName"},
             { "data": "productType"},
-            { "data": "productDescription"},
-            { "data": "sellingPrice"},
-            { "data": "productPrice"},
-            { "data": "mrpPrice"},
-            { "data": "openingStock"},
-            { "data": "unitType"},
-            { "data": "salesType"},
-            { "data": "purchaseType"},
-            { "data": "calculation"},
-            { "data": "negativeStock"},     
-            { "data": "hsnCode"},
-            { "data": "minQty"},
-            { "data": "subUnit"},
+            // { "data": "productDescription"},
+             { "data": "sellingPrice"},
+             { "data": "productPrice"},
+            // { "data": "mrpPrice"},
+            // { "data": "openingStock"},
+            // { "data": "unitType"},
+            // { "data": "salesType"},
+            // { "data": "purchaseType"},
+            // { "data": "calculation"},
+            // { "data": "negativeStock"},     
+            // { "data": "hsnCode"},
+            // { "data": "minQty"},
+            // { "data": "subUnit"},
             { "data": "action"},
             //{ "data": "view"}
 
@@ -308,7 +308,18 @@ function productView(id){
          });
     }
  }
-
+ function partyView(id){
+    var r = confirm("Are You Sure To select!");
+   
+    if(r){
+         $.ajax({
+             type : "POST",
+             url  : "<?php echo base_url()."master/party_view"; ?>",
+             data : {id:id},
+         });
+    }
+ }
+ 
 function productEdit(cek_id){
     var r = confirm("Are You Sure To select!");
        
