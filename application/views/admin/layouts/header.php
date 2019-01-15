@@ -112,7 +112,7 @@ z-index: 9999999;
                                     </div>
 
                                     <div class="dropdown-menu" aria-labelledby="dropdownUserMenu">
-
+<?php if($this->session->userdata('userRole') != '0'){ ?>
                                         <a class="dropdown-item" href="<?php echo base_url().'company/profile' ?>">
                                             <div class="row no-gutters align-items-center flex-nowrap">
                                                 <i class="icon-account"></i>
@@ -133,6 +133,15 @@ z-index: 9999999;
                                         </a>
 
                                        
+                                    <?php }else{ ?>
+                                        <a class="dropdown-item" href="">
+                                            <div class="row no-gutters align-items-center flex-nowrap">
+                                                <i class="icon-account"></i>
+                                                <span class="px-3">My Profile</span>
+                                            </div>
+                                        </a>
+                                    <?php } ?>
+                                        
 
                                        
 

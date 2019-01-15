@@ -52,15 +52,15 @@
                       ?>
                       </div>
                       <?php foreach($product as $value){?>
-                <div class="col-md-3">
-                <label class="control-label">Product Code</label>
-                <input type="text" name="productCode" value="<?php echo $value->productCode ?>" class="form-control" id="productCode" readonly="readonly">
-                 <input type="text" name="id" value="<?php echo $value->id ?>" class="form-control" id="id" hidden="hidden">
-
+                <div class="row">
+                  <div class="col-md-6">
+                    <label class="col-md-6">Product Code</label>
+                    <label class="col-md-6 "><?php echo $value->productCode ?></label>
+                  </div>
+                <div class="col-md-6">
+                  <label class="control-label">Product Group</label>
+                  <input type="text" name="productGroup" value="<?php echo $value->productGroup ?>" class="form-control" id="productGroup">
                 </div>
-              <div class="col-md-3">
-                <label class="control-label">Product Group</label>
-                <input type="text" name="productGroup" value="<?php echo $value->productGroup ?>" class="form-control" id="productGroup">
               </div>
               <div class="col-md-3">
                         <label class="control-label">Product Name</label>

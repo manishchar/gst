@@ -170,12 +170,11 @@ public function createCompany()
 }
  
 public function company_list(){
-   $this->load->view('template/header');
-   $this->load->view('template/sidemenu');
-   $this->load->view('template/topbar');
-   $this->load->view('template/breadcrumbs');
-   $this->load->view('company_list');
-   $this->load->view('template/footer');
+  $data['companyName']=$this->Company_model->CompanyList();
+  $data['page_title']="Company List";
+// echo "string";
+// die;
+   $this->load->view('master/view_company',$data);
 }
   
   // ----------------get data---------------------
@@ -199,7 +198,7 @@ public function profile(){
 
 public function change_password(){
   if($this->input->post()){
-    
+
   }else{
     $data['page_title'] = "Change Password";
     $this->load->view('master/change_password',$data); 

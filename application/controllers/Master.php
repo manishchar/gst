@@ -780,7 +780,7 @@ public function delete_user_master(){
  // product_services start  
 
 
- public function product_services(){
+ public function product_services($id=null){
     $data['title']="Company";
     $data['page_title']="product services";
             
@@ -815,6 +815,7 @@ public function delete_user_master(){
               $this->form_validation->set_rules('subUnit','subUnit','required');
               
           if ($this->form_validation->run() == TRUE){
+
                       $config['upload_path']   = './assets/master/uploads/'; 
                       $config['allowed_types'] = 'gif|jpg|png|jpeg'; 
                       $config['max_size']      = 100; 
@@ -823,12 +824,10 @@ public function delete_user_master(){
                       $this->load->library('upload', $config);
       
                     if ( ! $this->upload->do_upload('productImage')) {
-                    $error = array('error' => $this->upload->display_errors()); 
-                     }
-      
-                   else { 
+                      $error = array('error' => $this->upload->display_errors()); 
+                    }else { 
                        $file = $this->upload->data(); 
-                          } 
+                    } 
             $data = array(
                          'company_id' => $this->company_id,
                          'productCode' => $this->input->post('productCode'),
@@ -849,8 +848,7 @@ public function delete_user_master(){
                          'minQty' => $this->input->post('minQty'),
                          'subUnit' => $this->input->post('subUnit'),
                          'productImage' => $file['client_name'],
-                         
-                                          );
+              );
            
               
 
@@ -907,8 +905,7 @@ public function get_product_services(){
   foreach ($product as $key => $value) {
     $productResult[$key] =$value;
     $productResult[$key]['productImage'] ="<img src='".base_url('assets/master/uploads')."/".$value['productImage']."' style='width: 50px;'>";
-    $productResult[$key]['action'] ="<a onclick='productEdit(".$value['id'].")' class='btn btn-warning'>Edit</a>";
-    // $productResult[$key]['view'] ="<a href=' ".base_url('master/product_view/'.$value['id'].'')." ' onclick='productView(".$value['id'].")' class='btn btn-success'>View</a>";
+    $productResult[$key]['action'] ="<a onclick='productEdit(".$value['id'].")' class='btn btn-warning'>Edit</a>&nbsp;<a href=' ".base_url('master/product_view/'.$value['id'].'')." 'class='btn btn-success'>View</a>";
   }
 
   $data=array(
@@ -921,22 +918,25 @@ public function get_product_services(){
 }
 
 public function update_product_services(){
-                      $config['upload_path']   = './assets/master/uploads/'; 
-                      $config['allowed_types'] = 'gif|jpg|png|jpeg'; 
-                      $config['max_size']      = 100; 
-                      $config['max_width']     = 1024; 
-                      $config['max_height']    = 768;  
-                      $this->load->library('upload', $config);
-      
-                    if ( ! $this->upload->do_upload('productImage')) {
-                    $error = array('error' => $this->upload->display_errors()); 
-                     }
-      
-                   else { 
-                       $file = $this->upload->data(); 
-                          } 
+ $productImage =$_POST['old_image'];
+  if($_FILES['productImage']['name'] != ''){
+    $config['upload_path']   = './assets/master/uploads/'; 
+    $config['allowed_types'] = 'gif|jpg|png|jpeg'; 
+    $config['max_size']      = 1048576; 
+    $config['encrypt_name']      = true; 
+    $this->load->library('upload', $config);
+
+    if ( ! $this->upload->do_upload('productImage')) {
+      $error = array('error' => $this->upload->display_errors());
+    }else { 
+      $file = $this->upload->data();
+      $productImage=$file['file_name'];
+    }
+  }else{
+        $productImage =$_POST['old_image'];
+  }   
+
   $id = $_POST['id'];
-  $productImage= $_POST[$file('client_name')];
   $productCode= $_POST['productCode'];
   $productGroup= $_POST['productGroup'];
   $productName= $_POST['productName'];
@@ -947,7 +947,7 @@ public function update_product_services(){
   $mrpPrice= $_POST['mrpPrice'];
   $openingStock= $_POST['openingStock'];
   $unitType= $_POST['unitType'];
-  $salesType= $_POST['salesType'];
+  $salesType= $_POST['salesType']?$_POST['salesType']:'';
   $purchaseType= $_POST['purchaseType'];
   $calculation= $_POST['calculation'];
   $negativeStock= $_POST['negativeStock'];
@@ -956,27 +956,27 @@ public function update_product_services(){
   $subUnit= $_POST['subUnit'];
 
   
-$qery=$this->db->query("UPDATE `msd_product_services` SET `productCode`='$productCode',`productGroup`='$productGroup',`productName`='$productName',`productType`='$productType',`productDescription`='$productDescription',`sellingPrice`='$sellingPrice',`productPrice`='$productPrice',`mrpPrice`='$mrpPrice',`openingStock`='$openingStock',`unitType`='$unitType',`salesType`='$salesType',`purchaseType`='$purchaseType',`calculation`='$calculation',`negativeStock`='$negativeStock',`hsnCode`='$hsnCode',`minQty`='$minQty',`subUnit`='$subUnit',`productImage`='$productImage' WHERE `id`='$id' ");
- if($id){
-  if($qery){
-      //$this->session->set_flashdata('message','data update successfully');
-      $response = array('status'=>'success','message'=>'data update successfully');
+  $qery=$this->db->query("UPDATE `msd_product_services` SET `productCode`='$productCode',`productGroup`='$productGroup',`productName`='$productName',`productType`='$productType',`productDescription`='$productDescription',`sellingPrice`='$sellingPrice',`productPrice`='$productPrice',`mrpPrice`='$mrpPrice',`openingStock`='$openingStock',`unitType`='$unitType',`salesType`='$salesType',`purchaseType`='$purchaseType',`calculation`='$calculation',`negativeStock`='$negativeStock',`hsnCode`='$hsnCode',`minQty`='$minQty',`subUnit`='$subUnit',`productImage`='$productImage' WHERE `id`='$id' ");
+   if($id){
+    if($qery){
+        //$this->session->set_flashdata('message','data update successfully');
+        $response = array('status'=>'success','message'=>'data update successfully');
+      }else{
+        //$this->session->set_flashdata('error','data update Failed');
+        $response = array('status'=>'failed','message'=>'data update failed');
+      }
     }else{
-      //$this->session->set_flashdata('error','data update Failed');
-      $response = array('status'=>'failed','message'=>'data update failed');
-    }
-  }else{
-          $response = array('status'=>'failed','message'=>'Invailid Records');
+            $response = array('status'=>'failed','message'=>'Invailid Records');
 
-  }
+    }
     echo json_encode($response);
   
 }
-public function product_view(){
+public function product_view($id){
   $data['title']="Company";
   $data['page_title']="product services datails";
-  $id=$this->input->post('id');
-  $data['product']=$this->db->select('*')->get('msd_product_services')->result();
+  //$id=$this->input->post('id');
+  $data['product']=$this->db->select('*')->where('id',$id)->get('msd_product_services')->result();
   
   $this->load->view('master/product_view',$data);
 }

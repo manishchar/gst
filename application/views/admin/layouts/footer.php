@@ -283,7 +283,7 @@ $(document).ready(function() {
             { "data": "hsnCode"},
             { "data": "minQty"},
             { "data": "subUnit"},
-            { "data": "action"}
+            { "data": "action"},
             //{ "data": "view"}
 
             
@@ -292,17 +292,18 @@ $(document).ready(function() {
 
 
 });
-    function productView(id){
+function productView(id){
     var r = confirm("Are You Sure To select!");
-       
-     if(r){
+   
+    if(r){
          $.ajax({
              type : "POST",
              url  : "<?php echo base_url()."master/product_view"; ?>",
              data : {id:id},
          });
-     }
-     }
+    }
+ }
+ 
 function productEdit(cek_id){
     var r = confirm("Are You Sure To select!");
        
@@ -334,6 +335,8 @@ function productEdit(cek_id){
                  $("#negativeStock").val(obj.data.negativeStock); 
                  $("#hsnCode").val(obj.data.hsnCode);
                  $("#minQty").val(obj.data.minQty);
+                 $("#old_image").val(obj.data.productImage);
+                 $("#productImage").attr('src',"<?php echo base_url()."assets/master/uploads/"; ?>"+obj.data.productImage);
                  $("#subUnit").val(obj.data.subUnit);
                  $('#productSubmit').prop('disabled',true);    
                    
@@ -349,14 +352,19 @@ function productEdit(cek_id){
      }
 }   
     
-    
- $('#productUpdate').click(function(){          
-   var r = confirm("Are You Sure To Update?");
+$('#productUpdate').click(function(){          
+    var r = confirm("Are You Sure To Update?");
     if(r){
+       // productForm
+         var formData = new FormData(productForm);
         $.ajax({
            type: "POST",
            url: "<?php echo base_url('master/update_product_services') ?>", 
-            data: $("#productForm").serialize(),
+            cache:false,
+            contentType: false,
+            processData: false,
+           //data: $("#productForm").serialize(),
+            data:formData,
             success: function(result) 
           {
                 console.log(result);
@@ -364,8 +372,7 @@ function productEdit(cek_id){
                 console.log(obj.status);
                 if(obj.status=='success'){
                    $('#errorMessage').html('<div class="alert alert-success">'+obj.message+'</div>');
-                      $('#productForm').trigger('reset');
-
+                    $('#productForm').trigger('reset');
                    $('#productResult').DataTable().ajax.reload();
                    //window.location.reload(); 
                 }

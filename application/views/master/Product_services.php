@@ -173,7 +173,8 @@
         </select>
     </div>
     <div class="col-md-4">
-               <label>Product Picture</label>               
+               <label>Product Picture</label> 
+               <input type="text" name="old_image" id="old_image">              
                 <img width="50px" id="productImage" src="<?php echo  base_url().'assets/master/uploads/' ?>">
                 <input type="file"  onchange="readURL(this);" name="productImage" id="productImage" class="form-control" />
              

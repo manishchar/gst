@@ -76,7 +76,17 @@
                             </div>
 
                             <div class="title mt-4 mb-8">Log in to your account</div>
+<?php if($this->session->flashdata('message')){ ?>
+<div class="title mt-4 mb-8 text text-success"><?= $this->session->flashdata('message'); ?></div>
+<?php } ?>
+<?php if($this->session->flashdata('error')){ ?>
+<div class="title mt-4 mb-8 text text-danger"><?= $this->session->flashdata('error'); ?></div>
+<?php } ?>
+                            
+
                 <form name="loginForm" action="<?php echo base_url('login/user_login') ?>" method="post" >
+
+                                 
                                  <div class="form-group mb-4">
                                  <input type="email" class="form-control" id="loginFormInputEmail" aria-describedby="emailHelp" name="email" placeholder=" "  required="required" />
                                     <label for="loginFormInputEmail">Email address</label>

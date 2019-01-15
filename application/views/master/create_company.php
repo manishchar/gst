@@ -356,13 +356,13 @@
       <div class="col-md-3 col-lg-3">
         <div class="form-group">
           <label class="control-label">Cash Sales Conditions</label>
-          <input type="text" class="form-control" placeholder="Enter Cash Sales Conditions" name="cashSalesConditions" id="cashSalesConditions" value="set_value('cashSalesConditions');" />
+          <input type="text" class="form-control" placeholder="Enter Cash Sales Conditions" name="cashSalesConditions" id="cashSalesConditions" value="<?= set_value('cashSalesConditions'); ?>" />
         </div>
       </div>
       <div class="col-md-3 col-lg-3">
         <div class="form-group">
           <label class="control-label">Credit Sales Conditions</label>
-          <input class="form-control" type="text" placeholder="Enter redit Sales Conditions" name="creditSalesConditions" id="creditSalesConditions" value="set_value('creditSalesConditions');" />
+          <input class="form-control" type="text" placeholder="Enter redit Sales Conditions" name="creditSalesConditions" id="creditSalesConditions" value="<?= set_value('creditSalesConditions'); ?>" />
         </div>
       </div>
 

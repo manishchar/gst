@@ -27,6 +27,7 @@ class Login extends CI_Controller {
       // die;
       if($res==false)
       {
+        //$this->session->flashdata('error','Invalid User');
       	redirect(base_url());
       }
       else

@@ -99,33 +99,37 @@
 
                                 </ul>
                             </li>
-                            <li class="nav-item" role="tab" id="heading-ecommerce1">
 
-                                <a class="nav-link ripple with-arrow collapsed" data-toggle="collapse" data-target="#collapse-ecommerce1" href="#" aria-expanded="false" aria-controls="collapse-ecommerce1">
+                            <?php 
+if($this->session->userdata('userRole') == '0'){ ?>
 
-                                    <i class="icon-account-box"></i>
 
-                                    <span>Company</span>
-                                </a>
-                                <ul id="collapse-ecommerce1" class='collapse ' role="tabpanel" aria-labelledby="heading-ecommerce1" data-children=".nav-item">
+                        <li class="nav-item" role="tab" id="heading-ecommerce1">
 
-                                    <li class="nav-item">
-                                        <a class="nav-link ripple " href="<?php echo base_url().'company/createCompany'; ?>" data-url="index.html">
+                            <a class="nav-link ripple with-arrow collapsed" data-toggle="collapse" data-target="#collapse-ecommerce1" href="#" aria-expanded="false" aria-controls="collapse-ecommerce1">
 
-                                            <span>Craete Company</span>
-                                        </a>
-                                    </li>
+                                <i class="icon-account-box"></i>
 
-                                    <!-- <li class="nav-item">
-                                        <a class="nav-link ripple " href="apps-e-commerce-product.html" data-url="index.html">
+                                <span>Company</span>
+                            </a>
+                            <ul id="collapse-ecommerce1" class='collapse ' role="tabpanel" aria-labelledby="heading-ecommerce1" data-children=".nav-item">
 
-                                            <span>View Company</span>
-                                        </a>
-                                    </li> -->
+                                <li class="nav-item">
+                                    <a class="nav-link ripple " href="<?php echo base_url().'company/createCompany'; ?>" data-url="index.html">
+                                        <span>Company</span>
+                                    </a>
+                                </li>
 
-                                </ul>
-                            </li>
+                                <li class="nav-item">
+                                    <a class="nav-link ripple " href="<?php echo base_url().'company/company_list'; ?>" data-url="index.html">
 
+                                        <span>View Company</span>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+<?php } ?>
                            <li class="nav-item" role="tab" id="heading-dashboards">
 
                                 <a class="nav-link ripple "  href="<?php echo base_url().'Sales'; ?>" data-url="index.html">

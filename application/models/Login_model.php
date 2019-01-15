@@ -24,6 +24,7 @@ public function getGroup(){
             $userData=['loginId'=>$result->loginId,
               'company_id'=>$result->company_id,
               'company_name'=>$result->fullName,
+              'userRole'=>$result->userRole,
               'email'=>$result->userId,
      				  ];
      		   $this->session->set_userdata($userData);
