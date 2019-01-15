@@ -48,14 +48,14 @@
             </div>
             <div class="row form-group col-md-12">
                 <div class="col-md-3">
-                  <label class="control-label">Account ID</label>
+                  <label class="control-label">Account ID(&nbsp;<span class="text text-danger">*</span>)</label>
                   <?php //echo set_value('accountId'); ?>
                   
                     <input type="text" name="accountId" id="accountId" class="form-control" required="required">
                     <input type="text" name="id" id="id" class="form-control" hidden="hidden">
                 </div>
                 <div class="col-md-3">
-                   <label class="control-label">Bank Name</label>
+                   <label class="control-label">Bank Name(&nbsp;<span class="text text-danger">*</span>)</label>
                   
                     <select class="form-control" name="bankName" id="bankName"  required="required">
                       <option value=""></option>
@@ -67,23 +67,23 @@
                 </div>
                 <div class="col-md-3">
 
-                  <label class="control-label">Account Holder</label>
+                  <label class="control-label">Account Holder(&nbsp;<span class="text text-danger">*</span>)</label>
                   <div style="color: red;"><?php //echo form_error('accountHolder'); ?></div>
 
                    <input type="text" name="accountHolder" id="accountHolder" class="form-control"  required="required">
                 </div>
                 <div class="col-md-3">
-                  <label class="control-label">Account Number</label>
+                  <label class="control-label">Account Number(&nbsp;<span class="text text-danger">*</span>)</label>
                   <input type="text" name="accountNumber" id="accountNumber" class="form-control"  required="required">
                 </div>
             </div>
             <div class="row form-group col-md-12">
                 <div class="col-md-3">
-                  <label class="control-label">Branch</label>
+                  <label class="control-label">Branch(&nbsp;<span class="text text-danger">*</span>)</label>
                    <input type="text" name="branch" id="branch" class="form-control"  required="required">
                 </div>
                 <div class="col-md-3">
-                  <label class="control-label">IFSC Code</label>
+                  <label class="control-label">IFSC Code(&nbsp;<span class="text text-danger">*</span>)</label>
                   <input type="text" name="ifscCode" id="ifscCode" class="form-control"  required="required">
                 </div>
             </div>

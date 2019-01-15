@@ -129,19 +129,19 @@
                 { "data": "partyImage"},
                 { "data": "customerType"},
                 { "data": "customer"},
-                { "data": "primaryContactPerson"},
+                //{ "data": "primaryContactPerson"},
                 { "data": "email"},
                 { "data": "mobile"},
-                { "data": "billingAddress"},
-                { "data": "addressLine2"},
-                { "data": "city"},
-                { "data": "state"},
-                { "data": "pin"},
-                { "data": "gstinNo"},
-                { "data": "panNo"},
-                { "data": "collectionRoute"},
-                { "data": "openingBalance"},
-                { "data": "requiredSms"},
+                // { "data": "billingAddress"},
+                // { "data": "addressLine2"},
+                // { "data": "city"},
+                // { "data": "state"},
+                // { "data": "pin"},
+                // { "data": "gstinNo"},
+                // { "data": "panNo"},
+                // { "data": "collectionRoute"},
+                // { "data": "openingBalance"},
+                // { "data": "requiredSms"},
                 { "data": "action"}
                 
             ]
@@ -180,8 +180,9 @@ function partyEdit(cek_id){
                  $("#collectionRoute").val(obj.data.collectionRoute);
                  $("#openingBalance").val(obj.data.openingBalance);
                  $("#requiredSms").val(obj.data.requiredSms);
-                 $("#showimage").html('<img width="50px" id="partyImage" src="<?php echo base_url(); ?>assets/master/uploads/party_image/'+obj.data.partyImage+'">');
-                 $('#partysubmit').prop('disabled',true);
+                 $("#old_image").val(obj.data.partyImage);
+                 $("#partyImage").attr('src',"<?php echo base_url()."assets/master/uploads/party_image/"; ?>"+obj.data.partyImage);
+                $('#partysubmit').prop('disabled',true);
                }
                if(obj.status == 'failed'){
                     alert(obj.message);
@@ -270,19 +271,19 @@ $(document).ready(function() {
             { "data": "productGroup"},
             { "data": "productName"},
             { "data": "productType"},
-            { "data": "productDescription"},
-            { "data": "sellingPrice"},
-            { "data": "productPrice"},
-            { "data": "mrpPrice"},
-            { "data": "openingStock"},
-            { "data": "unitType"},
-            { "data": "salesType"},
-            { "data": "purchaseType"},
-            { "data": "calculation"},
-            { "data": "negativeStock"},     
-            { "data": "hsnCode"},
-            { "data": "minQty"},
-            { "data": "subUnit"},
+            // { "data": "productDescription"},
+             { "data": "sellingPrice"},
+             { "data": "productPrice"},
+            // { "data": "mrpPrice"},
+            // { "data": "openingStock"},
+            // { "data": "unitType"},
+            // { "data": "salesType"},
+            // { "data": "purchaseType"},
+            // { "data": "calculation"},
+            // { "data": "negativeStock"},     
+            // { "data": "hsnCode"},
+            // { "data": "minQty"},
+            // { "data": "subUnit"},
             { "data": "action"},
             //{ "data": "view"}
 
@@ -299,6 +300,17 @@ function productView(id){
          $.ajax({
              type : "POST",
              url  : "<?php echo base_url()."master/product_view"; ?>",
+             data : {id:id},
+         });
+    }
+ }
+ function partyView(id){
+    var r = confirm("Are You Sure To select!");
+   
+    if(r){
+         $.ajax({
+             type : "POST",
+             url  : "<?php echo base_url()."master/party_view"; ?>",
              data : {id:id},
          });
     }
