@@ -56,5 +56,15 @@
     <script type="text/javascript" src="<?= base_url(); ?>assets/js/main.js"></script>
     <!-- / JAVASCRIPT -->
     <style type="text/css">
-        
+    .dataTables_length{
+        display: inline-block;
+    }
+
+    .dataTables_filter{
+        width: 26%;
+        display: inline;
+        position: absolute;
+        left: 70%;
+        float: right;
+    }
     </style>

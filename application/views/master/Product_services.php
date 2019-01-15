@@ -195,6 +195,8 @@
               </form>
 
               <div class="container">
+                <hr/>
+                <br/>
     <table id="productResult" class="col-md-12 table table-responsive" >
     <thead>
       <th>productImage</th>
