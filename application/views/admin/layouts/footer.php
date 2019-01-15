@@ -126,6 +126,7 @@
               'url':"<?php echo base_url().'Master/get_party_master'; ?>",
               "type": "POST"
             }, "columns": [
+                { "data": "partyImage"},
                 { "data": "customerType"},
                 { "data": "customer"},
                 { "data": "primaryContactPerson"},
@@ -179,6 +180,7 @@ function partyEdit(cek_id){
                  $("#collectionRoute").val(obj.data.collectionRoute);
                  $("#openingBalance").val(obj.data.openingBalance);
                  $("#requiredSms").val(obj.data.requiredSms);
+                 $("#showimage").html('<img width="50px" id="partyImage" src="<?php echo base_url(); ?>assets/master/uploads/party_image/'+obj.data.partyImage+'">');
                  $('#partysubmit').prop('disabled',true);
                }
                if(obj.status == 'failed'){
@@ -263,6 +265,7 @@ $(document).ready(function() {
           'url':"<?php echo base_url().'master/get_product_services'; ?>",
            "type": "POST"
         }, "columns": [
+            { "data": "productImage"},
             { "data": "productCode"},
             { "data": "productGroup"},
             { "data": "productName"},
@@ -281,13 +284,25 @@ $(document).ready(function() {
             { "data": "minQty"},
             { "data": "subUnit"},
             { "data": "action"}
+            //{ "data": "view"}
+
             
         ]
     } );
 
 
 });
-    
+    function productView(id){
+    var r = confirm("Are You Sure To select!");
+       
+     if(r){
+         $.ajax({
+             type : "POST",
+             url  : "<?php echo base_url()."master/product_view"; ?>",
+             data : {id:id},
+         });
+     }
+     }
 function productEdit(cek_id){
     var r = confirm("Are You Sure To select!");
        
@@ -320,7 +335,7 @@ function productEdit(cek_id){
                  $("#hsnCode").val(obj.data.hsnCode);
                  $("#minQty").val(obj.data.minQty);
                  $("#subUnit").val(obj.data.subUnit);
-                 $('#submit').prop('disabled',true);    
+                 $('#productSubmit').prop('disabled',true);    
                    
                    
                  }  
@@ -349,13 +364,17 @@ function productEdit(cek_id){
                 console.log(obj.status);
                 if(obj.status=='success'){
                    $('#errorMessage').html('<div class="alert alert-success">'+obj.message+'</div>');
-                   //$('#user').DataTable().ajax.reload();
-                   window.location.reload(); 
+                      $('#productForm').trigger('reset');
+
+                   $('#productResult').DataTable().ajax.reload();
+                   //window.location.reload(); 
                 }
                 if(obj.status=='failed'){
                     $('#errorMessage').html('<div class="alert alert-danger">'+obj.message+'</div>');
-                    //alert(obj.message);
-                   //$('#user').DataTable().ajax.reload(); 
+                     $('#productForm').trigger('reset');
+                                        //window.location.reload(); 
+
+                    $('#productResult').DataTable().ajax.reload(); 
                 }
                 
                 //$('#user').DataTable().ajax.reload();
@@ -377,12 +396,20 @@ function productEdit(cek_id){
                 {
                 console.log(result);
                 var obj = JSON.parse(result);
-               if(obj.status == 'success'){
-                 $('#productResult').DataTable().ajax.reload(); 
-               }
-               if(obj.status == 'failed'){
-                    alert(obj.message);
-               }
+               if(obj.status=='success'){
+                   $('#errorMessage').html('<div class="alert alert-success">'+obj.message+'</div>');
+                      $('#productForm').trigger('reset');
+
+                   $('#productResult').DataTable().ajax.reload();
+                   //window.location.reload(); 
+                }
+                if(obj.status=='failed'){
+                    $('#errorMessage').html('<div class="alert alert-danger">'+obj.message+'</div>');
+                     $('#productForm').trigger('reset');
+                                        //window.location.reload(); 
+
+                    $('#productResult').DataTable().ajax.reload(); 
+                }
                 }        
             });
         }
@@ -457,13 +484,20 @@ $('#texDelete').click(function(){
                 {
                     console.log(result);
                     var obj = JSON.parse(result);
-                   if(obj.status == 'success'){
-                     $('#texResult').DataTable().ajax.reload(); 
-                     $('#texForm').trigger("reset");
-                   }
-                   if(obj.status == 'failed'){
-                        alert(obj.message);
-                   }
+                   if(obj.status=='success'){
+                   $('#errorMessage').html('<div class="alert alert-success">'+obj.message+'</div>');
+                      $('#texForm').trigger('reset');
+
+                   $('#texResult').DataTable().ajax.reload();
+                   //window.location.reload(); 
+                }
+                if(obj.status=='failed'){
+                    $('#errorMessage').html('<div class="alert alert-danger">'+obj.message+'</div>');
+                     $('#texForm').trigger('reset');
+                                        //window.location.reload(); 
+
+                    $('#texResult').DataTable().ajax.reload(); 
+                }
                 }        
             });
         }
@@ -478,20 +512,23 @@ $('#texUpdate').click(function(){
             data: $("#texForm").serialize(),
             success: function(result) 
             {
+
                 console.log(result);
                 var obj = JSON.parse(result);
                 console.log(obj.status);
                 if(obj.status=='success'){
                    $('#errorMessage').html('<div class="alert alert-success">'+obj.message+'</div>');
-                   
+                      $('#texForm').trigger('reset');
+
                    $('#texResult').DataTable().ajax.reload();
                    //window.location.reload(); 
-                   $('#texForm').trigger("reset");
                 }
                 if(obj.status=='failed'){
                     $('#errorMessage').html('<div class="alert alert-danger">'+obj.message+'</div>');
-                    //alert(obj.message);
-                   //$('#bankResult').DataTable().ajax.reload(); 
+                     $('#texForm').trigger('reset');
+                                       // window.location.reload(); 
+
+                    $('#texResult').DataTable().ajax.reload(); 
                 }
                 
                 //$('#bankResult').DataTable().ajax.reload();
@@ -525,38 +562,37 @@ $(document).ready(function() {
 
 
 });
-
 function userEdit(cek_id){
     var r = confirm("Are You Sure To select!");
-       
-     if(r){
-         $.ajax({
-             type : "POST",
-             url  : "<?php echo base_url()."master/get_user"; ?>",
-             data : {cek_id:cek_id},
-             success:function(result){
-            var obj = JSON.parse(result);
-            if(obj.status == 'success'){
-              console.log(obj.data);
-              console.log(obj.data.id);
-                 $("#id").val(obj.data.id);
-                // $("#company_id").val(obj.data.company_id);
-                 $("#userName").val(obj.data.userName); 
+
+    if(r){
+        $.ajax({
+            type  : "POST",
+            url   : "<?php echo base_url()."master/get_user"; ?>",
+            data  : {cek_id:cek_id},
+            success:function(result){
+               var obj = JSON.parse(result);
+               if(obj.status == 'success'){
+                console.log(obj.data);
+                console.log(obj.data.id);
+                $("#id").val(obj.data.id);
+                $("#userName").val(obj.data.userName); 
                  $("#name").val(obj.data.name);
-                 $("#email").val(obj.data.email); 
+                  $("#email").val(obj.data.email); 
                  $("#mobile").val(obj.data.mobile); 
                  $("#password").val(obj.data.password); 
-                 $('#submit').prop('disabled',true);    
-                 }  
-             if(obj.status == 'failed'){
-                 alert(obj.message)
-             }
-             }
-         });
-     }else{
-         txt = "You pressed Cancel";
-     }
-}   
+                 $("#userSubmit").prop('disabled',true);
+               }
+               if(obj.status == 'failed'){
+                    alert(obj.message);
+               }
+            }
+        });    
+    }else {
+      txt = "You pressed Cancel!";
+    }
+}
+
 
  $('#userUpdate').click(function(){          
    var r = confirm("Are You Sure To Update?");
@@ -572,11 +608,14 @@ function userEdit(cek_id){
                 console.log(obj.status);
                 if(obj.status=='success'){
                    $('#errorMessage').html('<div class="alert alert-success">'+obj.message+'</div>');
-                   //$('#user').DataTable().ajax.reload();
-                   window.location.reload(); 
+                   $('#userResult').DataTable().ajax.reload();
+                   $('#userForm').trigger('reset');
+                   //window.location.reload(); 
                 }
                 if(obj.status=='failed'){
                     $('#errorMessage').html('<div class="alert alert-danger">'+obj.message+'</div>');
+                    $('#userResult').DataTable().ajax.reload();
+                   $('#userForm').trigger('reset');
                     }
                 
                 
@@ -594,12 +633,17 @@ function userEdit(cek_id){
                 {
                 console.log(result);
                 var obj = JSON.parse(result);
-               if(obj.status == 'success'){
-                 $('#userResult').DataTable().ajax.reload(); 
-               }
-               if(obj.status == 'failed'){
-                    alert(obj.message);
-               }
+              if(obj.status=='success'){
+                   $('#errorMessage').html('<div class="alert alert-success">'+obj.message+'</div>');
+                   $('#userResult').DataTable().ajax.reload();
+                   $('#userForm').trigger('reset');
+                   //window.location.reload(); 
+                }
+                if(obj.status=='failed'){
+                    $('#errorMessage').html('<div class="alert alert-danger">'+obj.message+'</div>');
+                    $('#userResult').DataTable().ajax.reload();
+                   $('#userForm').trigger('reset');
+                    }
                 }        
             });
 });
@@ -612,7 +656,7 @@ function userEdit(cek_id){
           if(r){
         $.ajax({
             type: "POST",
-            url: "<?php echo base_url('Company/get_unit') ?>" ,
+            url: "<?php echo base_url('master/get_unit') ?>" ,
             
             data: {id: id},
             success:function(result){
@@ -622,7 +666,7 @@ function userEdit(cek_id){
               console.log(obj.data);
               console.log(obj.data.id);
                  $("#id").val(obj.data.id);
-                 $("#unit").val(obj.data.unit); 
+                 $("#unitName").val(obj.data.unit); 
                  $('#unitSubmit').prop('disabled',true);    
                  }  
              if(obj.status == 'failed'){
@@ -638,7 +682,7 @@ function userEdit(cek_id){
     if(r){
           $.ajax({
                 type: "POST",
-                url: "<?php echo base_url('Company/delete_unit_master') ?>", 
+                url: "<?php echo base_url('master/delete_unit_master') ?>", 
                 data: $("#unitForm").serialize(),
                 success: function(result) 
                 {
@@ -665,14 +709,15 @@ function userEdit(cek_id){
 
 //unit master end//
 // groupe master start//
-$("#groupEdit").change(function(event) {
+$("#gEdit").change(function(event) {
         event.preventDefault();
         var id = $(this).val();
+
           var r = confirm("Are you sure to selected!");
           if(r){
         $.ajax({
             type: "POST",
-            url: "<?php echo base_url('Company/get_group') ?>" ,
+            url: "<?php echo base_url('master/get_group') ?>" ,
             
             data: {id: id},
             success:function(result){
@@ -700,7 +745,7 @@ $('#groupDelete').click(function(){
     if(r){
           $.ajax({
                 type: "POST",
-                url: "<?php echo base_url('Company/delete_group_master') ?>", 
+                url: "<?php echo base_url('master/delete_group_master') ?>", 
                 data: $("#groupForm").serialize(),
                 success: function(result) 
                 {
@@ -731,6 +776,7 @@ $('#groupDelete').click(function(){
 $("#routeEdit").change(function(event) {
         event.preventDefault();
         var id = $(this).val();
+
           var r = confirm("Are you sure to selected!");
           if(r){
         $.ajax({
@@ -773,11 +819,8 @@ $('#routeDelete').click(function(){
                  $('#errorMessage').html('<div class="alert alert-success">'+obj.message+'</div>');
                    //$('#userResult').DataTable().ajax.reload();
                    $('#routeForm').trigger("reset");
-                   $('#routeName').trigger("reset");
-
- }
+                }
                if(obj.status == 'failed'){
-                    //alert(obj.message);
                     $('#errorMessage').html('<div class="alert alert-danger">'+obj.message+'</div>');
                    $('#routeForm').trigger("reset");
                    //$('#userResult').DataTable().ajax.reload();
@@ -794,6 +837,19 @@ function readURL(input) {
 
             reader.onload = function (e) {
                 $('#productImage')
+                    .attr('src', e.target.result)
+                    .width(100)
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    function partyURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#partyImage')
                     .attr('src', e.target.result)
                     .width(100)
             };

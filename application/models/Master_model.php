@@ -131,6 +131,20 @@ public function companyDelete()
       } 
    
   }
+  public function unit_master($data)
+  {
+    
+    $this->db->insert('msd_unit_master',$data);
+
+       if($this->db->affected_rows() > 0)
+      {
+          
+          return true; 
+      }else{
+        return false;
+      } 
+   
+  }
   public function party_master($data)
   {
     
@@ -173,20 +187,20 @@ public function companyDelete()
       } 
    
   }
-  public function unit_master($data)
-  {
+  // public function unit_master($data)
+  // {
     
-    $this->db->insert('msd_unit_master',$data);
+  //   $this->db->insert('msd_unit_master',$data);
 
-       if($this->db->affected_rows() > 0)
-      {
+  //      if($this->db->affected_rows() > 0)
+  //     {
           
-          return true; 
-      }else{
-        return false;
-      } 
+  //         return true; 
+  //     }else{
+  //       return false;
+  //     } 
    
-  }
+  // }
   public function user_master($data)
   {
     
@@ -237,13 +251,13 @@ public function get_user(){
   return $this->db->select('*')->where("id",$id)->get('msd_user_master')->row();
 }
 public function get_route(){ 
-  $id = $this->input->post("cek_id");
+  $id = $this->input->post("id");
   return $this->db->select('*')->where("id",$id)->get('msd_route_master')->row();
 }public function get_group(){ 
-  $id = $this->input->post("cek_id");
+  $id = $this->input->post("id");
   return $this->db->select('*')->where("id",$id)->get('msd_group_master')->row();
 }public function get_unit(){ 
-  $id = $this->input->post("cek_id");
+  $id = $this->input->post("id");
   return $this->db->select('*')->where("id",$id)->get('msd_unit_master')->row();
 }
 

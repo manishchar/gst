@@ -187,8 +187,7 @@
                 </div>
                 <div class="col-md-3 col-lg-3">
                   <div class="title font-weight-bold mb-1">Image</div>
-                  <div class="info"><img style="height: 50px;width: 50px;" src="<?php echo  base_url('assets/images/company/'.$company->logoImage.'') ; ?>"></div>
-
+                  <div class="info"><?= $company->logoImage; ?></div>
                 </div>
                 <div class="col-md-3 col-lg-3">
                   <div class="title font-weight-bold mb-1">Invoice Format</div>

@@ -31,45 +31,68 @@
 
 
 <div class="row">
-  <div class="about col-12 col-md-7 col-xl-6">
+  <div class="about col-12 col-md-7 col-xl-6" style="margin-left: 25%;">
 
-      <div class="profile-box info-box contact card mb-4">
+      <div class="profile-box info-box contact card mb-4" >
 
-          <header class="h6 bg-secondary text-auto p-4">
-              <div class="title">Contact</div>
-          </header>
-
-          <div class="content p-4">
-
-              <div class="info-line mb-6">
-                  <div class="title font-weight-bold mb-1">Old Password</div>
-                  <div class="info">
-                    <input type="text" name="old_password" placeholder="Old Password">
+          <!-- <header class="h6 bg-secondary text-auto p-4" >
+              <div class="title">Chsnge Password</div>
+           </header> -->
+       <?php
+                if($this->session->flashdata('message')){ ?>
+                  <div class="alert alert-success">
+                    <h5><?php echo $this->session->flashdata('message'); ?></h5>
                   </div>
+                      <?php }elseif($this->session->flashdata('error')){ ?>
+                   <div class="alert alert-danger">
+                    <h5><?php echo $this->session->flashdata('error'); ?></h5>
+                  </div>
+                <?php } ?>
+          
+<form method="post" action="<?php echo base_url('Company/change_password');?>">
+ <div class="col-md-12 text text-danger">
+                      <?php 
+                      echo validation_errors('<div class="text text-danger">', '</div>'); 
+                      echo validation_errors(); 
+                      ?>
+                      </div>
+          <div class="content p-4" >
+              <div class="row form-group ">
+                    <div class="col-md-12">
+                       <label><b>Old Password</b></label>
+                       <input type="password" name="password" placeholder="Enter Old Password" id="" class="form-control" >
+                     </div>
+              </div>
+              <div class="row form-group ">
+                    <div class="col-md-12">
+                   <label><b>New Password</b></label>
+                       <input type="password" name="newpass" placeholder="Enter New Password" id="" class="form-control" >
+                     </div>
+              </div>
+              <div class="row form-group ">
+                     <div class="col-md-12">
+                      <label><b>New Password</b></label>
+                       <input type="password" name="confpassword" placeholder="Enter New password" id="" class="form-control" >
+                    </div>   
               </div>
 
-              <div class="info-line mb-6">
-                  <div class="title font-weight-bold mb-1">New Password</div>
-                  <div class="info">
-                       <input type="text" name="old_password" placeholder="New Password">
-                  </div>
-              </div>
 
-              <div class="info-line mb-6">
-                  <div class="title font-weight-bold mb-1">New Password</div>
-                  <div class="info">
-                       <input type="text" name="old_password" placeholder="New Password">
-                  </div>
-              </div>
+              
               <div class="info-line mb-6">
                   <div class="info">
-                       <input type="submit" name="old_password" value="Update" class="btn btn-primary">
-                       <input type="submit" name="old_password" value="Reset" class="btn btn-warning">
-                  </div>
+                       <input type="submit"  name="update" value="Update" class="btn btn-primary">
+                       <input type="reset" name="reset" value="Reset" class="btn btn-warning">
+            </div>
               </div>
 
           </div>
-      </div>
+ </form>     
+   </div>
+
+  </div>
+
+
+</div>
 
   </div>
 
@@ -92,170 +115,3 @@
 </body>
 </html>
 
-<script type='text/javascript'>
-    $("#companyName").on('change',function(){
-   if($(this).find('option:selected'))
-       $("#submitform").attr('disabled',true)
-   else
-       $("#submitform").attr('enable',true)
-});
-</script>
-
-
-<script type="text/javascript">
-
-
-   function getgroup(val){  
-        jQuery.ajax({
-             type: 'post',
-             url: '<?php echo base_url()."Login/getgroup";?>', 
-             data: {val: val},  
-             success: 
-                  function(data){
-                    var obj=JSON.parse(data);
-                    console.log(); 
-                    $("#cmId").val(obj['allprojects'].cmId);
-                     $("#companyName1").val(obj['allprojects'].companyName); 
-                     $("#address").val(obj['allprojects'].address);
-                     $("#contactNo").val(obj['allprojects'].contactNo); 
-                     $("#emailId").val(obj['allprojects'].emailId); 
-                     $("#gistinNo").val(obj['allprojects'].gistinNo); 
-                     $("#panNo").val(obj['allprojects'].panNo);
-                     $("#cinNo").val(obj['allprojects'].cinNo); 
-                     $("#aadhaarNo").val(obj['allprojects'].aadhaarNo); 
-                     $("#bankAccountNo").val(obj['allprojects'].bankAccountNo);
-                     $("#bankAccountName").val(obj['allprojects'].bankAccountName); 
-                     $("#bankIfscCode").val(obj['allprojects'].bankIfscCode);
-                      $("#bankName").val(obj['allprojects'].bankName);
-                     $("#branchName").val(obj['allprojects'].branchName); 
-                     $("#estimateSeries").val(obj['allprojects'].estimateSeries);
-                     $("#requiredBarcode1").val(obj['allprojects'].requiredBarcode);
-                     $("#requiredBarcode2").val(obj['allprojects'].requiredBarcode);
-                     //alert(obj['allprojects'].TaxForProduct);
-                     if(obj['allprojects'].TaxForProduct=='Yes')
-                     {
-                      $("#TaxForProduct1").attr('checked','checked');
-                      $("#TaxForProduct2").removeAttr('checked','checked');
-                     }
-                     else{
-                       $("#TaxForProduct2").attr('checked', 'checked');
-                       $("#TaxForProduct1").removeAttr('checked', 'checked');
-                     }
-                     $("#TaxForProduct").val(obj['allprojects'].TaxForProduct); 
-                     $("#barCodeTitle").val(obj['allprojects'].barCodeTitle);
-                     $("#barCodeMrpPrefix").val(obj['allprojects'].barCodeMrpPrefix);
-                     $("#barCodeSendingPricePrefix").val(obj['allprojects'].gistinNo);
-                     $("#barCodeField").val(obj['allprojects'].barCodeField);
-                     $("#barCodePriceCode").val(obj['allprojects'].barCodePriceCode);
-                     $("#barCodeField1").val(obj['allprojects'].barCodeField1);
-                     $("#barCodeField2").val(obj['allprojects'].barCodeField2);
-                     $("#barCodeField3").val(obj['allprojects'].barCodeField3);
-                     $("#invoiceFormat").val(obj['allprojects'].invoiceFormat);        
-                     $("#barcodeFormat").val(obj['allprojects'].barcodeFormat);
-                     $("#natureOfBusiness").val(obj['allprojects'].natureOfBusiness); 
-                     $("#cashSalesConditions").val(obj['allprojects'].cashSalesConditions); 
-                     $("#accountMode").val(obj['allprojects'].accountMode); 
-                     $("#subTitle").val(obj['allprojects'].subTitle);
-                     $("#requiredRateCalculator").val(obj['allprojects'].requiredRateCalculator);
-                     $("#requiredProductImage").val(obj['allprojects'].requiredProductImage);
-                     $("#packingCalculator").val(obj['allprojects'].packingCalculator);
-                     $("#subTitle").val(obj['allprojects'].subTitle);
-                     $("#logo").val(obj['allprojects'].logo);
-                     //alert('<?php echo base_url('assets/images/company/') ?>'+obj['allprojects'].logoImage);
-                     $("#blah").attr('src','<?php echo base_url('assets/images/company/') ?>'+obj['allprojects'].logoImage);
-                     $("#logoImage").val(obj['allprojects'].logoImage);
-                    $("#update").attr('disabled',false);
-                    $("#delete").attr('disabled',false);
-                  }
-              });// you have missed this bracket
-       
-   }
-</script>
-
-<!-- form validation -->
-<script type="text/javascript">
-$(document).ready(function(){
-    $flag=1;
-      $("#companyName1").focusout(function(){
-        if($(this).val()==''){
-            $(this).css("border-color", "#FF0000");
-              $('#submit').attr('disabled',true);
-               $("#error_name").text("* You have to enter your Company name!");
-          }
-          else
-          {
-            $(this).css("border-color", "#2eb82e");
-            $('#submitform').attr('disabled',false);
-            $("#error_name").text("");
-
-          }
-       });
-        $("#natureOfBusiness").focusout(function(){
-        if($(this).val()=='0'){
-            $(this).css("border-color", "#FF0000");
-              $('#submitform').attr('disabled',true);
-              $("#error_nature1").text("* You have to select nature Of Business!!");
-          }
-          else
-          {
-            $(this).css("border-color", "#2eb82e");
-            $('#submitform').attr('disabled',false);
-            $("#error_nature1").text("");
-          }
-       });
-        
-        $("#accountMode").focusout(function(){
-        if($(this).val()=='0'){
-            $(this).css("border-color", "#FF0000");
-              $('#submitform').attr('disabled',true);
-              $("#error_accountMode1").text("* You have to select Account Mode!");
-          }
-          else
-          {
-            $(this).css("border-color", "#2eb82e");
-            $('#submitform').attr('disabled',false);
-            $("#error_accountMode1").text("");
-          }
-       });
-        
-      $( "#submitform" ).click(function() {
-        if($("#companyName1" ).val()=='')
-        {
-            $("#companyName1").css("border-color", "#FF0000");
-              $('#submitform').attr('disabled',true);
-               $("#error_name").text("* You have to enter your company name!");
-          }
-         
-         
-      
-        if($("#natureOfBusiness" ).val()=='0')
-        {
-            $("#natureOfBusiness").css("border-color", "#FF0000");
-              $('#submitfrom').attr('disabled',true);
-               $("#error_nature1").text("* You have to select nature Of Business!!");
-          }
-          if($("#accountMode" ).val()=='0')
-        {
-            $("#accountMode").css("border-color", "#FF0000");
-              $('#submitfrom').attr('disabled',true);
-               $("#error_accountMode1").text("* You have to select Account Mode!!");
-          }
-       
-      });
-});
-
-
-function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                $('#blah')
-                    .attr('src', e.target.result)
-                    .width(100)
-            };
-
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-</script>

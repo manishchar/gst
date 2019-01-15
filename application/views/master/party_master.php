@@ -39,7 +39,7 @@
                   </div>
                 <?php } ?>
 <div class="topTab" style="margin-top: 0px;">
-          <form method="POST" id="partyForm">
+          <form method="POST" id="partyForm" enctype="multipart/form-data">
              <?php echo validation_errors(); ?>
               <div class="row form-group col-md-12" style="padding: 0; margin: 0;">
                 <div class="col-md-3" >
@@ -141,11 +141,13 @@
               
               <br>
     <div class="row form-group col-md-12">
-         <div class="col-md-9" style="">
-               <input type="file" name="" class="">
-               <button name="" value="" class="btn btn-default" >Select File</button> 
-               <button name="" value="" class="btn btn-default" >Download</button>
-               <button name="" value="" class="btn btn-default" >Upload</button> 
+         <div class="col-md-4" style="">
+          <label>Party Picture</label>
+          <span id="showimage">  <img width="50px" id="partyImage"></span>
+
+                <input type="file"  onchange="partyURL(this);" name="partyImage" id="partyImage" class="form-control" />
+              
+
          </div> 
          
     </div>
@@ -156,25 +158,15 @@
           <button type="button" name="delete" value="delete" id="partyDelete" class="btn  btn-secondery " style="width: 120px;margin: 10px 10px; background-color: red; color: white;">Delete</button> 
         </div>
     </div>
-          </form>
-              <div class="row form-group col-md-12">
-                 <div class="col-md-6" style="display: inline-flex;padding: 0;margin: 10px 0px; ">
-                    <label class="control-label"></label>
-                     <select class="form-control" name=""  >
-                        <option>text</option>
-                        <option>text1</option>
-                        <option>text2</option>
-                        <option>text3</option>
-             
-                      </select>  
-                  </div>
-              </div>
+  </form>
+              
        </div>
        </div>
         <div class="container">
               <table id="partyResult" class="table col-md-12 table-responsive" >
                     <thead>
                       <tr>  
+                       <th width="5%">partyImage</th>
                        <th width="5%">customerType</th>
                        <th width="5%">customer</th>
                        <th width="5%">primaryContactPerson</th>

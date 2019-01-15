@@ -29,6 +29,17 @@
 <!-- CONTENT -->
 <div class="page-content p-6">
 <div class="topTab" style="margin-top: 0px;">
+                <div id="errorMessage"></div>
+                <?php
+                if($this->session->flashdata('message')){ ?>
+                  <div class="alert alert-success">
+                    <h5><?php echo $this->session->flashdata('message'); ?></h5>
+                  </div>
+                      <?php }elseif($this->session->flashdata('error')){ ?>
+                   <div class="alert alert-danger">
+                    <h5><?php echo $this->session->flashdata('error'); ?></h5>
+                  </div>
+                <?php } ?>
 	<form method="POST" id="routeForm">
       <div class=" row form-group col-md-12">
                <div class="col-md-4"  ">

@@ -1,14 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Company_model extends CI_Model {
-
-  
-
-
-
-
-  
+class Company_model extends CI_Model {  
   
  
 
@@ -176,8 +169,9 @@ class Company_model extends CI_Model {
     
     $this->db->trans_begin();
 
-    $this->db->where('company_id',$cmId)->update('company_barcode',$barcode);
-    $this->db->where('company_id',$cmId)->update('company_bank',$bank);
+    $this->db->where('barcode_id',$cmId)->update('company_barcode',$barcode);
+    $this->db->where('cmId',$cmId)->update('company_bank',$bank);
+
     $this->db->where('cmId',$cmId)->update('companymaster',$arr3);
     if ($this->db->trans_status() === FALSE)
     {
@@ -236,5 +230,25 @@ public function companyDelete()
     }
   }
   // -------------delete--------------------------------
+// ****** change password
+   public function getCurrPassword($userid){
+  $query = $this->db->where(['company_id'=>$userid])->get('users');
+  
+    if($query->num_rows() > 0){
+    //print_r();
+  //  die();
+        
+        return $query->row();
+    
+    
+    } }
 
+  public function updatePassword($new_password, $userid){
+  $data = array(
+      'password'=> md5($new_password)
+      );  
+      return $this->db->where('company_id', $userid)->update('users', $data);
+    
+        
+}
   } 
