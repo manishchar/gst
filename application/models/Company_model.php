@@ -171,6 +171,7 @@ class Company_model extends CI_Model {
 
     $this->db->where('barcode_id',$cmId)->update('company_barcode',$barcode);
     $this->db->where('cmId',$cmId)->update('company_bank',$bank);
+
     $this->db->where('cmId',$cmId)->update('companymaster',$arr3);
     if ($this->db->trans_status() === FALSE)
     {
