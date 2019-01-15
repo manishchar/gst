@@ -196,10 +196,10 @@ public function profile(){
 // die;
   $this->load->view('master/profile',$data); 
 }
-public function change_password(){
-  $data['page_title'] = "Change Password";
-  $this->load->view('master/change_password',$data); 
-}
+// public function change_password(){
+//   $data['page_title'] = "Change Password";
+//   $this->load->view('master/change_password',$data); 
+// }
 public function Logout()
 {
   $user_data = $this->session->all_userdata();
@@ -211,6 +211,42 @@ public function Logout()
 }
 
 // ---------------------
+// ******** change password by rahul create on 12-01-19
+public function change_password() {
+        $data['page_title'] = "Change Password";
+        $id = $this->company_id = $this->session->userdata('company_id');
+        if ($this->input->post()) {
+            $this->form_validation->set_rules('password', 'password', 'required');
+            $this->form_validation->set_rules('newpass', 'newpass', 'required|alpha_numeric|min_length[6]|max_length[20]');
+            $this->form_validation->set_rules('confpassword', 'confpassword', 'required|alpha_numeric|min_length[6]|max_length[20]');
 
+            if ($this->form_validation->run()) {
+                $cur_password = $this->input->post('password');
+                $new_password = $this->input->post('newpass');
+                $conf_password = $this->input->post('confpassword');
+                $this->load->model('Company_model');
+                $userid = $id;
+                $passwd = $this->Company_model->getCurrPassword($userid);
 
+                if ($passwd->password == md5($cur_password)) {
+
+                    if ($new_password == $conf_password) {
+
+                        if ($this->Company_model->updatePassword($new_password, $userid)) {
+
+                            $this->session->set_flashdata('message', 'Password updated successfully');
+                        } else {
+                            $this->session->set_flashdata('error', 'Failed to update password');
+                        }
+                    } else {
+                        $this->session->set_flashdata('error', 'New password & Confirm password is not matching');
+                    }
+                } else {
+
+                    $this->session->set_flashdata('error', 'Sorry! Current password is not matching');
+                }
+            }
+        }
+        $this->load->view('master/change_password', $data);
+    }
 }

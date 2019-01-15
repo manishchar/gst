@@ -112,16 +112,16 @@
                                     <li class="nav-item">
                                         <a class="nav-link ripple " href="<?php echo base_url().'company/createCompany'; ?>" data-url="index.html">
 
-                                            <span>Company</span>
+                                            <span>Craete Company</span>
                                         </a>
                                     </li>
 
-                                    <li class="nav-item">
+                                    <!-- <li class="nav-item">
                                         <a class="nav-link ripple " href="apps-e-commerce-product.html" data-url="index.html">
 
                                             <span>View Company</span>
                                         </a>
-                                    </li>
+                                    </li> -->
 
                                 </ul>
                             </li>

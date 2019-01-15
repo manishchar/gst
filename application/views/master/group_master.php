@@ -26,44 +26,50 @@
         <!-- / HEADER -->
         <!-- CONTENT -->
         <div class="page-content p-6">
+          <div id="errorMessage"></div>
+                <?php
+                if($this->session->flashdata('message')){ ?>
+                  <div class="alert alert-success">
+                    <h5><?php echo $this->session->flashdata('message'); ?></h5>
+                  </div>
+                      <?php }elseif($this->session->flashdata('error')){ ?>
+                   <div class="alert alert-danger">
+                    <h5><?php echo $this->session->flashdata('error'); ?></h5>
+                  </div>
+                <?php } ?>
         <div class="topTab" style="margin-top: 0px;">
-
-          <div class="col-md-12 ">
-                    <div class="form-group">
-                      <?php echo form_open('Company/group_master'); ?>
-                      <?php echo validation_errors(); ?>
-                              
-                          <div class="col-md-12">
-                            
-        <div class="col-md-4 form-group">
-        <input type="text" class="form-control" id="first_name" aria-describedby="emailHelp" name="first_name" autocomplete="off" value="<?= isset($employee->first_name)?$employee->first_name:set_value('first_name'); ?>">
-        <label for="first_name">First name</label>
-        <small id="emailHelp" class="form-text text-muted"><?php echo form_error('first_name', '<span class="text text-danger">', '</span>'); ?></small>
-        </div>
-                               
-                              </div>
-                          </div>
-                          <div class="col-md-12">
-                            <div class="col-md-6">
-                                <select class="form-control" name="groupName" required="required"  >
-                                    <option value="0">Select Group</option>
-                                    <option value="1">Group1</option>
-                                    <option value="2">Group2</option>
-                                    <option value="3">Group3</option>
-                         
-                                  </select>  
-                                </div>
-                              <div class="col-md--6" style="display: inline-flex;padding: 0;margin-left: 50%;">
-                                <button name="add" value="submit" class="btn  " style="width: 120px;margin: 10px 10px; margin-left: 10px; background-color: blue; color: white;">Add</button> 
-                                <button name="delete" value="delete" class="btn  btn-secondery " style="width: 120px;margin: 10px 10px; background-color: red; color: white;">Delete</button> 
-                              </div>
-                              
-                          </div>
-                            
-                   <?php echo form_close();?>
-              </div>
-        </div>
-
+       <form method="POST" id="groupForm">
+      <div class=" row form-group col-md-12">
+               <div class="col-md-4"  ">
+                <label class="control-label" for="groupName"  required="required">Group Name</label>
+                <input type="text" name="id" id="id" class="form-control" hidden="hidden" >
+                <input type="text" name="groupName" id="groupName" class="form-control" required="required">
+          </div>
+      </div>
+      <div class=" row form-group col-md-12">
+          <div class="col-md-6">
+                <label for="group">All Groups </label>
+                <select type="text" class="form-control" value="group" name="group" id="gEdit" required="required">
+                   <option value="0">Root</option>
+                      <?php
+                        if($all_groups){
+                        foreach ($all_groups as $key => $value) { 
+                                  ?>
+                      <option  value="<?php echo $value->id ; ?>"><?php echo  $value->groupName ;?>
+                      </option>
+                  <?php
+                     }
+                     }
+                    ?>
+               </select>
+          </div>
+           <div class="col-md-6 " style="margin:30px 0px;" >
+                     <button type="submit" value="add" name="submit" id="groupSubmit" class="btn " style="width:120px; background-color: blue; color: white; ">ADD</button>
+                    <button type="button" value="delete" name="delete" id="groupDelete" class="btn btn-danger" style="width:120px;">DELETE</button>
+          </div> 
+      
+    </div>
+  </form>
         </div>
 
 
@@ -77,4 +83,4 @@
     </div>
   </body>
 </html>
-
+<?php $this->load->view('admin/layouts/footer'); ?>

@@ -69,7 +69,7 @@ public function index(){
 }
 
 public function get_bank_details(){
-  $company =$this->company_id;
+ $company =$this->company_id;
   $draw = $_REQUEST['draw'];
   $start = $_REQUEST['start'];
   $length = $_REQUEST['length'];
@@ -78,9 +78,15 @@ public function get_bank_details(){
 
   if($search !=''){
     //$w = array('active' => 1, 'company_id' => $company);
-    $totalCount = $this->db->where(['active'=>1,'company_id'=> $company])->like('accountId',$search)->or_like(array('bankName'=>$search,'accountHolder'=>$search,'accountNumber'=>$search,'branch'=>$search))->get('msd_bank_details')->num_rows();
 
-    $product = $this->db->where(['active'=> 1,'company_id'=> $company] )->like('accountId',$search)->or_like(array('bankName'=>$search,'accountHolder'=>$search,'accountNumber'=>$search,'branch'=>$search))->limit($length, $start)->order_by("created_date DESC,deleted_date DESC")->get('msd_bank_details')->result_array();
+    $q="SELECT * FROM `msd_bank_details` WHERE `active` = 1 AND `company_id` = '".$company."' AND  (`accountId` LIKE '%".$search."%' ESCAPE '!' OR  `bankName` LIKE '%".$search."%' ESCAPE '!' OR  `accountHolder` LIKE '%".$search."%' ESCAPE '!' OR  `accountNumber` LIKE '%".$search."%' OR  `branch` LIKE '%".$search."%' ESCAPE '!') ORDER BY `created_date` DESC, `deleted_date` DESC";
+
+    $totalCount = $this->db->query($q)->num_rows();
+
+    $product =$this->db->query($q)->result_array();
+
+    //echo $this->db->last_query();
+   
   }else{
     $totalCount = $this->db->where(['active'=> 1,'company_id'=> $company])->get('msd_bank_details')->num_rows();
  // print_r($totalCount);
@@ -149,6 +155,7 @@ public function group_master(){
 
      $data['title']="Company";
       $data['page_title']="group master";
+    $data['all_groups'] = $this->db->select('*')->where('active',1)->get('msd_group_master')->result();
        if($this->input->post()) {
                          
                 $this->form_validation->set_rules('groupName','group name','required');
@@ -159,16 +166,17 @@ public function group_master(){
                                      'groupName' => $this->input->post('groupName'),
                                );
                
-                           $query = $this->Master_model->group_master($data);
+                           
     
-                if($query>0){
-                            $this->session->set_flashdata('success', 'succesfully');
-                            redirect('Master/group_master');
-                     }
-                else{
-                           $this->session->set_flashdata('faiid', 'faild');
+                   if($this->Master_model->group_master($data)){
+                            $this->session->set_flashdata('message', 'Record Save succesfully');
+                      }
+                  else{
+
+                           $this->session->set_flashdata('error', 'Record Save failed');
+                     }      
                            redirect('Master/group_master');
-                    }
+                    
             }
          else
             {
@@ -182,6 +190,31 @@ else{
           
            
 
+}
+public function delete_group_master(){
+  $id = $_POST['id'];
+  if($id){
+     $qery=$this->db->query("UPDATE `msd_group_master` SET `active`='0' WHERE `id`='$id' ");
+  if(!empty($qery)){
+    $response = array('status'=>'success','code'=>'200','message'=>'Record Delete succesfully');
+  }else{
+    $response = array('status'=>'failed','code'=>'201','message'=>'Record Delete Failed');
+  }
+}else{
+      $response = array('status'=>'failed','code'=>'201','message'=>'Invailid Records');
+ 
+}
+  echo json_encode($response);
+
+}
+public function get_group(){
+   $user = $this->Master_model->get_group(); 
+   if(!empty($user)){
+    $response = array('status'=>'success','code'=>'200','data'=>$user);
+   }else{
+    $response = array('status'=>'failed','code'=>'201','message'=>'data not found');
+   }
+   echo json_encode($response);
 }
  
 public function party_master(){
@@ -206,6 +239,20 @@ public function party_master(){
               $this->form_validation->set_rules('openingBalance','openingBalance','required');
               $this->form_validation->set_rules('requiredSms','requiredSms','required');
           if ($this->form_validation->run() == TRUE){
+                      $config['upload_path']   = './assets/master/uploads/party_image'; 
+                      $config['allowed_types'] = 'gif|jpg|png|jpeg'; 
+                      $config['max_size']      = 100; 
+                      $config['max_width']     = 1024; 
+                      $config['max_height']    = 768;  
+                      $this->load->library('upload', $config);
+      
+                    if ( ! $this->upload->do_upload('partyImage')) {
+                    $error = array('error' => $this->upload->display_errors()); 
+                     }
+      
+                   else { 
+                       $file = $this->upload->data(); 
+                          }
             $data = array(
                          'company_id' => $this->company_id,
                          'customerType' => $this->input->post('customerType'),
@@ -222,7 +269,9 @@ public function party_master(){
                          'panNo' => $this->input->post('panNo'),
                          'collectionRoute' => $this->input->post('collectionRoute'),
                          'openingBalance' => $this->input->post('openingBalance'),
-                         'requiredSms' => $this->input->post('requiredSms')
+                         'requiredSms' => $this->input->post('requiredSms'),
+                          'partyImage' => $file['client_name'],
+
                  );
            
              
@@ -260,10 +309,11 @@ public function get_party_master(){
   $search = $searchArray['value'];
 
   if($search !=''){
-    $totalCount = $this->db->where(['active'=> 1,'company_id'=> $this->company_id])->like('customer',$search)->or_like(array('customerType'=>$search,'primaryContactPerson'=>$search,'email'=>$search,'mobile'=>$search,'billingAddress'=>$search,'addressLine2'=>$search,'city'=>$search,'state'=>$search,'pin'=>$search,'gstinNo'=>$search,'panNo'=>$search,'collectionRoute'=>$search,'openingBalance'=>$search,'requiredSms'=>$search))->get('msd_party_master')->num_rows();
-  
-    $product = $this->db->where(['active'=> 1,'company_id'=> $this->company_id])->like('customerType',$search)->or_like(array('customer'=>$search,'primaryContactPerson'=>$search,'email'=>$search,'mobile'=>$search,'billingAddress'=>$search,'addressLine2'=>$search,'city'=>$search,'state'=>$search,'pin'=>$search,'gstinNo'=>$search,'panNo'=>$search,'collectionRoute'=>$search,'openingBalance'=>$search,'requiredSms'=>$search))->limit($length, $start)->order_by("created_date DESC,deleted_date DESC")->get('msd_party_master')->result_array();
-    
+
+    $q="SELECT * FROM `msd_party_master` WHERE `active` = 1 AND `company_id` = '".$this->company_id."' AND  (`customerType` LIKE '%".$search."%' ESCAPE '!' OR  `customer` LIKE '%".$search."%' ESCAPE '!' OR  `primaryContactPerson` LIKE '%".$search."%' ESCAPE '!' OR  `email` LIKE '%".$search."%' ESCAPE '!' OR  `mobile` LIKE '%".$search."%' ESCAPE '!' OR  `billingAddress` LIKE '%".$search."%' ESCAPE '!' OR  `addressLine2`LIKE '%".$search."%' ESCAPE '!' OR  `city` LIKE '%".$search."%' ESCAPE '!' OR  `state` LIKE '%".$search."%' ESCAPE '!' OR  `pin` LIKE '%".$search."%' ESCAPE '!' OR  `gstinNo` LIKE '%".$search."%' ESCAPE '!' OR  `panNo` LIKE '%".$search."%' ESCAPE '!' OR  `collectionRoute` LIKE '%".$search."%' ESCAPE '!' OR  `openingBalance` LIKE '%".$search."%' ESCAPE '!' OR  `requiredSms` LIKE '%".$search."%' ESCAPE '!') ORDER BY `created_date` DESC, `deleted_date` DESC ";
+    $totalCount = $this->db->query($q)->num_rows();
+    $q.=" limit $start, $length ";
+    $product = $this->db->query($q)->result_array();
   }else{
     $totalCount = $this->db->where(['active'=> 1,'company_id'=> $this->company_id])->get('msd_party_master')->num_rows();
     //print_r($totalCount);
@@ -273,6 +323,7 @@ public function get_party_master(){
   $productResult = array();
   foreach ($product as $key => $value) {
     $productResult[$key] =$value;
+    $productResult[$key]['partyImage'] ="<img src='".base_url('assets/master/uploads/party_image')."/".$value['partyImage']."' style='width: 50px;'>";
     $productResult[$key]['action'] ="<a onclick='partyEdit(".$value['id'].")' class='btn btn-warning'>Edit</a>";
   }
 
@@ -340,7 +391,7 @@ public function delete_party_master(){
 public function route_master(){
    $data['title']="Route Master";
     $data['page_title']="Route Master";
-    $data['all_routes'] = $this->db->select('*')->get('msd_route_master')->result();
+    $data['all_routes'] = $this->db->select('*')->where('active',1)->get('msd_route_master')->result();
   // print_r($da);
   // die();
      if($this->input->post()){  
@@ -351,21 +402,17 @@ public function route_master(){
                      'company_id' => $this->company_id,
                      'routeName' => $this->input->post('routeName'),
                   );
-                   $query = $this->Master_model->route_master($data);
-               if($query>0){
-                       $this->session->set_flashdata('success', 'succesfully');
-                       redirect('master/route_master');
+                   
+                 if($this->Master_model->route_master($data)){
+                         $this->session->set_flashdata('message', 'Record Save succesfully');
+                    }else{
+                         $this->session->set_flashdata('error', 'Record Failed');
                      }
-                else{
-                        $this->session->set_flashdata('faiid', 'faild');
-                        redirect('master/route_master');
-                     }
-   
-               }
-          else
-             {
+                redirect('master/route_master');
+                   
+             }else{
                      $this->load->view('master/Route_master',$data);
-            }
+               }
      }
   else{
                         $this->load->view('master/Route_master',$data);    
@@ -400,9 +447,10 @@ public function delete_route_master(){
 
 
 public function tex_master(){
-    $data['title']="Company";
-    $data['page_title']="Company";
-    $data['taxs']=$this->db->where(['active', 1,'company_id'=>$this->company_id['loginId']])->get('msd_tex_master')->result();
+    $data['title']="Master";
+    $data['page_title']="Taxs Master";
+    $data['taxs']=$this->db->where(['active', 1,'company_id'=>$this->company_id])->get('msd_tex_master')->result();
+
      if($this->input->post()){
                   $this->form_validation->set_rules('texName','texName','required'); 
                   $this->form_validation->set_rules('texPercentage','texPercentage','required');     
@@ -426,13 +474,13 @@ public function tex_master(){
             'igst' => $this->input->post('igst'),
           );
 
-         if($this->Company_model->tex_master($data)){
+         if($this->Master_model->tex_master($data)){
           $this->session->set_flashdata('message', 'Record Save succesfully');
           }else{
           $this->session->set_flashdata('error', 'Record Failed');
           }
           
-          redirect('company/tex_master');
+          redirect('master/tex_master');
 
 
         }
@@ -455,20 +503,21 @@ public function get_tex_details(){
   $search = $searchArray['value'];
 
   if($search !=''){
+
+
+
+
+
   $query = "SELECT * FROM `msd_tex_master` WHERE `active` = 1 AND `company_id` = '".$this->company_id."' AND  (`texName` LIKE '%".$search."%' ESCAPE '!'
 OR  `texPercentage` LIKE '%".$search."%' OR  `texType` LIKE '%".$search."%' OR  `sgst` LIKE '%".$search."%' OR  `cgst` LIKE '%".$search."%' OR  `igst` LIKE '%".$search."%')";
     $totalCount = $this->db->query($query)->num_rows();
   $query .= "ORDER BY `created_date` DESC, `deleted_date` DESC LIMIT 10";
     $product = $this->db->query($query)->result_array();
 
-    //$product = $this->db->where(['active'=>1,'company_id'=>$this->company_id['loginId']])->like('texName',$search)->or_like(array('texPercentage'=>$search,'texType'=>$search,'sgst'=>$search,'cgst'=>$search,'igst'=>$search))->limit($length, $start)->order_by("created_date DESC,deleted_date DESC")->get('msd_tex_master')->result_array();
-    //echo $this->db->last_query();
-
+   
   }else{
     $totalCount = $this->db->where(['active'=>1,'company_id'=>$this->company_id])->get('msd_tex_master')->num_rows();
- // print_r($totalCount);
- // die();
-    $product = $this->db->where(['active'=>1,'company_id'=>$this->company_id])->limit($length, $start)->order_by("created_date DESC,deleted_date DESC")->get('msd_tex_master')->result_array();
+     $product = $this->db->where(['active'=>1,'company_id'=>$this->company_id])->limit($length, $start)->order_by("created_date DESC,deleted_date DESC")->get('msd_tex_master')->result_array();
   }
 
   $productResult = array();
@@ -494,17 +543,17 @@ public function update_tex_master(){
     $sgst= $_POST['sgst'];
     $cgst= $_POST['cgst'];
     $igst= $_POST['igst'];
-if($id ){ 
- $qery=$this->db->query("UPDATE `msd_tex_master` SET `texName`='$texName',`texPercentage`='$texPercentage',`texType`='$texType',`sgst`='$sgst',`cgst`='$cgst',`igst`='$igst' WHERE `id`='$id'");
-    if($qery){
-      $this->session->set_flashdata('message','data update successfully');
-      $response = array('status'=>'success','message'=>'data update successfully');
-    }else{
-      $this->session->set_flashdata('error','data update Failed');
-      $response = array('status'=>'failed','message'=>'data update failed');
-    }
+if($id){ 
+      $qery=$this->db->query("UPDATE `msd_tex_master` SET `texName`='$texName',`texPercentage`='$texPercentage',`texType`='$texType',`sgst`='$sgst',`cgst`='$cgst',`igst`='$igst' WHERE `id`='$id'");
+      if($qery){
+         //  $this->session->set_flashdata('message','data update successfully');
+          $response = array('status'=>'success','message'=>'data update successfully');
+        }else{
+           // $this->session->set_flashdata('error','data update Failed');
+          $response = array('status'=>'failed','message'=>'data update failed');
+         }
   }else{
-    $this->session->set_flashdata('error','Invalid Records');
+      //$this->session->set_flashdata('error','Invalid Records');
       $response = array('status'=>'failed','message'=>'Invalid Records');
   }
     echo json_encode($response);
@@ -525,66 +574,82 @@ public function get_tex(){
 
 public function delete_tex_master(){
   $id = $_POST['id'];
+  if($id){
   $qery= $this->db->query("UPDATE `msd_tex_master` SET `active`='0' WHERE `id`='$id' ");
   if($qery){
     $response = array('status'=>'success','message'=>'data Delete successfully');
   }else{
     $response = array('status'=>'failed','message'=>'data Delete failed');
   }
+  }else{
+       $response = array('status'=>'failed','message'=>'Invailid Records');
+ 
+  }
   echo json_encode($response);
 }
 //end tex master
 
 public function unit_master(){
-                   $this->load->view('template/header');
-                   $this->load->view('template/sidemenu');
-                   $this->load->view('template/topbar');
-                   $this->load->view('template/breadcrumbs');
-                   $this->load->view('Unit_master');
-                   $this->load->view('template/footer');  
-  
-                }
-public function unit_master_insert(){
-                   
-                  $this->form_validation->set_rules('unit','unit','required'); 
-                 
-                
-           if ($this->form_validation->run() == TRUE)
+   $data['title']="Master";
+  $data['page_title']="Unit Master";
+$data['all_units'] = $this->db->where('active',1 )->get('msd_unit_master')->result();
+     if($this->input->post()){
+              $this->form_validation->set_rules('unitName','unitName','required',array('required'=>'%s required'));     
+            if($this->form_validation->run() == TRUE)
                 {
+                   // $company_id=$this->session->userdata('gst_login');
+
                         $data = array(
-                                     'unit' => $this->input->post('unit'),
+                         'company_id' => $this->company_id,
+                         //'parent_id' => $this->input->post('unit') ,
+                         'unit' => $this->input->post('unitName'),
                                      
                   );
-               
-                   $query = $this->Company_model->unit_master($data);
-    
-               if($query>0){
-                   $this->session->set_flashdata('success', 'succesfully');
-                       redirect('Company/unit_master');
+               if($this->Master_model->unit_master($data)){
+                   $this->session->set_flashdata('message', 'Data Save succesfully');
                      }
-                else{
-                      $this->session->set_flashdata('faiid', 'faild');
-
-                       redirect('Company/unit_master');
-            }
-
-   
+                  else{
+                      $this->session->set_flashdata('error', 'faild');
+                    }
+                       redirect('master/unit_master');            
+             }else{         
+                    $this->load->view('master/Unit_master',$data);
           }
-      else
-         {
-                  echo "form validation faild";
-                  //redirect('Company/index');
-         }
-  
-    
-     
 
-         }                  
+      }else{
+                     $this->load->view('master/Unit_master',$data);
+          }
+ }                 
+public function get_unit(){
+   $user = $this->Master_model->get_unit(); 
+   if(!empty($user)){
+    $response = array('status'=>'success','code'=>'200','data'=>$user);
+   }else{
+    $response = array('status'=>'failed','code'=>'201','message'=>'data not found');
+   }
+   echo json_encode($response);
+}     
+public function delete_unit_master(){
+  $id = $_POST['id'];
+  if($id){
+     $qery=$this->db->query("UPDATE `msd_unit_master` SET `active`='0' WHERE `id`='$id' ");
+  if(!empty($qery)){
+    $response = array('status'=>'success','code'=>'200','message'=>'Record Delete succesfully');
+  }else{
+    $response = array('status'=>'failed','code'=>'201','message'=>'Record Delete Failed');
+  }
+}else{
+      $response = array('status'=>'failed','code'=>'201','message'=>'Invailid Records');
+ 
+}
+  echo json_encode($response);
 
+}
 //user master start
 public function user_master(){
     $data['title']="Company";
     $data['page_title']="user master";
+
     $this->db->select('*');
     $this->db->from('msd_user_master');
     $this->db->where('active', 1);
@@ -601,7 +666,7 @@ public function user_master(){
               
           if ($this->form_validation->run() == TRUE){
             $data = array(
-                         //'company_id' => $this->input->post('company_id'),
+                         'company_id' => $this->company_id,
                          'userName' => $this->input->post('userName'),
                          'name' => $this->input->post('name'),
                          'email' => $this->input->post('email'),
@@ -611,33 +676,24 @@ public function user_master(){
            
              
 
-          if($this->Company_model->user_master($data)){
+          if($this->Master_model->user_master($data)){
           $this->session->set_flashdata('message', 'Record Save succesfully');
           }else{
           $this->session->set_flashdata('error', 'Record Failed');
           }
-          redirect('company/user_master');
+
+          redirect('master/user_master');
           }else{
-              $this->load->view('template/header');
-               $this->load->view('template/sidemenu');
-               $this->load->view('template/topbar');
-               $this->load->view('template/breadcrumbs');
-               $this->load->view('user_master',$data);
-               $this->load->view('template/footer');  
+                  $this->load->view('master/user_master',$data);
           }
     }else{
-         $this->load->view('template/header');
-         $this->load->view('template/sidemenu');
-         $this->load->view('template/topbar');
-         $this->load->view('template/breadcrumbs');
-         $this->load->view('user_master',$data);
-         $this->load->view('template/footer');  
+         $this->load->view('master/user_master',$data);
     }   
 } 
 public function get_user(){
-   $user = $this->Company_model->get_user(); 
-   if(!empty($user)){
-    $response = array('status'=>'success','code'=>'200','data'=>$user);
+   $product = $this->Master_model->get_user(); 
+   if(!empty($product)){
+    $response = array('status'=>'success','code'=>'200','data'=>$product);
    }else{
     $response = array('status'=>'failed','code'=>'201','message'=>'data not found');
    }
@@ -688,25 +744,34 @@ public function update_user_master(){
   $mobile= $_POST['mobile'];
   $password= $_POST['password'];
   
-  
-$qery=$this->db->query("UPDATE `msd_user_master` SET `userName`='$userName',`name`='$name',`email`='$email',`mobile`='$mobile',`password`='$password' WHERE `id`='$id' ");
+    if($id){
+       $qery=$this->db->query("UPDATE `msd_user_master` SET `userName`='$userName',`name`='$name',`email`='$email',`mobile`='$mobile',`password`='$password' WHERE `id`='$id' ");
   if($qery){
-      $this->session->set_flashdata('message','data update successfully');
+      //$this->session->set_flashdata('message','data update successfully');
       $response = array('status'=>'success','message'=>'data update successfully');
     }else{
-      $this->session->set_flashdata('error','data update Failed');
+      //$this->session->set_flashdata('error','data update Failed');
       $response = array('status'=>'failed','message'=>'data update failed');
     }
+  }else{
+          $response = array('status'=>'failed','message'=>'Invailid Records');
+
+  }
     echo json_encode($response);
+  
 }
 public function delete_user_master(){
   $id = $_POST['id'];
-  $qery=$this->db->query("UPDATE `msd_user_master` SET `active`='0' WHERE `id`='$id' ");
-  if(!empty($qery)){
-    $response = array('status'=>'success','code'=>'200','message'=>'Record Delete succesfully');
-  }else{
-    $response = array('status'=>'failed','code'=>'201','message'=>'Record Delete Failed');
+  if($id){
+        $qery=$this->db->query("UPDATE `msd_user_master` SET `active`='0' WHERE `id`='$id' ");
+          if(!empty($qery)){
+        $response = array('status'=>'success','code'=>'200','message'=>'Record Delete succesfully');
+      }else{
+       $response = array('status'=>'failed','code'=>'201','message'=>'Record Delete Failed');
   }
+  }else{
+           $response = array('status'=>'failed','code'=>'201','message'=>'Invailid Records');
+     }
   echo json_encode($response);
 }
 
@@ -718,6 +783,16 @@ public function delete_user_master(){
  public function product_services(){
     $data['title']="Company";
     $data['page_title']="product services";
+            
+            $query=$this->db->select('*')->where(['texType'=>'sales','company_id'=>$this->company_id])->group_by('texName')->get('msd_tex_master');
+
+            $data['tax']=$query->result();
+            $q=$this->db->select('*')->where(['texType'=>'purchase', 'company_id'=>$this->company_id])->group_by('texName')->get('msd_tex_master');
+           $data['taxPurchase']=$q->result();
+           $que=$this->db->select('*')->where(['active'=>1,'company_id'=>$this->company_id])->group_by('unit')->get('msd_unit_master');
+           $data['unit']=$que->result();
+ 
+ 
     if($this->input->post()){
 
              // $this->form_validation->set_rules('company_id','company_id','required');
@@ -740,8 +815,22 @@ public function delete_user_master(){
               $this->form_validation->set_rules('subUnit','subUnit','required');
               
           if ($this->form_validation->run() == TRUE){
+                      $config['upload_path']   = './assets/master/uploads/'; 
+                      $config['allowed_types'] = 'gif|jpg|png|jpeg'; 
+                      $config['max_size']      = 100; 
+                      $config['max_width']     = 1024; 
+                      $config['max_height']    = 768;  
+                      $this->load->library('upload', $config);
+      
+                    if ( ! $this->upload->do_upload('productImage')) {
+                    $error = array('error' => $this->upload->display_errors()); 
+                     }
+      
+                   else { 
+                       $file = $this->upload->data(); 
+                          } 
             $data = array(
-                         //'company_id' => $this->input->post('company_id'),
+                         'company_id' => $this->company_id,
                          'productCode' => $this->input->post('productCode'),
                          'productGroup' => $this->input->post('productGroup'),
                          'productName' => $this->input->post('productName'),
@@ -758,27 +847,23 @@ public function delete_user_master(){
                          'negativeStock' => $this->input->post('negativeStock'),
                          'hsnCode' => $this->input->post('hsnCode'),
                          'minQty' => $this->input->post('minQty'),
-                         'subUnit' => $this->input->post('subUnit')
+                         'subUnit' => $this->input->post('subUnit'),
+                         'productImage' => $file['client_name'],
                          
                                           );
            
               
 
-               if($this->Company_model->product_services($data)){
+               if($this->Master_model->product_services($data)){
                 $this->session->set_flashdata('message', 'Record Save succesfully');
                     }else{
                  $this->session->set_flashdata('error', 'Record Failed');
                      }
 
-                   redirect('Company/product_services');
+                   redirect('master/product_services');
            
           }else{
-              $this->load->view('template/header',$data);
-               $this->load->view('template/sidemenu');
-               $this->load->view('template/topbar');
-               $this->load->view('template/breadcrumbs');
-               $this->load->view('product_services');
-               $this->load->view('template/footer');  
+                $this->load->view('master/product_services',$data);
           }
     }else{
          $this->load->view('master/product_services',$data);
@@ -802,20 +887,28 @@ public function get_product_services(){
   $search = $searchArray['value'];
 
   if($search !=''){
-    $totalCount = $this->db->where('active', 1)->like('productCode',$search)->or_like(array('productGroup'=>$search,'productName'=>$search,'productType'=>$search,'productDescription'=>$search,'sellingPrice'=>$search,'productPrice'=>$search,'mrpPrice'=>$search,'openingStock'=>$search,'unitType'=>$search,'salesType'=>$search,'purchaseType'=>$search,'calculation'=>$search,'negativeStock'=>$search,'hsnCode'=>$search,'minQty'=>$search,'subUnit'))->get('msd_product_services')->num_rows();
+
+ $q="SELECT * FROM `msd_product_services` WHERE `active` = 1 AND `company_id` = '".$this->company_id."' AND  (`productCode` LIKE '%".$search."%' ESCAPE '!' OR  `productGroup` LIKE '%".$search."%' ESCAPE '!' OR  `productName` LIKE '%".$search."%' ESCAPE '!' OR  `productType` LIKE '%".$search."%' ESCAPE '!' OR  `productDescription` LIKE '%".$search."%' ESCAPE '!' OR  `sellingPrice` LIKE '%".$search."%' ESCAPE '!' OR  `productPrice`LIKE '%".$search."%' ESCAPE '!' OR  `mrpPrice` LIKE '%".$search."%' ESCAPE '!' OR  `openingStock` LIKE '%".$search."%' ESCAPE '!' OR  `unitType` LIKE '%".$search."%' ESCAPE '!' OR  `salesType` LIKE '%".$search."%' ESCAPE '!' OR  `purchaseType` LIKE '%".$search."%' ESCAPE '!' OR  `calculation` LIKE '%".$search."%' ESCAPE '!' OR  `negativeStock` LIKE '%".$search."%' ESCAPE '!' OR  `hsnCode` LIKE '%".$search."%' ESCAPE '!' OR  `minQty` LIKE '%".$search."%' ESCAPE '!' OR  `subUnit` LIKE '%".$search."%' ESCAPE '!') ORDER BY `created_date` DESC, `deleted_date` DESC ";
+    $totalCount = $this->db->query($q)->num_rows();
+    $q.=" limit $start, $length ";
+    $product = $this->db->query($q)->result_array();
+    //echo $this->db->last_query();
+
+    // $totalCount = $this->db->where('active', 1)->like('productCode',$search)->or_like(array('productGroup'=>$search,'productName'=>$search,'productType'=>$search,'productDescription'=>$search,'sellingPrice'=>$search,'productPrice'=>$search,'mrpPrice'=>$search,'openingStock'=>$search,'unitType'=>$search,'salesType'=>$search,'purchaseType'=>$search,'calculation'=>$search,'negativeStock'=>$search,'hsnCode'=>$search,'minQty'=>$search,'subUnit'))->get('msd_product_services')->num_rows();
   
-    $product = $this->db->where('active', 1)->like('productCode',$search)->or_like(array('productGroup'=>$search,'productName'=>$search,'productType'=>$search,'productDescription'=>$search,'sellingPrice'=>$search,'productPrice'=>$search,'mrpPrice'=>$search,'openingStock'=>$search,'unitType'=>$search,'salesType'=>$search,'purchaseType'=>$search,'calculation'=>$search,'negativeStock'=>$search,'hsnCode'=>$search,'minQty'=>$search,'subUnit'))->limit($length, $start)->order_by("created_date DESC,deleted_date DESC")->get('msd_product_services')->result_array();
+    // $product = $this->db->where('active', 1)->like('productCode',$search)->or_like(array('productGroup'=>$search,'productName'=>$search,'productType'=>$search,'productDescription'=>$search,'sellingPrice'=>$search,'productPrice'=>$search,'mrpPrice'=>$search,'openingStock'=>$search,'unitType'=>$search,'salesType'=>$search,'purchaseType'=>$search,'calculation'=>$search,'negativeStock'=>$search,'hsnCode'=>$search,'minQty'=>$search,'subUnit'))->limit($length, $start)->order_by("created_date DESC,deleted_date DESC")->get('msd_product_services')->result_array();
     
   }else{
     $totalCount = $this->db->where('active', 1)->get('msd_product_services')->num_rows();
-//print_r($totalCount);
     $product = $this->db->where('active', 1)->limit($length, $start)->order_by("created_date DESC,deleted_date DESC")->get('msd_product_services')->result_array();
   }
 
   $productResult = array();
   foreach ($product as $key => $value) {
     $productResult[$key] =$value;
+    $productResult[$key]['productImage'] ="<img src='".base_url('assets/master/uploads')."/".$value['productImage']."' style='width: 50px;'>";
     $productResult[$key]['action'] ="<a onclick='productEdit(".$value['id'].")' class='btn btn-warning'>Edit</a>";
+    // $productResult[$key]['view'] ="<a href=' ".base_url('master/product_view/'.$value['id'].'')." ' onclick='productView(".$value['id'].")' class='btn btn-success'>View</a>";
   }
 
   $data=array(
@@ -824,14 +917,26 @@ public function get_product_services(){
           "recordsFiltered"=> $totalCount,
           "data"=>$productResult
     );
-  // print_r($data);
-  // die();
     echo json_encode($data);
 }
 
 public function update_product_services(){
+                      $config['upload_path']   = './assets/master/uploads/'; 
+                      $config['allowed_types'] = 'gif|jpg|png|jpeg'; 
+                      $config['max_size']      = 100; 
+                      $config['max_width']     = 1024; 
+                      $config['max_height']    = 768;  
+                      $this->load->library('upload', $config);
+      
+                    if ( ! $this->upload->do_upload('productImage')) {
+                    $error = array('error' => $this->upload->display_errors()); 
+                     }
+      
+                   else { 
+                       $file = $this->upload->data(); 
+                          } 
   $id = $_POST['id'];
-  //$company_id= $_POST['company_id'];
+  $productImage= $_POST[$file('client_name')];
   $productCode= $_POST['productCode'];
   $productGroup= $_POST['productGroup'];
   $productName= $_POST['productName'];
@@ -851,25 +956,45 @@ public function update_product_services(){
   $subUnit= $_POST['subUnit'];
 
   
-$qery=$this->db->query("UPDATE `msd_product_services` SET `productCode`='$productCode',`productGroup`='$productGroup',`productName`='$productName',`productType`='$productType',`productDescription`='$productDescription',`sellingPrice`='$sellingPrice',`productPrice`='$productPrice',`mrpPrice`='$mrpPrice',`openingStock`='$openingStock',`unitType`='$unitType',`salesType`='$salesType',`purchaseType`='$purchaseType',`calculation`='$calculation',`negativeStock`='$negativeStock',`hsnCode`='$hsnCode',`minQty`='$minQty',`subUnit`='$subUnit' WHERE `id`='$id' ");
+$qery=$this->db->query("UPDATE `msd_product_services` SET `productCode`='$productCode',`productGroup`='$productGroup',`productName`='$productName',`productType`='$productType',`productDescription`='$productDescription',`sellingPrice`='$sellingPrice',`productPrice`='$productPrice',`mrpPrice`='$mrpPrice',`openingStock`='$openingStock',`unitType`='$unitType',`salesType`='$salesType',`purchaseType`='$purchaseType',`calculation`='$calculation',`negativeStock`='$negativeStock',`hsnCode`='$hsnCode',`minQty`='$minQty',`subUnit`='$subUnit',`productImage`='$productImage' WHERE `id`='$id' ");
+ if($id){
   if($qery){
-      $this->session->set_flashdata('message','data update successfully');
+      //$this->session->set_flashdata('message','data update successfully');
       $response = array('status'=>'success','message'=>'data update successfully');
     }else{
-      $this->session->set_flashdata('error','data update Failed');
+      //$this->session->set_flashdata('error','data update Failed');
       $response = array('status'=>'failed','message'=>'data update failed');
     }
+  }else{
+          $response = array('status'=>'failed','message'=>'Invailid Records');
+
+  }
     echo json_encode($response);
+  
+}
+public function product_view(){
+  $data['title']="Company";
+  $data['page_title']="product services datails";
+  $id=$this->input->post('id');
+  $data['product']=$this->db->select('*')->get('msd_product_services')->result();
+  
+  $this->load->view('master/product_view',$data);
 }
 public function delete_product_master(){
   $id = $_POST['id'];
+  if($id){
   $qery=$this->db->query("UPDATE `msd_product_services` SET `active`='0' WHERE `id`='$id' ");
   if($qery){
     $response = array('status'=>'success','message'=>'data Delete successfully');
   }else{
     $response = array('status'=>'failed','message'=>'data Delete failed');
   }
+}else{
+      $response = array('status'=>'failed','message'=>'Invailid Records');
+
+}
   echo json_encode($response);
+
 }
                    
 // product services end //

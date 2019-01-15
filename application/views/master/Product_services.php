@@ -26,12 +26,25 @@
 <?php $this->load->view('admin/layouts/inside_header'); ?>
 <!-- / HEADER -->
 <!-- CONTENT -->
+
 <div class="page-content p-6">
+
 <div class="topTab" style="margin-top: 0px;">
-    <form id="productForm" method="POST">
+  <div id="errorMessage"></div>
+                <?php
+                if($this->session->flashdata('message')){ ?>
+                  <div class="alert alert-success">
+                    <h5><?php echo $this->session->flashdata('message'); ?></h5>
+                  </div>
+                      <?php }elseif($this->session->flashdata('error')){ ?>
+                   <div class="alert alert-danger">
+                    <h5><?php echo $this->session->flashdata('error'); ?></h5>
+                  </div>
+                <?php } ?>
+    <form id="productForm" method="POST" enctype="multipart/form-data">
   
             
-               <div class="row col-md-12">
+               <div class="row form-group col-md-12">
                <div class="col-md-12 text text-danger">
                       <?php 
                       echo validation_errors('<div class="text text-danger">', '</div>'); 
@@ -89,31 +102,32 @@
     </div> 
     <div class="col-md-3">
         <label class="control-label">Unit Type</label>
-        <select type="text" class="form-control" value="" name="unitType" id="unitType">
-            
-            <option id="1" value="1">Unit Type1</option>
-            <option id="2" value="2">Unit Type2</option>
-            <option id="3" value="3">Unit Type3</option>
-            <option id="4" value="4">Unit Type4</option>
-    </select>
+        <select type="text" class="form-control" value="unitType" name="unitType" id="unit">
+              
+              <?php foreach($unit as $row) { ?>
+    
+              <option value="<?php echo $row->unit ; ?>" ><?php echo $row->unit ; ?></option>
+               <?php } ?>
+          </select>
     </div>
                     
     <div class="col-md-3">
         <label class="control-label">Sales Tex Type</label>
         <select type="text" class="form-control" value="" name="salesType" id="salesType">
-        <option id="1" value="1">sales type1</option>
-        <option id="2" value="2">sales type2</option>
-        <option id="3" value="3">sales type3</option>
-        </select>
+                           <?php foreach($tax as $row) { ?>
+    
+              <option value="<?php echo $row->texName ; ?>"><?php echo $row->texName ; ?></option>
+               <?php } ?>
+                 </select>
     </div>
                      
     <div class="col-md-3">
         <label class="control-label">Purchase Tex Type</label>
         <select type="text" class="form-control" value="" name="purchaseType" id="purchaseType">
-        <option id="1" value="1">purchase type1</option>
-        <option id="2" value="2">purchase type2</option>
-        <option id="3" value="3">purchase type3</option>
-        </select>
+              <?php foreach($taxPurchase as $row) { ?>
+              <option value="<?php echo $row->texName ; ?>"><?php echo $row->texName ; ?></option>
+               <?php } ?>
+         </select>
     </div>
 </div>
 <div class="row form-group col-md-12">
@@ -121,9 +135,8 @@
         <label class="control-label">Tex Calculation Type</label>
         <select type="text" class="form-control" value="calculation" name="calculation" id="calculation">
                 
-                <option id="1" value="1">calculation type1</option>
-                <option id="2" value="2">calculation type2</option>
-                <option id="3" value="3">calculation type3</option>
+                <option  value="Including">Including</option>
+              <option  value="Excluding">Excluding</option>
                 
      </select>
     </div>
@@ -131,9 +144,9 @@
       <label class="control-label">Allow Negative Stock</label>
       <select type="text" class="form-control" value="negativeStock" name="negativeStock" id="negativeStock">
                 
-                <option id="1" value="1">stock1</option>
-                <option id="2" value="2">stock1</option>
-                <option id="3" value="3">stock1</option>
+                <option value="">--Select--</option>
+              <option value="yes">yes</option>
+              <option value="No">No</option>
                 
       </select>
     </div>
@@ -150,30 +163,29 @@
 
                
 <div class="row form-group col-md-12 ">            
-<div class="col-md-3">
-<label class="control-label">Sub Unit</label>             
-<select type="text" class="form-control" value="" name="subUnit" id="subUnit">
-        
-        <option value="1">sub unit1</option>
-        <option value="2">sub unit1</option>
-        <option value="3">sub unit1</option>
+    <div class="col-md-3">
+         <label class="control-label">Sub Unit</label>             
+        <select type="text" class="form-control" value="" name="subUnit" id="subUnit">
+            <option value="">--select--</option>
+              <option value="yes">yes</option>
+              <option value="No">No</option>
         
         </select>
-</div>
-<div class="col-md-9">
-      <input type="file" name="">
- <button name="" value="" class="btn btn-default">Select File</button> 
-   <button name="" value="" class="btn btn-default">Download</button>
-<button name="" value="" class="btn btn-default" style="margin: 10px 0px;">Upload</button> 
-</div> 
+    </div>
+    <div class="col-md-4">
+               <label>Product Picture</label>               
+                <img width="50px" id="productImage" src="<?php echo  base_url().'assets/master/uploads/' ?>">
+                <input type="file"  onchange="readURL(this);" name="productImage" id="productImage" class="form-control" />
+             
 
+    </div>
 </div>
 
                <div class="col-md-12">
                       
                      
                       <div class="col-md-6 " style="display: inline-flex;">
-                        <button name="add" value="submit" id="productsubmit" class="btn  " style="width: 120px;margin: 10px 10px; margin-left: 10px; background-color: blue; color: white;" >Add</button> 
+                        <button name="add" value="submit" id="productSubmit" class="btn  " style="width: 120px;margin: 10px 10px; margin-left: 10px; background-color: blue; color: white;" >Add</button> 
                         <button type="button" name="update" id="productUpdate" class="update btn  btn-primary   " style="width: 120px;margin: 10px 10px; color: white;" >Modify</button>
                         <button type="button" name="delete" value="delete" id="productDelete" class="btn  btn-secondery " style="width: 120px;margin: 10px 10px; background-color: red; color: white;" >Delete</button> 
                       </div>
@@ -183,7 +195,8 @@
 
               <div class="container">
     <table id="productResult" class="col-md-12 table table-responsive" >
-    <thead>  
+    <thead>
+      <th>productImage</th>
     <th>Product_Code</th>
     <th>Product_Group</th>
     <th>Product_Name</th>
@@ -202,6 +215,8 @@
     <th>minQty</th>
     <th>Sub_Unit</th>
     <th>Action</th>
+        <!-- <th>View</th> -->
+
     </thead>
     </table>                                         
 
