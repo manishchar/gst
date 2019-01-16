@@ -180,6 +180,8 @@ function partyEdit(cek_id){
                  $("#collectionRoute").val(obj.data.collectionRoute);
                  $("#openingBalance").val(obj.data.openingBalance);
                  $("#requiredSms").val(obj.data.requiredSms);
+                $("#old_image").val(obj.data.partyImage);
+
                  $("#showimage").html('<img width="80px" id="partyImage" src="<?php echo base_url(); ?>assets/images/party_image/'+obj.data.partyImage+'">');
                  $('#partysubmit').prop('disabled',true);
                }
@@ -457,15 +459,12 @@ $(document).ready(function() {
             { "data": "cgst"},
             { "data": "igst"},
             { "data": "action"}
-            
         ]
     } );
-
 });
 
 function texEdit(cek_id){
     var r = confirm("Are You Sure To select!");
-
     if(r){
         $.ajax({
             type  : "POST",
@@ -563,7 +562,6 @@ $('#texUpdate').click(function(){
 
 // user master start//
 $(document).ready(function() {
-    //alert('');
     var table = '';
     var table=$('#userTable').DataTable( {
         "processing": true,
@@ -572,18 +570,14 @@ $(document).ready(function() {
           'url':"<?php echo base_url().'master/get_user_master'; ?>",
            "type": "POST"
         }, "columns": [
-           // {"data": "company_id"},
             { "data": "userName"},
             { "data": "name"},
             { "data": "email"},
             { "data": "mobile"},
             { "data": "password"},
             { "data": "action"}
-            
         ]
     } );
-
-
 });
 function userEdit(cek_id){
     var r = confirm("Are You Sure To select!");
@@ -616,7 +610,6 @@ function userEdit(cek_id){
     }
 }
 
-
 $('#userUpdate').click(function(){          
     var r = confirm("Are You Sure To Update?");
     if(r){
@@ -631,13 +624,13 @@ $('#userUpdate').click(function(){
                 console.log(obj.status);
                 if(obj.status=='success'){
                    $('#errorMessage').html('<div class="alert alert-success">'+obj.message+'</div>');
-                   $('#userResult').DataTable().ajax.reload();
+                   $('#userTable').DataTable().ajax.reload();
                    $('#userForm').trigger('reset');
                    //window.location.reload(); 
                 }
                 if(obj.status=='failed'){
                     $('#errorMessage').html('<div class="alert alert-danger">'+obj.message+'</div>');
-                    $('#userResult').DataTable().ajax.reload();
+                    $('#userTable').DataTable().ajax.reload();
                    $('#userForm').trigger('reset');
                     }
                 
@@ -658,13 +651,13 @@ $('#userUpdate').click(function(){
                 var obj = JSON.parse(result);
               if(obj.status=='success'){
                    $('#errorMessage').html('<div class="alert alert-success">'+obj.message+'</div>');
-                   $('#userResult').DataTable().ajax.reload();
+                   $('#userTable').DataTable().ajax.reload();
                    $('#userForm').trigger('reset');
                    //window.location.reload(); 
                 }
                 if(obj.status=='failed'){
                     $('#errorMessage').html('<div class="alert alert-danger">'+obj.message+'</div>');
-                    $('#userResult').DataTable().ajax.reload();
+                    $('#userTable').DataTable().ajax.reload();
                    $('#userForm').trigger('reset');
                     }
                 }        
@@ -680,10 +673,8 @@ $('#userUpdate').click(function(){
         $.ajax({
             type: "POST",
             url: "<?php echo base_url('master/get_unit') ?>" ,
-            
             data: {id: id},
             success:function(result){
-
             var obj = JSON.parse(result);
             if(obj.status == 'success'){
               console.log(obj.data);
@@ -728,6 +719,32 @@ $('#unitDelete').click(function(){
             }        
         });
     }
+});
+$('#unitUpdate').click(function(){  
+ var r = confirm("Are You Sure To Update!");
+    if(r){
+          $.ajax({
+                type: "POST",
+                url: "<?php echo base_url('master/update_unit_master') ?>", 
+                data: $("#unitForm").serialize(),
+                success: function(result) 
+                {
+                console.log(result);
+                var obj = JSON.parse(result);
+               if(obj.status == 'success'){
+                 $('#errorMessage').html('<div class="alert alert-success">'+obj.message+'</div>');
+                    $('#unitForm').trigger("reset");
+                   //window.location.reload();
+ }
+               if(obj.status == 'failed'){
+                    //alert(obj.message);
+                    $('#errorMessage').html('<div class="alert alert-danger">'+obj.message+'</div>');
+                   $('#unitForm').trigger("reset");
+
+               }
+                }        
+            });
+      }
 });
 
 //unit master end//
@@ -792,6 +809,33 @@ $('#groupDelete').click(function(){
             });
       }
 });
+$('#groupUpdate').click(function(){  
+ var r = confirm("Are You Sure To Update!");
+    if(r){
+          $.ajax({
+                type: "POST",
+                url: "<?php echo base_url('master/update_group_master') ?>", 
+                data: $("#groupForm").serialize(),
+                success: function(result) 
+                {
+                console.log(result);
+                var obj = JSON.parse(result);
+               if(obj.status == 'success'){
+                 $('#errorMessage').html('<div class="alert alert-success">'+obj.message+'</div>');
+                    $('#groupForm').trigger("reset");
+                   //window.location.reload();
+ }
+               if(obj.status == 'failed'){
+                    //alert(obj.message);
+                    $('#errorMessage').html('<div class="alert alert-danger">'+obj.message+'</div>');
+                   $('#groupForm').trigger("reset");
+
+               }
+                }        
+            });
+      }
+});
+
 // group master end//
 
 //route master start//
@@ -847,6 +891,32 @@ $('#routeDelete').click(function(){
                     $('#errorMessage').html('<div class="alert alert-danger">'+obj.message+'</div>');
                    $('#routeForm').trigger("reset");
                    //$('#userResult').DataTable().ajax.reload();
+
+               }
+                }        
+            });
+      }
+});
+$('#routeUpdate').click(function(){  
+ var r = confirm("Are You Sure To Update!");
+    if(r){
+          $.ajax({
+                type: "POST",
+                url: "<?php echo base_url('master/update_route_master') ?>", 
+                data: $("#routeForm").serialize(),
+                success: function(result) 
+                {
+                console.log(result);
+                var obj = JSON.parse(result);
+               if(obj.status == 'success'){
+                 $('#errorMessage').html('<div class="alert alert-success">'+obj.message+'</div>');
+                    $('#routeForm').trigger("reset");
+                   //window.location.reload();
+ }
+               if(obj.status == 'failed'){
+                    //alert(obj.message);
+                    $('#errorMessage').html('<div class="alert alert-danger">'+obj.message+'</div>');
+                   $('#routeForm').trigger("reset");
 
                }
                 }        

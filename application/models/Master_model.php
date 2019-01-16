@@ -187,48 +187,27 @@ public function companyDelete()
       } 
    
   }
-  // public function unit_master($data)
-  // {
-    
-  //   $this->db->insert('msd_unit_master',$data);
-
-  //      if($this->db->affected_rows() > 0)
-  //     {
-          
-  //         return true; 
-  //     }else{
-  //       return false;
-  //     } 
-   
-  // }
+ 
   public function user_master($data)
   {
-    
     $this->db->insert('msd_user_master',$data);
-
        if($this->db->affected_rows() > 0)
       {
-          
           return true; 
       }else{
         return false;
       } 
-   
   }
   
   public function product_services($data)
   {
-    
     $this->db->insert('msd_product_services',$data);
-
        if($this->db->affected_rows() > 0)
       {
-          
           return true; 
       }else{
         return false;
       } 
-   
   }
 public function get_product(){ 
   $id = $this->input->post("cek_id");
@@ -248,6 +227,7 @@ public function get_tex(){
 }
 public function get_user(){ 
   $id = $this->input->post("cek_id");
+
   return $this->db->select('*')->where("id",$id)->get('msd_user_master')->row();
 }
 public function get_route(){ 

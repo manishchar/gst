@@ -1,10 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="en-us">
 <head>
-<?php $this->load->view('admin/layouts/meta'); ?>
+ <?php $this->load->view('admin/layouts/meta'); ?>
 </head>
-
 <body class="layout layout-vertical layout-left-navigation layout-below-toolbar">
 <main>
 <div id="wrapper">
@@ -14,15 +12,11 @@
 </aside>
 <div class="content-wrapper">
 <nav id="toolbar" class="bg-white">
-
 <?php $this->load->view('admin/layouts/header'); ?>
 </nav>
 <div class="content custom-scrollbar">
-
 <div id="project-dashboard" class="page-layout simple right-sidebar">
-
 <div class="page-content-wrapper custom-scrollbar">
-
 <!-- HEADER -->
 <?php $this->load->view('admin/layouts/inside_header'); ?>
 <!-- / HEADER -->
@@ -43,7 +37,7 @@
 	<form method="POST" id="routeForm">
       <div class=" row form-group col-md-12">
                <div class="col-md-4"  ">
-                <label class="control-label" for="routeName"  required="required">Route Name</label>
+                <label class="control-label" for="routeName"  required="required">Route Name(&nbsp;<span class="text text-danger">*</span>&nbsp;)</label>
                 <input type="text" name="id" id="id" class="form-control" hidden="hidden">
                 <input type="text" name="routeName" id="routeName" class="form-control">
           </div>
@@ -66,28 +60,19 @@
                </select>
           </div>
 			     <div class="col-md-6 " style="margin:30px 0px;" >
-		                 <button type="submit" value="add" name="submit" id="routeSubmit" class="btn " style="width:120px; background-color: blue; color: white; ">ADD</button>
-                    <button type="button" value="delete" name="delete" id="routeDelete" class="btn btn-danger" style="width:120px;">DELETE</button>
+              <button type="submit" value="add" name="submit" id="routeSubmit" class="btn " style="width:120px; background-color: blue; color: white; ">ADD</button>
+              <button type="button" value="update" name="update" id="routeUpdate" class="btn btn-primary" style="width:120px;">Modify</button>
+              <button type="button" value="delete" name="delete" id="routeDelete" class="btn btn-danger" style="width:120px;">DELETE</button>
           </div> 
-			
     </div>
   </form>
   </div>
-
-</div>
-
-</div>
-
-
-</div>
-
-
 </div>
 </div>
-
 </div>
-
-
+</div>
+</div>
+</div>
 </body>
 </html>
 <?php $this->load->view('admin/layouts/footer'); ?>

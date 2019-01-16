@@ -41,7 +41,7 @@
        <form method="POST" id="unitForm">
       <div class=" row form-group col-md-12">
                <div class="col-md-4"  ">
-                <label class="control-label" for="unit"  required="required">Unit Name</label>
+                <label class="control-label" for="unit"  required="required">Unit Name(&nbsp;<span class="text text-danger">*</span>&nbsp;)</label>
                 <input type="text" name="id" id="id" class="form-control" hidden="hidden" >
                 <input type="text" name="unitName" id="unitName" class="form-control" required="required">
           </div>
@@ -65,6 +65,7 @@
           </div>
            <div class="col-md-6 " style="margin:30px 0px;" >
                      <button type="submit" value="add" name="submit" id="unitSubmit" class="btn " style="width:120px; background-color: blue; color: white; ">ADD</button>
+                      <button type="button" value="update" name="update" id="unitUpdate" class="btn btn-primary" style="width:120px;">Modify</button>
                     <button type="button" value="delete" name="delete" id="unitDelete" class="btn btn-danger" style="width:120px;">DELETE</button>
           </div> 
       
