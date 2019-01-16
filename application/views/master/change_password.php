@@ -52,14 +52,14 @@
 <form method="post" action="<?php echo base_url('Company/change_password');?>">
  <div class="col-md-12 text text-danger">
                       <?php 
-                      //echo validation_errors('<div class="text text-danger">', '</div>'); 
+                      echo validation_errors('<div class="text text-danger">', '</div>'); 
                        
                       ?>
                       </div>
           <div class="content p-4" >
               <div class="row form-group ">
                     <div class="col-md-12">
-                       <label><b>Old Password(&nbsp;<span class="text text-danger">*</span>)</b><?php echo validation_errors('password','<div class="text text-danger">', '</div>'); ?></label>
+                       <label><b>Old Password(&nbsp;<span class="text text-danger">*</span>)</b><?php //echo //validation_errors('password','<div class="text text-danger">', '</div>'); ?></label>
                        <input type="password" name="password" placeholder="Enter Old Password" id="" class="form-control" >
                      </div>
               </div>

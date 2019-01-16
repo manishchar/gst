@@ -141,7 +141,7 @@
          <div class="col-md-4" style="">
           <label>Party Picture</label>
           <input type="text" name="old_image" id="old_image">              
-                <img width="50px" id="partyImage" src="<?php echo  base_url().'assets/master/uploads/' ?>">
+                <img width="50px" id="partyImage" src="<?php echo  base_url().'assets/master/uploads/party_image/' ?>">
          <input type="file"  onchange="partyURL(this);" name="partyImage" id="partyImage" class="form-control" />
              
                 

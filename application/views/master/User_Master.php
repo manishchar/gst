@@ -80,14 +80,13 @@
           </div>
                 <div class="row form-group col-md-12" style="margin: 10px 0px ">
                       <div class="col-md-6" style="display: inline-flex;margin: 10px 0px; ">
-                        <label class="control-label"></label>
+                        <!-- <label class="control-label"></label>
                          <select class="form-control" name=""   >
                             <option></option>
                             <option>admin</option>
                             <option>admin</option>
                             <option>admin</option>
-                 
-                          </select>  
+                          </select> -->  
                       </div>
                       <div class="col-md-6 " style="display: inline-flex;padding: 0;margin: 0;">
                         <button name="add" value="submit" id="userSubmit" class="btn  " style="width: 120px;margin: 10px 10px; margin-left: 10px; background-color: blue; color: white;" >Add</button> 
@@ -99,29 +98,20 @@
     <div class="container">
           <table id="userTable" class="table table-responsive col-md-12">
             <thead>
-            
-               <th>User Name</th>
-               <th>Name</th>
-               <th>Email</th>
-               <th>Mobile</th>
-               <th>Password</th>
-               <th>Action</th>
-           
+               <th>userName</th>
+               <th>name</th>
+               <th>email</th>
+               <th>mobile</th>
+               <th>password</th>
+               <th>action</th>
             </thead>               
           </table>
     </div>
-
-</div>
-
-</div>
-
-
-</div>
-
-
 </div>
 </div>
-
+</div>
+</div>
+</div>
 </div>
 </body>
 </html>
